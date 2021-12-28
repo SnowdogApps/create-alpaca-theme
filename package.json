@@ -1,0 +1,20 @@
+{
+  "name": "alpaca-theme",
+  "version": "1.0.0",
+  "description": "Snowdog Alpaca Theme for Magento 2 projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://lab.snowdog.pro/patrykbura/alpaca-theme-npm"
+  },
+  "keywords": [
+    "alpaca",
+    "alpaca-theme",
+    "magento"
+  ],
+  "author": "Patryk Bura",
+  "license": "ISC"
+}
