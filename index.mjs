@@ -7,6 +7,7 @@ import {
   validateMagento
 } from './src/validators.mjs';
 import { composerRequire } from './src/composer-actions.mjs';
+import { installFrontools } from './src/frontools-actions.mjs'
 
 const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
 const frontoolsPath = 'snowdog/frontools'
@@ -36,10 +37,11 @@ if (validateMagento()) {
       loop: true
     }
   ])
-  .then(answers => {
+  .then(async answers => {
     console.log(answers)
-    validateComposer()
-    composerRequire(alpacaPackagesPath)
-    composerRequire(frontoolsPath)
+    await validateComposer()
+    await composerRequire(alpacaPackagesPath)
+    await composerRequire(frontoolsPath)
+    await installFrontools()
   })
 }

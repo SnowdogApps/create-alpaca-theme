@@ -4,6 +4,7 @@ import fs from 'fs'
 const nameNotProvidedMessage = 'It cannot be empty. Please provide valid theme name'
 const nameToShortMessage = 'Your theme name should be at least 3 characters long.'
 const nameMinimumLength = 3
+const magentoInstanceErrorMessage = 'This directory is not a valid Magento project. Please run npx again from main Magento project directory.'
 
 export function validateInput(inputString) {
   if (inputString.length === 0) {
