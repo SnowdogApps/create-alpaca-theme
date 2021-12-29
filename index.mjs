@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
+import inquirer from 'inquirer';
 import {
   validateInput,
   validateComposer,
   validateMagento
 } from './src/validators.mjs';
-import inquirer from 'inquirer';
-import fs from 'fs'
-import { exec } from 'child_process'
+import { composerRequire } from './src/composer-actions.mjs';
 
+const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
+const frontoolsPath = 'snowdog/frontools'
 const supportedMagentoVersions = ['2.4.3', '2.3.5']
 const supportedFrontoolsVersions = ['1.12', '1.11']
-const magentoInstanceErrorMessage = 'This directory is not a valid Magento project. Please run npx again from main Magento project directory.'
 
 if (validateMagento()) {
   inquirer.prompt([
@@ -38,18 +38,8 @@ if (validateMagento()) {
   ])
   .then(answers => {
     console.log(answers)
-    //   exec("composer require snowdog/module-alpaca-packages", (error, stdout, stderr) => {
-    //     if (error) {
-    //         console.log(`error: ${error.message}`);
-    //         return;
-    //     }
-    //     if (stderr) {
-    //         console.log(`stderr: ${stderr}`);
-    //         return;
-    //     }
-    //     console.log(`stdout: ${stdout}`);
-    // });
-
     validateComposer()
+    composerRequire(alpacaPackagesPath)
+    composerRequire(frontoolsPath)
   })
 }
