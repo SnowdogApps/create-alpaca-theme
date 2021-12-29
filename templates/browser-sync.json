@@ -1,0 +1,9 @@
+{
+  "proxy": "alpaca-boilerplate.test",
+  "rewriteRules": [
+    {
+      "match": ".alpaca-boilerplate.test",
+      "replace": ""
+    }
+  ]
+}
