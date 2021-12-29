@@ -83,7 +83,6 @@ if (validateMagento()) {
 
       await createDirectory(`app/design/frontend/${answers.name}`)
 
-      // create directory in app/design/frontend
       // create registraion.php
       // create theme.xml
       // bin/magento setup:upgrade
