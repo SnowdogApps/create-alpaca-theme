@@ -2,6 +2,7 @@
 
 import inquirer from 'inquirer';
 import cliProgress from 'cli-progress';
+import _colors from 'colors'
 import {
   validateInput,
   validateComposer,
@@ -12,10 +13,9 @@ import { installFrontools } from './src/frontools-actions.mjs'
 
 const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
 const frontoolsPath = 'snowdog/frontools'
-const supportedMagentoVersions = ['2.4.3', '2.3.5']
 const supportedFrontoolsVersions = ['1.12', '1.11']
 const bar1 = new cliProgress.SingleBar({
-  format: 'Progress: |' + '{bar}' + '| {percentage}% || {info}',
+  format: 'Progress: |' + _colors.cyan('{bar}') + '| {percentage}% || {info}',
   barCompleteChar: '\u2588',
   barIncompleteChar: '\u2591',
   hideCursor: true
@@ -28,20 +28,6 @@ if (validateMagento()) {
       message: "Enter your theme name:",
       name: 'Theme Name',
       validate: validateInput
-    },
-    {
-      type: 'list',
-      message: "Pick Magento version you're using:",
-      name: 'Magento version:',
-      choices: supportedMagentoVersions,
-      loop: true
-    },
-    {
-      type: 'list',
-      message: "Choose frontools version:",
-      name: 'Frontools version:',
-      choices: supportedFrontoolsVersions,
-      loop: true
     }
   ])
   .then(async answers => {
@@ -65,6 +51,15 @@ if (validateMagento()) {
         info: "Installing frontools"
       });
       await installFrontools()
+
+      // setup themes.json
+      // setup browsersync.json
+      // create directory in app/design/frontend
+      // create registraion.php
+      // create theme.xml
+      // bin/magento setup:upgrade
+      // run yarn install && yarn setup && yarn styles && yarn svg && yarn babel
+      // Go to Content -> Design -> Configuration, and choose your theme
 
       bar1.update(200, {
         info: "Enjoy Alpaca :)"
