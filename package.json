@@ -19,5 +19,8 @@
   "license": "ISC",
   "dependencies": {
     "inquirer": "^8.2.0"
+  },
+  "bin": {
+    "alpaca-theme": "/index.js"
   }
 }

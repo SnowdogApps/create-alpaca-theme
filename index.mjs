@@ -1,14 +1,19 @@
-const inquirer = require('inquirer')
-const fs = require('fs')
+#!/usr/bin/env node
+
+import {
+  validateInput,
+  validateComposer,
+  validateMagento
+} from './src/validators.mjs';
+import inquirer from 'inquirer';
+import fs from 'fs'
+import { exec } from 'child_process'
 
 const supportedMagentoVersions = ['2.4.3', '2.3.5']
 const supportedFrontoolsVersions = ['1.12', '1.11']
-const nameNotProvidedMessage = 'It cannot be empty. Please provide valid theme name'
-const nameMinimumLength = 3
-const nameToShortMessage = 'Your theme name should be at least 3 characters long.'
 const magentoInstanceErrorMessage = 'This directory is not a valid Magento project. Please run npx again from main Magento project directory.'
 
-if (checkIfMagentoInstance()) {
+if (validateMagento()) {
   inquirer.prompt([
     {
       type: 'input',
@@ -33,30 +38,18 @@ if (checkIfMagentoInstance()) {
   ])
   .then(answers => {
     console.log(answers)
+    //   exec("composer require snowdog/module-alpaca-packages", (error, stdout, stderr) => {
+    //     if (error) {
+    //         console.log(`error: ${error.message}`);
+    //         return;
+    //     }
+    //     if (stderr) {
+    //         console.log(`stderr: ${stderr}`);
+    //         return;
+    //     }
+    //     console.log(`stdout: ${stdout}`);
+    // });
+
+    validateComposer()
   })
 }
-
-
-
-function validateInput(inputString) {
-  if (inputString.length === 0) {
-    return nameNotProvidedMessage
-  } else if (inputString.length < nameMinimumLength) {
-      return nameToShortMessage
-    }
-s
-  return true
-}
-
-function checkIfMagentoInstance() {
-  const path = './bin/magento'
-
-  fs.access(path, fs.F_OK, (err) => {
-    if (err) {
-      console.error(magentoInstanceErrorMessage)
-    }
-  })
-
-  return true
-}
-
