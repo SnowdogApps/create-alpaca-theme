@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-
+import fs from 'fs'
 import inquirer from 'inquirer';
 import cliProgress from 'cli-progress';
 import _colors from 'colors'
 import { readFile } from 'fs/promises';
+import convert from 'xml-js';
 import {
   validateInput,
   validateComposer,
@@ -20,8 +21,6 @@ import {
 
 const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
 const frontoolsPath = 'snowdog/frontools'
-const themesJson = JSON.parse(await readFile(new URL('./templates/themes.json', import.meta.url)));
-const browserSyncJson = JSON.parse(await readFile(new URL('./templates/browser-sync.json', import.meta.url)));
 const progressBar = new cliProgress.SingleBar({
   format: 'Progress: |' + _colors.cyan('{bar}') + '| {percentage}% || {info}',
   barCompleteChar: '\u2588',
@@ -64,6 +63,7 @@ if (validateMagento()) {
       progressBar.update(70, {
         info: "Configuring themes.json"
       });
+      const themesJson = JSON.parse(await readFile(new URL('./templates/themes.json', import.meta.url)));
       await replaceJSONContents('dev/tools/frontools/config/themes.json', themesJson)
 
       progressBar.update(75, {
@@ -74,6 +74,7 @@ if (validateMagento()) {
       progressBar.update(80, {
         info: "Configuring browser-sync.json"
       });
+      const browserSyncJson = JSON.parse(await readFile(new URL('./templates/browser-sync.json', import.meta.url)));
       await replaceJSONContents('dev/tools/frontools/config/browser-sync.json', browserSyncJson)
 
       progressBar.update(85, {
@@ -83,6 +84,14 @@ if (validateMagento()) {
 
       await createDirectory(`app/design/frontend/${answers.name}`)
 
+      // fs.writeFileSync(path, JSON.stringify(json), err => {
+      //   if (err) {
+      //     console.log(err);
+      //   }
+    
+      //   console.log('done');
+      // });
+      // console.log(fs.readFileSync('./templates/theme.xml', {encoding: 'utf-8'})); 
       // create registraion.php
       // create theme.xml
       // bin/magento setup:upgrade
