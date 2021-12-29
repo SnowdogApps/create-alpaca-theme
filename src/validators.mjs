@@ -17,20 +17,20 @@ export function validateInput(inputString) {
 }
 
 export function validateComposer() {
-  exec("composer -v", (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
+  return new Promise((resolve, reject) => {
+    exec("composer -v", (error, stdout, stderr) => {
+      if (error) {
+          reject(`error: ${error.message}`);
+          return;
+      }
+      if (stderr) {
+          reject(`stderr: ${stderr}`);
+          return;
+      }
 
-  // temp
-  console.log('composer installed in this system')
-  return
-  });
+    resolve('Composer is installed in this system')
+    });
+  })
 }
 
 export function validateMagento() {
