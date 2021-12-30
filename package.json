@@ -19,8 +19,8 @@
   "author": "Patryk Bura",
   "license": "ISC",
   "dependencies": {
-    "cli-progress": "^3.9.1",
-    "inquirer": "^8.2.0"
+    "cli-progress": "3.9.1",
+    "inquirer": "8.2.0"
   },
   "bin": {
     "alpaca-theme": "/index.mjs"
