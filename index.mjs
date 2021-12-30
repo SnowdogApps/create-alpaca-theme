@@ -35,15 +35,8 @@ const progressBar = new cliProgress.SingleBar({
   barIncompleteChar: '\u2591',
   hideCursor: true
 });
-
-var twirlTimer = function() {
-  var P = ["\\", "|", "/", "-"];
-  var x = 0;
-  return setInterval(function() {
-    process.stdout.write("\r" + P[x++]);
-    x &= 3;
-  }, 80);
-};
+const spinnerPath = ["\\", "|", "/", "-"];
+let x = 0;
 
 /*
   Check if valid Magento instance. If not throw error.
@@ -51,6 +44,7 @@ var twirlTimer = function() {
 if (validateMagento()) {
   console.clear()
   log(blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
+
   inquirer.prompt([
     {
       type: 'input',
@@ -61,15 +55,19 @@ if (validateMagento()) {
   ])
   .then(async answers => {
     try {
+      const spinner = setInterval(function() {
+        process.stdout.write("\r" + spinnerPath[x++]);
+        x &= 3;
+      }, 80);
       console.time(blue('Finished in'))
-      twirlTimer()
+
       progressBar.start(100, 0, {
         info: barInfoColor("Validating composer..."),
       })
       await validateComposer()
 
       progressBar.update(2, {
-        info: barInfoColor("Downloading Alpaca Packages")
+        info: barInfoColor("Downloading Alpaca Packages...")
       });
       await composerRequire(alpacaPackagesPath)
 
@@ -137,6 +135,8 @@ if (validateMagento()) {
       progressBar.update(100, {
         info: blue("Enjoy Alpaca :)")
       });
+
+      clearInterval(spinner)
       progressBar.stop();
       console.timeEnd(blue('Finished in'))
     }
@@ -150,9 +150,10 @@ if (validateMagento()) {
     }
     finally {
       log(blue('\nInstallation finished succefuly!'))
-      log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme.'))
-      log(blue('Visit Alpaca Docs to learn how to fully utlize Alpaca Theme.'))
-      log(barInfoColor('2021 || https://snow.dog || https://github.com/SnowdogApps\n'))
+      log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme'), `(${barInfoColor(answers.name)}).`)
+      log(blue('Visit Alpaca Docs to learn how to work with Alpaca Theme.'))
+      log(blue('To see exemplary code go to Alpaca Boilerplate.\n'))
+      log(barInfoColor('|| 2021 Snowdog || https://snow.dog || https://github.com/SnowdogApps ||\n'))
     }
   })
 }
