@@ -7,7 +7,7 @@ import { readFile } from 'fs/promises';
 import {
   validateInput,
   validateComposer,
-  validateMagento
+  isMagentoInstance
 } from './src/validators.mjs';
 import {
   replaceJSONContents,
@@ -29,19 +29,20 @@ const barInfoColor = _colors.yellow
 const blue = _colors.blue
 const red = _colors.red
 const log = console.log
+const spinnerPath = ["\\", "|", "/", "-"];
+const spinnerSpeed = 100;
 const progressBar = new cliProgress.SingleBar({
   format: '  |' + _colors.cyan('{bar}') + '| {percentage}% || {info}',
   barCompleteChar: '\u2588',
   barIncompleteChar: '\u2591',
   hideCursor: true
 });
-const spinnerPath = ["\\", "|", "/", "-"];
 let x = 0;
 
 /*
   Check if valid Magento instance. If not throw error.
 */
-if (validateMagento()) {
+if (isMagentoInstance()) {
   console.clear()
   log(blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
 
@@ -58,9 +59,8 @@ if (validateMagento()) {
       const spinner = setInterval(function() {
         process.stdout.write("\r" + spinnerPath[x++]);
         x &= 3;
-      }, 80);
+      }, spinnerSpeed);
       console.time(blue('Finished in'))
-
       progressBar.start(100, 0, {
         info: barInfoColor("Validating composer..."),
       })
@@ -85,28 +85,28 @@ if (validateMagento()) {
         info: barInfoColor("Configuring themes.json...")
       });
       const themesJson = JSON.parse(await readFile(new URL('./templates/themes.json', import.meta.url)));
-      await replaceJSONContents('dev/tools/frontools/config/themes.json', themesJson)
+      replaceJSONContents('dev/tools/frontools/config/themes.json', themesJson)
 
       progressBar.update(57, {
         info: barInfoColor("Replace theme name in themes.json with your theme name")
       });
-      await renameTheme('dev/tools/frontools/config/themes.json', answers.name)
+      renameTheme('dev/tools/frontools/config/themes.json', answers.name)
 
       progressBar.update(59, {
         info: barInfoColor("Configuring browser-sync.json...")
       });
       const browserSyncJson = JSON.parse(await readFile(new URL('./templates/browser-sync.json', import.meta.url)));
-      await replaceJSONContents('dev/tools/frontools/config/browser-sync.json', browserSyncJson)
+      replaceJSONContents('dev/tools/frontools/config/browser-sync.json', browserSyncJson)
 
       progressBar.update(61, {
         info: barInfoColor("Replace theme name in browser-sync.json with your theme name")
       });
-      await renameBrowserSyncPaths('dev/tools/frontools/config/browser-sync.json', answers.name)
+      renameBrowserSyncPaths('dev/tools/frontools/config/browser-sync.json', answers.name)
 
       progressBar.update(63, {
         info: barInfoColor("Creating child theme directory...")
       });
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}`)
+      createDirectory(`app/design/frontend/Snowdog/${answers.name}`)
 
       progressBar.update(65, {
         info: barInfoColor("Creating theme.xml file...")
