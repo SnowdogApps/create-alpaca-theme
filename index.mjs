@@ -20,6 +20,7 @@ import {
   createDirectory,
   createThmeRegistrationFiles
 } from './src/local-env-actions.mjs'
+import { magentoUpgrade } from './src/magento-actions.mjs'
 
 const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
 const frontoolsPath = 'snowdog/frontools'
@@ -47,62 +48,66 @@ if (validateMagento()) {
       });
       await validateComposer()
 
-      progressBar.update(5, {
+      progressBar.update(2, {
         info: "Downloading Alpaca Packages"
       });
       // await composerRequire(alpacaPackagesPath)
 
-      progressBar.update(45, {
+      progressBar.update(30, {
         info: "Downloading Frontools"
       });
       // await composerRequire(frontoolsPath)
 
-      progressBar.update(60, {
+      progressBar.update(45, {
         info: "Installing frontools"
       });
       // await installFrontools()
 
-      progressBar.update(70, {
+      progressBar.update(55, {
         info: "Configuring themes.json"
       });
       const themesJson = JSON.parse(await readFile(new URL('./templates/themes.json', import.meta.url)));
       await replaceJSONContents('dev/tools/frontools/config/themes.json', themesJson)
 
-      progressBar.update(75, {
+      progressBar.update(57, {
         info: "Replace theme name in themes.json with your theme name"
       });
       await renameTheme('dev/tools/frontools/config/themes.json', answers.name)
 
-      progressBar.update(80, {
+      progressBar.update(59, {
         info: "Configuring browser-sync.json"
       });
       const browserSyncJson = JSON.parse(await readFile(new URL('./templates/browser-sync.json', import.meta.url)));
       await replaceJSONContents('dev/tools/frontools/config/browser-sync.json', browserSyncJson)
 
-      progressBar.update(85, {
+      progressBar.update(61, {
         info: "Replace theme name in browser-sync.json with your theme name"
       });
       await renameBrowserSyncPaths('dev/tools/frontools/config/browser-sync.json', answers.name)
 
-      progressBar.update(90, {
+      progressBar.update(63, {
         info: "Creating child theme directory."
       });
       await createDirectory(`app/design/frontend/${answers.name}`)
 
-      progressBar.update(92, {
-        info: "Creating child theme directory."
+      progressBar.update(65, {
+        info: "Creating theme.xml file"
       });
       const themeXML = await readFile(new URL('./templates/theme.xml', import.meta.url));
       const themeXMLUpdated = themeXML.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
       createThmeRegistrationFiles(`app/design/frontend/${answers.name}/theme.xml`, themeXMLUpdated)
 
-      progressBar.update(94, {
-        info: "Creating child theme directory."
+      progressBar.update(67, {
+        info: "Creating registration.php file"
       });
       const registrationPhp = await readFile(new URL('./templates/registration.php', import.meta.url));
       const registrationPHPupdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
       createThmeRegistrationFiles(`app/design/frontend/${answers.name}/registration.php`, registrationPHPupdated)
 
+      progressBar.update(70, {
+        info: "Upgrading magneto instance"
+      });
+      await magentoUpgrade()
 
       progressBar.update(100, {
         info: "Enjoy Alpaca :)"

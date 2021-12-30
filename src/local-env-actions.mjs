@@ -55,7 +55,5 @@ export function createThmeRegistrationFiles(path, payload) {
     if (err) {
       console.error(err)
     }
-
-    console.log('Results Received');
   });
 }
