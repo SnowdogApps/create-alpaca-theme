@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import fs from 'fs'
+import fs, { readFileSync } from 'fs'
+import path from 'path';
 import inquirer from 'inquirer';
 import cliProgress from 'cli-progress';
 import _colors from 'colors'
@@ -16,7 +17,8 @@ import {
   replaceJSONContents,
   renameTheme,
   renameBrowserSyncPaths,
-  createDirectory
+  createDirectory,
+  createThmeRegistrationFiles
 } from './src/local-env-actions.mjs'
 
 const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
@@ -82,21 +84,25 @@ if (validateMagento()) {
       });
       await renameBrowserSyncPaths('dev/tools/frontools/config/browser-sync.json', answers.name)
 
+      progressBar.update(90, {
+        info: "Creating child theme directory."
+      });
       await createDirectory(`app/design/frontend/${answers.name}`)
 
-      // fs.writeFileSync(path, JSON.stringify(json), err => {
-      //   if (err) {
-      //     console.log(err);
-      //   }
-    
-      //   console.log('done');
-      // });
-      // console.log(fs.readFileSync('./templates/theme.xml', {encoding: 'utf-8'})); 
-      // create registraion.php
-      // create theme.xml
-      // bin/magento setup:upgrade
-      // run yarn install && yarn setup && yarn styles && yarn svg && yarn babel
-      // Go to Content -> Design -> Configuration, and choose your theme
+      progressBar.update(92, {
+        info: "Creating child theme directory."
+      });
+      const themeXML = await readFile(new URL('./templates/theme.xml', import.meta.url));
+      const themeXMLUpdated = themeXML.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
+      createThmeRegistrationFiles(`app/design/frontend/${answers.name}/theme.xml`, themeXMLUpdated)
+
+      progressBar.update(94, {
+        info: "Creating child theme directory."
+      });
+      const registrationPhp = await readFile(new URL('./templates/registration.php', import.meta.url));
+      const registrationPHPupdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
+      createThmeRegistrationFiles(`app/design/frontend/${answers.name}/registration.php`, registrationPHPupdated)
+
 
       progressBar.update(100, {
         info: "Enjoy Alpaca :)"

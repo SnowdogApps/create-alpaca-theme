@@ -49,3 +49,13 @@ export function createDirectory(path) {
     }
   });
 }
+
+export function createThmeRegistrationFiles(path, payload) {
+  fs.writeFile(path, payload, function (err) {
+    if (err) {
+      console.error(err)
+    }
+
+    console.log('Results Received');
+  });
+}
