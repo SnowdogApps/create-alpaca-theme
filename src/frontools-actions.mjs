@@ -5,7 +5,7 @@ export function installFrontools() {
     exec(`cd vendor/snowdog/frontools && yarn install && yarn setup`, (error, stdout, stderr) => {
       if (error) {
           reject(`error: ${error.message}`);
-          return;
+          throw error;
       }
 
       resolve('Frontools installed correctly');
