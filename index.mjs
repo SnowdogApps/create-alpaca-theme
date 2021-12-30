@@ -12,7 +12,7 @@ import {
   validateMagento
 } from './src/validators.mjs';
 import { composerRequire } from './src/composer-actions.mjs';
-import { installFrontools } from './src/frontools-actions.mjs'
+import { installFrontools, compileFiles } from './src/frontools-actions.mjs'
 import {
   replaceJSONContents,
   renameTheme,
@@ -105,9 +105,14 @@ if (validateMagento()) {
       createThmeRegistrationFiles(`app/design/frontend/${answers.name}/registration.php`, registrationPHPupdated)
 
       progressBar.update(70, {
-        info: "Upgrading magneto instance"
+        info: "Upgrading magneto instance."
       });
       await magentoUpgrade()
+  
+      progressBar.update(90, {
+        info: "Compiling files."
+      });
+      await compileFiles()
 
       progressBar.update(100, {
         info: "Enjoy Alpaca :)"
@@ -125,6 +130,7 @@ if (validateMagento()) {
     finally {
       console.log(`
         Installation finished succefuly!\n
+        Visit Alpaca Docs to learn how to fully utlize Alpaca Theme.\n
         Visit Alpaca Docs to learn how to fully utlize Alpaca Theme.\n
         2021 | Patryk Bura | https://snow.dog
       `)
