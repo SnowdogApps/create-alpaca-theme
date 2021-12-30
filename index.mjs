@@ -22,18 +22,28 @@ import {
 } from './src/frontools-actions.mjs'
 import { composerRequire } from './src/composer-actions.mjs';
 import { magentoUpgrade } from './src/magento-actions.mjs'
+
 const alpacaPackagesPath = 'snowdog/module-alpaca-packages'
 const frontoolsPath = 'snowdog/frontools'
+const barInfoColor = _colors.yellow
+const blue = _colors.blue
+const red = _colors.red
+const log = console.log
 const progressBar = new cliProgress.SingleBar({
-  format: 'Progress: |' + _colors.cyan('{bar}') + '| {percentage}% || {info}',
+  format: '  |' + _colors.cyan('{bar}') + '| {percentage}% || {info}',
   barCompleteChar: '\u2588',
   barIncompleteChar: '\u2591',
   hideCursor: true
 });
-const log = console.log
-const barInfoColor = _colors.yellow
-const blue = _colors.blue
-const red = _colors.red
+
+var twirlTimer = function() {
+  var P = ["\\", "|", "/", "-"];
+  var x = 0;
+  return setInterval(function() {
+    process.stdout.write("\r" + P[x++]);
+    x &= 3;
+  }, 80);
+};
 
 /*
   Check if valid Magento instance. If not throw error.
@@ -52,13 +62,14 @@ if (validateMagento()) {
   .then(async answers => {
     try {
       console.time(blue('Finished in'))
+      twirlTimer()
       progressBar.start(100, 0, {
         info: barInfoColor("Validating composer..."),
       })
       await validateComposer()
 
       progressBar.update(2, {
-        info: barInfoColor("Downloading Alpaca Packages...")
+        info: barInfoColor("Downloading Alpaca Packages")
       });
       await composerRequire(alpacaPackagesPath)
 
@@ -68,7 +79,7 @@ if (validateMagento()) {
       await composerRequire(frontoolsPath)
 
       progressBar.update(45, {
-        info: barInfoColor("Installing frontools...")
+        info: barInfoColor("Installing Frontools...")
       });
       await installFrontools()
 
@@ -97,29 +108,29 @@ if (validateMagento()) {
       progressBar.update(63, {
         info: barInfoColor("Creating child theme directory...")
       });
-      await createDirectory(`app/design/frontend/${answers.name}`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}`)
 
       progressBar.update(65, {
         info: barInfoColor("Creating theme.xml file...")
       });
       const themeXML = await readFile(new URL('./templates/theme.xml', import.meta.url));
       const themeXMLUpdated = themeXML.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
-      createThmeRegistrationFiles(`app/design/frontend/${answers.name}/theme.xml`, themeXMLUpdated)
+      createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/theme.xml`, themeXMLUpdated)
 
       progressBar.update(67, {
         info: barInfoColor("Creating registration.php file...")
       });
       const registrationPhp = await readFile(new URL('./templates/registration.php', import.meta.url));
       const registrationPHPupdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
-      createThmeRegistrationFiles(`app/design/frontend/${answers.name}/registration.php`, registrationPHPupdated)
+      createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/registration.php`, registrationPHPupdated)
 
       progressBar.update(70, {
-        info: barInfoColor("Upgrading magneto instance...")
+        info: barInfoColor("Upgrading Magneto instance...")
       });
       await magentoUpgrade()
 
       progressBar.update(90, {
-        info: barInfoColor("Compiling files...W")
+        info: barInfoColor("Compiling files...")
       });
       await compileFiles()
 
@@ -138,10 +149,10 @@ if (validateMagento()) {
       process.exit()
     }
     finally {
-      log(blue('Installation finished succefuly!'))
+      log(blue('\nInstallation finished succefuly!'))
       log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme.'))
       log(blue('Visit Alpaca Docs to learn how to fully utlize Alpaca Theme.'))
-      log(barInfoColor('2021 || https://snow.dog || https://github.com/SnowdogApps'))
+      log(barInfoColor('2021 || https://snow.dog || https://github.com/SnowdogApps\n'))
     }
   })
 }

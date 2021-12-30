@@ -39,9 +39,7 @@ export function validateMagento() {
   if (fs.existsSync(path)) {
     return true
   } else {
-    console.error(
-      _colors.red('This directory is not valid Magento instance.\n'),
-      _colors.yellow('Try again from Magento project root directory.')
-    )
+    console.error(_colors.red('This directory is not valid Magento instance.'))
+    console.error(_colors.yellow('Try again from Magento project root directory.'))
   }
 }
