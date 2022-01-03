@@ -86,7 +86,7 @@ if (isMagentoInstance()) {
       progressBar.update(55, {
         info: barInfoColor("Configuring themes.json...")
       });
-      const themesJson = JSON.parse(await readFile(new URL('./templates/themes.json', import.meta.url)));
+      const themesJson = JSON.parse(await readFile(new URL('./templates/themes.json.sample', import.meta.url)));
       replaceJSONContents('dev/tools/frontools/config/themes.json', themesJson)
 
       progressBar.update(57, {
@@ -97,7 +97,7 @@ if (isMagentoInstance()) {
       progressBar.update(59, {
         info: barInfoColor("Configuring browser-sync.json...")
       });
-      const browserSyncJson = JSON.parse(await readFile(new URL('./templates/browser-sync.json', import.meta.url)));
+      const browserSyncJson = JSON.parse(await readFile(new URL('./templates/browser-sync.json.sample', import.meta.url)));
       replaceJSONContents('dev/tools/frontools/config/browser-sync.json', browserSyncJson)
 
       progressBar.update(61, {
@@ -113,14 +113,14 @@ if (isMagentoInstance()) {
       progressBar.update(65, {
         info: barInfoColor("Creating theme.xml file...")
       });
-      const themeXML = await readFile(new URL('./templates/theme.xml', import.meta.url));
+      const themeXML = await readFile(new URL('./templates/theme.xml.sample', import.meta.url));
       const themeXMLUpdated = themeXML.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
       createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/theme.xml`, themeXMLUpdated)
 
       progressBar.update(67, {
         info: barInfoColor("Creating registration.php file...")
       });
-      const registrationPhp = await readFile(new URL('./templates/registration.php', import.meta.url));
+      const registrationPhp = await readFile(new URL('./templates/registration.php.sample', import.meta.url));
       const registrationPhpUpdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
       createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/registration.php`, registrationPhpUpdated)
 
@@ -145,7 +145,7 @@ if (isMagentoInstance()) {
 
       log(blue('\nInstallation finished succefuly!'))
       log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme'), `(${barInfoColor(answers.name)}).`)
-      log(blue('Visit Alpaca Docs to learn how to work with Alpaca Theme.'))
+      log(blue('\nVisit Alpaca Docs to learn how to work with Alpaca Theme.'))
       log(blue('To see exemplary code go to Alpaca Boilerplate.\n'))
       log(barInfoColor('2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n'))
     }
