@@ -121,8 +121,8 @@ if (isMagentoInstance()) {
         info: barInfoColor("Creating registration.php file...")
       });
       const registrationPhp = await readFile(new URL('./templates/registration.php', import.meta.url));
-      const registrationPHPupdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
-      createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/registration.php`, registrationPHPupdated)
+      const registrationPhpUpdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
+      createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/registration.php`, registrationPhpUpdated)
 
       progressBar.update(70, {
         info: barInfoColor("Upgrading Magneto instance...")
@@ -144,7 +144,7 @@ if (isMagentoInstance()) {
     }
     catch (exception_var) {
       progressBar.update(0, {
-        info: red("Installation failed, fix issues logged below and try again.")
+        info: red("Installation failed.")
       });
       progressBar.stop();
       log(`\n${red(exception_var)}`)
@@ -155,7 +155,7 @@ if (isMagentoInstance()) {
       log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme'), `(${barInfoColor(answers.name)}).`)
       log(blue('Visit Alpaca Docs to learn how to work with Alpaca Theme.'))
       log(blue('To see exemplary code go to Alpaca Boilerplate.\n'))
-      log(barInfoColor('|| 2021 Snowdog || https://snow.dog || https://github.com/SnowdogApps ||\n'))
+      log(barInfoColor('2021 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n'))
     }
   })
 }

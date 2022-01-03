@@ -12,25 +12,20 @@ export function validateInput(inputString) {
   if (inputString.length === 0) {
     return NAME_NOT_PROVIDED_MSG
   } else if (inputString.length < nameMinimumLength) {
-      return NAME_TO_SHORT_MSG
-    }
+    return NAME_TO_SHORT_MSG
+  };
 
   return true
 };
 
 export function validateComposer() {
   return new Promise((resolve, reject) => {
-    exec("composer -v", (error, stdout, stderr) => {
+    exec("composer -v", error => {
       if (error) {
-        reject(_colors.red(`error: ${error.message}`));
-        return;
-      }
-      if (stderr) {
-        reject(_colors.yellow(`stderr: ${stderr}`));
-        return;
+        reject(`Error while validating composer:\n${error.message}`);
       }
 
-    resolve('Composer is installed in this system')
+      resolve('Composer is installed in this system')
     });
   });
 };
@@ -43,5 +38,5 @@ export function isMagentoInstance() {
   } else {
     console.error(_colors.red(NOT_MAGENTO_MSG_TOP))
     console.error(_colors.yellow(NOT_MAGENTO_MSG_BOTTOM))
-  }
+  };
 };
