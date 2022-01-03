@@ -16,24 +16,24 @@ export function validateInput(inputString) {
     }
 
   return true
-}
+};
 
 export function validateComposer() {
   return new Promise((resolve, reject) => {
     exec("composer -v", (error, stdout, stderr) => {
       if (error) {
-          reject(_colors.red(`error: ${error.message}`));
-          return;
+        reject(_colors.red(`error: ${error.message}`));
+        return;
       }
       if (stderr) {
-          reject(_colors.yellow(`stderr: ${stderr}`));
-          return;
+        reject(_colors.yellow(`stderr: ${stderr}`));
+        return;
       }
 
     resolve('Composer is installed in this system')
     });
-  })
-}
+  });
+};
 
 export function isMagentoInstance() {
   const path = './bin/magento'
@@ -44,4 +44,4 @@ export function isMagentoInstance() {
     console.error(_colors.red(NOT_MAGENTO_MSG_TOP))
     console.error(_colors.yellow(NOT_MAGENTO_MSG_BOTTOM))
   }
-}
+};

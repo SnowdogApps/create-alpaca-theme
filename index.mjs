@@ -37,7 +37,6 @@ const progressBar = new cliProgress.SingleBar({
   barIncompleteChar: '\u2591',
   hideCursor: true
 });
-let x = 0;
 
 /*
   Check if valid Magento instance. If not throw error.
@@ -56,11 +55,14 @@ if (isMagentoInstance()) {
   ])
   .then(async answers => {
     try {
+      let x = 0;
       const spinner = setInterval(function() {
         process.stdout.write("\r" + spinnerPath[x++]);
         x &= 3;
       }, spinnerSpeed);
-      console.time(blue('Finished in'))
+
+      console.time(blue('Finished in')) // Start task time counter
+
       progressBar.start(100, 0, {
         info: barInfoColor("Validating composer..."),
       })
@@ -138,7 +140,7 @@ if (isMagentoInstance()) {
 
       clearInterval(spinner)
       progressBar.stop();
-      console.timeEnd(blue('Finished in'))
+      console.timeEnd(blue('Finished in')) // Stop task time counter
     }
     catch (exception_var) {
       progressBar.update(0, {
