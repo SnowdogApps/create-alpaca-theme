@@ -55,10 +55,10 @@ if (isMagentoInstance()) {
   ])
   .then(async answers => {
     try {
-      let x = 0;
-      const spinner = setInterval(function() {
-        process.stdout.write("\r" + spinnerPath[x++]);
-        x &= 3;
+      let iteratorValue = 0; // Spinner character iterator value
+      const spinner = setInterval(() => {
+        process.stdout.write("\r" + spinnerPath[iteratorValue++]);
+        iteratorValue &= 3;
       }, spinnerSpeed);
 
       console.time(blue('Finished in')) // Start task time counter
@@ -139,8 +139,15 @@ if (isMagentoInstance()) {
       });
 
       clearInterval(spinner)
+      process.stdout.write("\r" + '\u2713') // Unicode check mark character
       progressBar.stop();
       console.timeEnd(blue('Finished in')) // Stop task time counter
+
+      log(blue('\nInstallation finished succefuly!'))
+      log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme'), `(${barInfoColor(answers.name)}).`)
+      log(blue('Visit Alpaca Docs to learn how to work with Alpaca Theme.'))
+      log(blue('To see exemplary code go to Alpaca Boilerplate.\n'))
+      log(barInfoColor('2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n'))
     }
     catch (exception_var) {
       progressBar.update(0, {
@@ -149,13 +156,6 @@ if (isMagentoInstance()) {
       progressBar.stop();
       log(`\n${red(exception_var)}`)
       process.exit()
-    }
-    finally {
-      log(blue('\nInstallation finished succefuly!'))
-      log(blue('Go to Admin Panel -> Content -> Design -> Configuration and choose your theme'), `(${barInfoColor(answers.name)}).`)
-      log(blue('Visit Alpaca Docs to learn how to work with Alpaca Theme.'))
-      log(blue('To see exemplary code go to Alpaca Boilerplate.\n'))
-      log(barInfoColor('2021 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n'))
     }
   })
 }
