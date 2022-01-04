@@ -1,34 +1,26 @@
-import { exec } from 'child_process'
+import promiseExec from '../utils/promiseExec.mjs'
 import fs from 'fs'
-import _colors from 'colors'
-
-const NAME_NOT_PROVIDED_MSG = 'It cannot be empty. Please provide valid theme name'
-const NAME_TO_SHORT_MSG = 'Your theme name should be at least 3 characters long.'
-const nameMinimumLength = 3
-const NOT_MAGENTO_MSG_TOP = 'This directory is not valid Magento instance.'
-const NOT_MAGENTO_MSG_BOTTOM = 'Try again from Magento project root directory.'
+import {
+  NAME_MINIMUM_LENGTH,
+  NAME_TO_SHORT_MSG,
+  NAME_NOT_PROVIDED_MSG
+} from '../utils/constants.mjs'
 
 export function validateInput(inputString) {
   if (inputString.length === 0) {
     return NAME_NOT_PROVIDED_MSG
-  } else if (inputString.length < nameMinimumLength) {
+  } else if (inputString.length < NAME_MINIMUM_LENGTH) {
     return NAME_TO_SHORT_MSG
-  };
+  }
 
   return true
-};
+}
 
 export function validateComposer() {
-  return new Promise((resolve, reject) => {
-    exec("composer -v", error => {
-      if (error) {
-        reject(`Error while validating composer:\n${error.message}`);
-      }
-
-      resolve('Composer is installed in this system')
-    });
-  });
-};
+  return promiseExec(`composer -v`, msg => {
+    `There was an while validating composer: ${msg}`
+  })
+}
 
 export function isMagentoInstance() {
   const path = './bin/magento'
@@ -36,7 +28,6 @@ export function isMagentoInstance() {
   if (fs.existsSync(path)) {
     return true
   } else {
-    console.error(_colors.red(NOT_MAGENTO_MSG_TOP))
-    console.error(_colors.yellow(NOT_MAGENTO_MSG_BOTTOM))
-  };
-};
+    return false
+  }
+}
