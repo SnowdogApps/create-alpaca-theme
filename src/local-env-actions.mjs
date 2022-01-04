@@ -1,50 +1,15 @@
 import fs from 'fs'
-
-export function replaceJSONContents(path, json) {
-  fs.writeFileSync(path, JSON.stringify(json), err => {
-    if (err) {
-      throw (`Error while copying template files\n${err}`)
-    }
-  })
-}
-
-export function renameTheme(path, themeName) {
-  fs.readFile(path, 'utf-8', (err, data) => {
-    if (err) {
-      throw err
-    }
-
-    const newValue = data.replace(/YOUR_THEME_NAME/gim, themeName);
-
-    fs.writeFile(path, newValue, 'utf-8', err => {
-      if (err) {
-        throw err
-      }
-    })
-  })
-}
-
-export function renameBrowserSyncPaths(path, themeName) {
-  fs.readFile(path, 'utf-8', (err, data) => {
-    if (err) {
-      throw err
-    }
-
-    const newValue = data.replace(/alpaca-boilerplate.test/gim, `${themeName}.test`);
-
-    fs.writeFile(path, newValue, 'utf-8', err => {
-      if (err) {
-        throw err
-      }
-    })
-  })
-}
+import { readFile } from 'fs/promises';
 
 export function createDirectory(path) {
-  fs.promises.mkdir(path, { recursive: true }, err => {
-    if (err) {
-      throw err
-    }
+  return new Promise((resolve, reject) => {
+    fs.mkdir(path, { recursive: true }, err => {
+      if (err) {
+        reject(err)
+      }
+
+      resolve()
+    })
   })
 }
 
@@ -54,4 +19,27 @@ export function createFile(path, payload) {
       throw err
     }
   })
+}
+
+export async function addChildThemeFile(templatePath, fileName, themeName, dirPath, replace = false) {
+  try {
+    if (replace) {
+      const template = await readFile(new URL(`../${templatePath}`, import.meta.url));
+      const templateUpdated = template.toString().replace(/YOUR_THEME_NAME/gim, themeName)
+      if (dirPath) {
+        createFile(dirPath, templateUpdated)
+      } else {
+        createFile(`app/design/frontend/Snowdog/${themeName}/${fileName}`, templateUpdated)
+      }
+    } else {
+      const template = await readFile(new URL(`../${templatePath}`, import.meta.url));
+      if (dirPath) {
+        createFile(dirPath, template)
+      } else {
+        createFile(`app/design/frontend/Snowdog/${themeName}/${fileName}`, template)
+      }
+    }
+  } catch (error) {
+    console.error(`\n${error}`)
+  }
 }

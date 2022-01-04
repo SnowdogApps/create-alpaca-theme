@@ -1,7 +1,6 @@
 import colors from 'colors'
 
-export const NOT_MAGENTO_MSG_TOP = 'This directory is not valid Magento instance.'
-export const NOT_MAGENTO_MSG_BOTTOM = 'Try again from Magento project root directory.'
+// global
 export const CHECK_MARK_CHARACTER = '\u2713'
 
 // composer download paths
@@ -32,7 +31,8 @@ export const TEMPLATE_PATHS = {
   THEME_STYLES: './templates/components/styles.scss.sample',
   CRITICAL_STYLES: './templates/components/critical.scss.sample',
   README: './templates/theme/README.md.sample',
-  CHANGELOG: './templates/theme/CHANGELOG.md.sample'
+  CHANGELOG: './templates/theme/CHANGELOG.md.sample',
+  GITIGNORE: './templates/theme/.gitignore.sample'
 }
 
 // local environment paths
@@ -54,3 +54,6 @@ export const LOADING_BAR = {
 export const NAME_NOT_PROVIDED_MSG = 'It cannot be empty. Please provide valid theme name'
 export const NAME_TO_SHORT_MSG = 'Your theme name should be at least 3 characters long.'
 export const NAME_MINIMUM_LENGTH = 3
+export const NOT_MAGENTO_MSG_TOP = 'This directory is not valid Magento instance.'
+export const NOT_MAGENTO_MSG_BOTTOM = 'Try again from Magento project root directory.'
+export const REGISTRATION_NAME_NOT_SINGULAR = 'Registration name needs to be one word'

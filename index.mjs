@@ -7,17 +7,17 @@ import Spinner from './utils/spinner.mjs'
 import { readFile } from 'fs/promises';
 import { composerRequire } from './src/composer-actions.mjs';
 import { magentoUpgrade } from './src/magento-actions.mjs'
+import { addFile, installComponents } from './src/components-actions.mjs';
 import {
-  validateInput,
+  validateName,
+  validateRegistrationName,
   validateComposer,
   isMagentoInstance
 } from './src/validators.mjs';
 import {
-  replaceJSONContents,
-  renameTheme,
-  renameBrowserSyncPaths,
   createDirectory,
-  createThmeRegistrationFiles
+  createFile,
+  addChildThemeFile
 } from './src/local-env-actions.mjs'
 import {
   installFrontools,
@@ -33,6 +33,7 @@ import {
   LOCAL_ENV_PATHS
 } from './utils/constants.mjs';
 
+const spinner = new Spinner()
 const log = console.log
 const barInfoColor = colors.yellow
 const progressBar = new cliProgress.SingleBar({
@@ -41,12 +42,64 @@ const progressBar = new cliProgress.SingleBar({
   barIncompleteChar: LOADING_BAR.INCOMPLETE_CHAR,
   hideCursor: LOADING_BAR.CURSOR_HIDDEN,
   barsize: LOADING_BAR.SIZE
-});
-const spinner = new Spinner()
+})
+const snowdogComponentsFiles = [
+  { name: '.editorconfig', path: TEMPLATE_PATHS.EDITOR_CONFIG },
+  { name: '.eslintignore', path: TEMPLATE_PATHS.ESLINT_IGNORE },
+  { name: '.eslintrc.json', path: TEMPLATE_PATHS.ESLINT_RC },
+  { name: '.node-version', path: TEMPLATE_PATHS.NODE_VERSIONS },
+  { name: '.sass-lint.yml', path: TEMPLATE_PATHS.SASS_LINT },
+  { name: '.stylelintrc', path: TEMPLATE_PATHS.STYLE_LINT_RC },
+  { name: 'gulpfile.js', path: TEMPLATE_PATHS.GULPFILE, },
+  { name: 'modules.json ', path: TEMPLATE_PATHS.MODULES_JSON, },
+]
+const styleCssFiles = [
+  { name: 'checkout.scss', path: TEMPLATE_PATHS.DOCS_CHECKOUT_SCSS, dirPath: 'Snowdog_Components/docs/styles/checkout.scss'},
+  { name: 'styles.scss', path: TEMPLATE_PATHS.DOCS_STYLES_SCSS, dirPath: 'Snowdog_Components/docs/styles/styles.scss'},
+  { name: 'checkout.scss', path: TEMPLATE_PATHS.MAGENTO_CHECKOUT_SCSS, dirPath: 'Magento_Checkout/checkout.scss'},
+  { name: 'critical.scss', path: TEMPLATE_PATHS.CRITICAL_STYLES, dirPath: 'styles/critical.scss'},
+  { name: 'styles.scss', path: TEMPLATE_PATHS.THEME_STYLES, dirPath: 'styles/styles.scss'},
+]
+const childThemeFiles = [
+  {
+    name: 'themes.json',
+    path: TEMPLATE_PATHS.THEMES_JSON,
+    dirPath: LOCAL_ENV_PATHS.THEMES_JSON,
+    shouldReplace: true
+  },
+  {
+    name: 'browser-sync.json',
+    path: TEMPLATE_PATHS.BROWSER_SYNC,
+    dirPath: LOCAL_ENV_PATHS.BROWSER_SYNC,
+    shouldReplace: true
+  },
+  {
+    name: 'theme.xml',
+    path: TEMPLATE_PATHS.THEME_XML,
+    shouldReplace: true
+  },
+  {
+    name: 'registration.php',
+    path: TEMPLATE_PATHS.REGISTRATION,
+    shouldReplace: true
+  },
+  {
+    name: '.gitignore',
+    path: TEMPLATE_PATHS.GITIGNORE,
+  },
+  {
+    name: 'README.md',
+    path: TEMPLATE_PATHS.README,
+    shouldReplace: true
+  },
+  {
+    name: 'CHANGELOG.md',
+    path: TEMPLATE_PATHS.CHANGELOG,
+  },
+]
 
-/*
-  Check if valid Magento instance. If not log error.
-*/
+
+// Check if valid Magento instance. If not log error.
 if (isMagentoInstance()) {
   console.clear()
   log(colors.blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
@@ -56,8 +109,14 @@ if (isMagentoInstance()) {
       type: 'input',
       message: "Enter your theme name:",
       name: 'name',
-      validate: validateInput
+      validate: validateName
     }
+    // {
+    //   type: 'input',
+    //   message: `Enter theme registration name (${colors.yellow('One word, could be in camelCase etc.')}):`,
+    //   name: 'registrationName',
+    //   validate: validateRegistrationName
+    // }
   ])
   .then(async answers => {
     try {
@@ -69,76 +128,90 @@ if (isMagentoInstance()) {
       })
       await validateComposer()
 
+     // Creating, registering copying files of Alpaca Theme and Child Theme
       progressBar.update(2, {
         info: barInfoColor("Downloading Alpaca Packages...")
       });
       await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
 
-      progressBar.update(30, {
+      progressBar.update(25, {
         info: barInfoColor("Downloading Frontools...")
       });
       await composerRequire(PACKAGE_PATH.FRONTOOLS)
 
-      progressBar.update(45, {
+      progressBar.update(35, {
         info: barInfoColor("Installing Frontools...")
       });
       await installFrontools()
 
-      progressBar.update(55, {
-        info: barInfoColor("Configuring themes.json...")
-      });
-      const themesJson = JSON.parse(await readFile(new URL(TEMPLATE_PATHS.THEMES_JSON, import.meta.url)));
-      replaceJSONContents(LOCAL_ENV_PATHS.THEMES_JSON, themesJson)
-
-      progressBar.update(57, {
-        info: barInfoColor("Replace theme name in themes.json with your theme name")
-      });
-      renameTheme(LOCAL_ENV_PATHS.THEMES_JSON, answers.name)
-
-      progressBar.update(59, {
-        info: barInfoColor("Configuring browser-sync.json...")
-      });
-      const browserSyncJson = JSON.parse(await readFile(new URL(TEMPLATE_PATHS.BROWSER_SYNC, import.meta.url)));
-      replaceJSONContents(LOCAL_ENV_PATHS.BROWSER_SYNC, browserSyncJson)
-
-      progressBar.update(61, {
-        info: barInfoColor("Replace theme name in browser-sync.json with your theme name")
-      });
-      renameBrowserSyncPaths(LOCAL_ENV_PATHS.BROWSER_SYNC, answers.name)
-
-      progressBar.update(63, {
+      progressBar.update(45, {
         info: barInfoColor("Creating child theme directory...")
       });
-      createDirectory(`app/design/frontend/Snowdog/${answers.name}`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}`)
+
+      childThemeFiles.forEach((file) => {
+        progressBar.increment(1, {
+          info: barInfoColor(`Creating ${file.name} file...`)
+        });
+        addChildThemeFile(file.path, file.name, answers.name, file.dirPath, file.shouldReplace)
+      })
+
+      // Scaffolding Snowdog_Components and related files
+      progressBar.update(54, {
+        info: barInfoColor("Creating Snowdog_Components directories...")
+      });
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/docs/styles`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/atoms/variables`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Magento_Checkout`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/styles`)
+
+      progressBar.update(58, {
+        info: barInfoColor("Creating package.json file...")
+      });
+      const packageJson = await readFile(new URL(TEMPLATE_PATHS.PACKAGE_JSON, import.meta.url));
+      const packageJsonUpdated = packageJson.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
+      createFile(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/package.json`, packageJsonUpdated)
+
+      progressBar.update(59, {
+        info: barInfoColor("Creating theme-variables.scss file...")
+      });
+      const themeVariables = await readFile(new URL(TEMPLATE_PATHS.THEME_VARIABLES, import.meta.url));
+      createFile(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/atoms/variables/_${answers.name}-variables.scss`, themeVariables)
+
+      snowdogComponentsFiles.forEach((file) => {
+        progressBar.increment(1, {
+          info: barInfoColor(`Creating ${file.name} file...`)
+        });
+        addFile(file.path, file.name, answers.name)
+      })
+
+      styleCssFiles.forEach((file) => {
+        progressBar.increment(1, {
+          info: barInfoColor(`Creating ${file.name} file...`)
+        });
+        addFile(file.path, file.name, answers.name, `app/design/frontend/Snowdog/${answers.name}/${file.dirPath}`)
+      })
 
       progressBar.update(65, {
-        info: barInfoColor("Creating theme.xml file...")
+        info: barInfoColor("Installing Snowdog Components...")
       });
-      const themeXML = await readFile(new URL(TEMPLATE_PATHS.THEME_XML, import.meta.url));
-      const themeXMLUpdated = themeXML.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
-      createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/theme.xml`, themeXMLUpdated)
+      await installComponents(answers.name)
 
-      progressBar.update(67, {
-        info: barInfoColor("Creating registration.php file...")
-      });
-      const registrationPhp = await readFile(new URL(TEMPLATE_PATHS.REGISTRATION, import.meta.url));
-      const registrationPhpUpdated = registrationPhp.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
-      createThmeRegistrationFiles(`app/design/frontend/Snowdog/${answers.name}/registration.php`, registrationPhpUpdated)
-
-      progressBar.update(70, {
+      // Magento and Frontools tasks
+      progressBar.update(77, {
         info: barInfoColor("Upgrading Magneto instance...")
       });
       await magentoUpgrade()
 
-      progressBar.update(90, {
+      progressBar.update(93, {
         info: barInfoColor("Compiling files...")
       });
       await compileFiles()
 
+      // After succes tasks
       progressBar.update(100, {
         info: colors.blue("Enjoy Alpaca :)")
       });
-
       process.stdout.write("\r" + CHECK_MARK_CHARACTER)
       spinner.stop()
       progressBar.stop();
