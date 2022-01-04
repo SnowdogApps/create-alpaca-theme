@@ -1,26 +1,13 @@
-import { exec } from 'child_process'
+import promiseExec from '../utils/promiseExec.mjs'
 
 export function installFrontools() {
-  return new Promise((resolve, reject) => {
-    exec(`cd vendor/snowdog/frontools && yarn install && yarn setup`, error => {
-      if (error) {
-        reject(`Error while installing Frontools:\n${error.message}`);
-      };
-
-      resolve('Frontools installed correctly');
-    });
-  });
-};
+  return promiseExec(`cd vendor/snowdog/frontools && yarn install && yarn setup`, msg => {
+    `There was an error installing Frontools: ${msg}`
+  })
+}
 
 export function compileFiles() {
-  return new Promise((resolve, reject) => {
-    exec(`cd vendor/snowdog/frontools && yarn styles && yarn svg && yarn babel`, error => {
-      if (error) {
-        reject(`error: ${error.message}`);
-        return;
-      };
-
-      resolve('Files compiled');
-    });
-  });
-};
+  return promiseExec(`cd vendor/snowdog/frontools && yarn styles && yarn svg && yarn babel`, msg => {
+    `There was an error compiling files with Frontools: ${msg}`
+  })
+}
