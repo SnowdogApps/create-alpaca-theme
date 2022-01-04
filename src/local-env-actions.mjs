@@ -48,7 +48,7 @@ export function createDirectory(path) {
   })
 }
 
-export function createThmeRegistrationFiles(path, payload) {
+export function createFile(path, payload) {
   fs.writeFile(path, payload, err => {
     if (err) {
       throw err
