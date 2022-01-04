@@ -57,3 +57,4 @@ export const NAME_MINIMUM_LENGTH = 3
 export const NOT_MAGENTO_MSG_TOP = 'This directory is not valid Magento instance.'
 export const NOT_MAGENTO_MSG_BOTTOM = 'Try again from Magento project root directory.'
 export const REGISTRATION_NAME_NOT_SINGULAR = 'Registration name needs to be one word'
+export const BANNED_NAMES_MSG = 'Choose diffrent name.'

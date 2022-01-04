@@ -76,28 +76,34 @@ const childThemeFiles = [
   {
     name: 'theme.xml',
     path: TEMPLATE_PATHS.THEME_XML,
+    dirPath: null,
     shouldReplace: true
   },
   {
     name: 'registration.php',
     path: TEMPLATE_PATHS.REGISTRATION,
+    dirPath: null,
     shouldReplace: true
   },
   {
     name: '.gitignore',
     path: TEMPLATE_PATHS.GITIGNORE,
+    dirPath: null,
+    shouldReplace: false
   },
   {
     name: 'README.md',
     path: TEMPLATE_PATHS.README,
+    dirPath: null,
     shouldReplace: true
   },
   {
     name: 'CHANGELOG.md',
     path: TEMPLATE_PATHS.CHANGELOG,
+    dirPath: null,
+    shouldReplace: false
   },
 ]
-
 
 // Check if valid Magento instance. If not log error.
 if (isMagentoInstance()) {
@@ -107,16 +113,16 @@ if (isMagentoInstance()) {
   inquirer.prompt([
     {
       type: 'input',
-      message: "Enter your theme name:",
-      name: 'name',
+      message: "Enter your theme full name:",
+      name: 'fullName',
       validate: validateName
+    },
+    {
+      type: 'input',
+      message: `Enter theme registration name (${colors.yellow('One word, could be in camelCase etc.')}):`,
+      name: 'name',
+      validate: validateRegistrationName
     }
-    // {
-    //   type: 'input',
-    //   message: `Enter theme registration name (${colors.yellow('One word, could be in camelCase etc.')}):`,
-    //   name: 'registrationName',
-    //   validate: validateRegistrationName
-    // }
   ])
   .then(async answers => {
     try {
@@ -128,7 +134,7 @@ if (isMagentoInstance()) {
       })
       await validateComposer()
 
-     // Creating, registering copying files of Alpaca Theme and Child Theme
+    //  Creating, registering copying files of Alpaca Theme and Child Theme
       progressBar.update(2, {
         info: barInfoColor("Downloading Alpaca Packages...")
       });
@@ -153,7 +159,11 @@ if (isMagentoInstance()) {
         progressBar.increment(1, {
           info: barInfoColor(`Creating ${file.name} file...`)
         });
-        addChildThemeFile(file.path, file.name, answers.name, file.dirPath, file.shouldReplace)
+        if (file.name === 'theme.xml' || file.name === 'README.md')
+          addChildThemeFile(file, answers.name, answers.fullName)
+        else {
+          addChildThemeFile(file, answers.name)
+        }
       })
 
       // Scaffolding Snowdog_Components and related files
