@@ -12,10 +12,19 @@ export const PACKAGE_PATH = {
 
 // templates paths
 export const TEMPLATE_PATHS = {
-  BROWSER_SYNC: './templates/browser-sync.json.sample',
-  REGISTRATION: './templates/registration.php.sample',
-  THEME_XML: './templates/theme.xml.sample',
-  THEMES_JSON: './templates/themes.json.sample'
+  BROWSER_SYNC: './templates/frontools/browser-sync.json.sample',
+  REGISTRATION: './templates/theme/registration.php.sample',
+  THEME_XML: './templates/theme/theme.xml.sample',
+  THEMES_JSON: './templates/frontools/themes.json.sample',
+  EDITOR_CONFIG: './templates/components/.editorconfig.sample',
+  ESLINT_IGNORE: './templates/components/.eslintignore.sample',
+  ESLINT_RC: './templates/components/.eslintrc.json.sample',
+  NODE_VERSIONS: './templates/components/.node-version.sample',
+  SASS_LINT: './templates/components/.sass-lint.yml.sample',
+  STYLE_LINT_RC: './templates/components/.stylelintrc.sample',
+  GULPFILE: './templates/components/gulpfile.js.sample',
+  MODULES_JSON: './templates/components/modules.json.sample',
+  PACKAGE_JSON: './templates/components/package.json.sample'
 }
 
 // local environment paths
