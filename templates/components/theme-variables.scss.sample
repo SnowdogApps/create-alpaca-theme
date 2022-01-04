@@ -1,0 +1,3 @@
+// Change Alpaca Components variables here
+// Example - alter value bellow to change color-primary variable
+$color-primary: $black;

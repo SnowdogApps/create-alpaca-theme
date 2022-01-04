@@ -1,0 +1,9 @@
+// Variables
+@import '../../components/Atoms/variables/variables';
+@import '../../components/Atoms/variables/YOUR_THEME_NAME-variables';
+
+// Components
+@import '../../components/styles/checkout';
+
+// Styles necessary only for Fractal purpoueses
+@import 'fractal';

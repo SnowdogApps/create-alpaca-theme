@@ -24,7 +24,15 @@ export const TEMPLATE_PATHS = {
   STYLE_LINT_RC: './templates/components/.stylelintrc.sample',
   GULPFILE: './templates/components/gulpfile.js.sample',
   MODULES_JSON: './templates/components/modules.json.sample',
-  PACKAGE_JSON: './templates/components/package.json.sample'
+  PACKAGE_JSON: './templates/components/package.json.sample',
+  DOCS_CHECKOUT_SCSS: './templates/components/docs_checkout.scss.sample',
+  DOCS_STYLES_SCSS: './templates/components/docs_styles.scss.sample',
+  MAGENTO_CHECKOUT_SCSS: './templates/components/magento-checkout.scss.sample',
+  THEME_VARIABLES: './templates/components/theme-variables.scss.sample',
+  THEME_STYLES: './templates/components/styles.scss.sample',
+  CRITICAL_STYLES: './templates/components/critical.scss.sample',
+  README: './templates/theme/README.md.sample',
+  CHANGELOG: './templates/theme/CHANGELOG.md.sample'
 }
 
 // local environment paths

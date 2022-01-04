@@ -1,8 +1,8 @@
 {
-  "proxy": "alpaca-boilerplate.test",
+  "proxy": "YOUR_THEME_NAME.test",
   "rewriteRules": [
     {
-      "match": ".alpaca-boilerplate.test",
+      "match": ".YOUR_THEME_NAME.test",
       "replace": ""
     }
   ]
