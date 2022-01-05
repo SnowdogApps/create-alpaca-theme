@@ -19,6 +19,6 @@ export async function addFile(templatePath, fileName, themeName, dirPath = null)
 
 export function installComponents(themeName) {
   return promiseExec(`cd app/design/frontend/Snowdog/${themeName}/Snowdog_Components && yarn install`, msg => {
-    `There was an error installing Snowdog_Components: ${msg}`
+    return `There was an error installing Snowdog_Components: ${msg}`
   })
 }

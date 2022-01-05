@@ -56,7 +56,7 @@ const snowdogComponentsFiles = [
 const styleCssFiles = [
   { name: 'checkout.scss', path: TEMPLATE_PATHS.DOCS_CHECKOUT_SCSS, dirPath: 'Snowdog_Components/docs/styles/checkout.scss'},
   { name: 'styles.scss', path: TEMPLATE_PATHS.DOCS_STYLES_SCSS, dirPath: 'Snowdog_Components/docs/styles/styles.scss'},
-  { name: 'checkout.scss', path: TEMPLATE_PATHS.MAGENTO_CHECKOUT_SCSS, dirPath: 'Magento_Checkout/checkout.scss'},
+  { name: 'checkout.scss', path: TEMPLATE_PATHS.MAGENTO_CHECKOUT_SCSS, dirPath: 'Magento_Checkout/styles/checkout.scss'},
   { name: 'critical.scss', path: TEMPLATE_PATHS.CRITICAL_STYLES, dirPath: 'styles/critical.scss'},
   { name: 'styles.scss', path: TEMPLATE_PATHS.THEME_STYLES, dirPath: 'styles/styles.scss'},
 ]
@@ -128,13 +128,12 @@ if (isMagentoInstance()) {
     try {
       console.time(colors.blue('Finished in')) // Start task time counter
       spinner.start()
-
       progressBar.start(100, 0, {
         info: barInfoColor("Validating composer..."),
       })
       await validateComposer()
 
-    //  Creating, registering copying files of Alpaca Theme and Child Theme
+      // Creating, registering copying files of Alpaca Theme and Child Theme
       progressBar.update(2, {
         info: barInfoColor("Downloading Alpaca Packages...")
       });
@@ -172,7 +171,7 @@ if (isMagentoInstance()) {
       });
       await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/docs/styles`)
       await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/atoms/variables`)
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Magento_Checkout`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Magento_Checkout/styles`)
       await createDirectory(`app/design/frontend/Snowdog/${answers.name}/styles`)
 
       progressBar.update(58, {

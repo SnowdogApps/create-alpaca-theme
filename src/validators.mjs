@@ -36,7 +36,7 @@ export function validateRegistrationName(inputString) {
 
 export function validateComposer() {
   return promiseExec(`composer -v`, msg => {
-    `There was an while validating composer: ${msg}`
+    return `There was an while validating composer: ${msg}`
   })
 }
 
