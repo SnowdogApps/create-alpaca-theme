@@ -49,7 +49,7 @@ export const LOCAL_ENV_PATHS = {
 
 // loading bar
 export const LOADING_BAR = {
-  FORMAT: '  |' + colors.cyan('{bar}') + '| {percentage}% || {info}',
+  FORMAT: `  | ${colors.cyan('{bar}')} | {percentage}% || {info}`,
   COMPLETE_CHAR: '\u2588',
   INCOMPLETE_CHAR: '\u2591',
   SIZE: 30,

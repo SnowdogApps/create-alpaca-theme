@@ -1,8 +1,8 @@
 import { readFile } from 'fs/promises'
-import { createFile } from './local-env-actions.mjs'
-import { validateYarn } from './validators.mjs'
-import promiseExec from '../utils/promiseExec.mjs'
-import { BASE_PATH } from '../utils/constants.mjs'
+import { createFile } from './local-env-actions.js'
+import { validateYarn } from './validators.js'
+import promiseExec from '../utils/promiseExec.js'
+import { BASE_PATH } from '../utils/constants.js'
 
 export async function addFile(templatePath, fileName, themeName, dirPath = null) {
   try {
@@ -21,12 +21,12 @@ export async function addFile(templatePath, fileName, themeName, dirPath = null)
 
 export function installComponents(themeName) {
   if (validateYarn()) {
-    return promiseExec(`cd ${BASE_PATH}${themeName}/Snowdog_Components && yarn install`, msg => {
-      return `There was an error installing Snowdog_Components: ${msg}`
-    })
-  } else {
-    return promiseExec(`cd ${BASE_PATH}${themeName}/Snowdog_Components && npm install`, msg => {
+    return promiseExec(`cd ${BASE_PATH}${themeName}/Snowdog_Components && yarn install`, (msg) => {
       return `There was an error installing Snowdog_Components: ${msg}`
     })
   }
+
+  return promiseExec(`cd ${BASE_PATH}${themeName}/Snowdog_Components && npm install`, (msg) => {
+    return `There was an error installing Snowdog_Components: ${msg}`
+  })
 }

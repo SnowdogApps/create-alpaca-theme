@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 
+import { readFile } from 'fs/promises'
 import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
-import Spinner from './utils/spinner.mjs'
-import { readFile } from 'fs/promises'
-import { CLISuccesMessage } from './utils/messages.mjs'
-import { magentoUpgrade } from './src/magento-actions.mjs'
-import { composerRequire } from './src/composer-actions.mjs'
-import { addFile, installComponents } from './src/components-actions.mjs'
-import { installFrontools, compileFiles } from './src/frontools-actions.mjs'
+import Spinner from './utils/spinner.js'
+import { CLISuccesMessage } from './utils/messages.js'
+import { magentoUpgrade } from './src/magento-actions.js'
+import { composerRequire } from './src/composer-actions.js'
+import { addFile, installComponents } from './src/components-actions.js'
+import { installFrontools, compileFiles } from './src/frontools-actions.js'
 import {
   validateName,
   validateComposer,
   isMagentoInstance,
   validateRegistrationName
-} from './src/validators.mjs'
+} from './src/validators.js'
 import {
   createFile,
   createDirectory,
   addChildThemeFile
-} from './src/local-env-actions.mjs'
+} from './src/local-env-actions.js'
 import {
   BASE_PATH,
   LOADING_BAR,
@@ -30,9 +30,9 @@ import {
   NOT_MAGENTO_MSG_TOP,
   CHECK_MARK_CHARACTER,
   NOT_MAGENTO_MSG_BOTTOM
-} from './utils/constants.mjs'
+} from './utils/constants.js'
 
-const log = console.log
+const { log } = console
 const spinner = new Spinner()
 const infoColor = colors.yellow
 const bar = new cliProgress.SingleBar({
@@ -58,7 +58,7 @@ const styleCssFiles = [
   { name: 'styles.scss', path: TEMPLATE_PATHS.DOCS_STYLES_SCSS, dirPath: 'Snowdog_Components/docs/styles/styles.scss' },
   { name: 'checkout.scss', path: TEMPLATE_PATHS.MAGENTO_CHECKOUT_SCSS, dirPath: 'Magento_Checkout/styles/checkout.scss' },
   { name: 'critical.scss', path: TEMPLATE_PATHS.CRITICAL_STYLES, dirPath: 'styles/critical.scss' },
-  { name: 'styles.scss', path: TEMPLATE_PATHS.THEME_STYLES, dirPath: 'styles/styles.scss' },
+  { name: 'styles.scss', path: TEMPLATE_PATHS.THEME_STYLES, dirPath: 'styles/styles.scss' }
 ]
 const childThemeFiles = [
   {
@@ -102,7 +102,7 @@ const childThemeFiles = [
     path: TEMPLATE_PATHS.CHANGELOG,
     dirPath: null,
     shouldReplace: false
-  },
+  }
 ]
 const promptQuestions = [
   {
@@ -125,7 +125,7 @@ const init = () => {
     console.clear()
     log(colors.blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
 
-    Inquirer.prompt(promptQuestions).then(async answers => {
+    Inquirer.prompt(promptQuestions).then(async (answers) => {
       try {
         console.time(colors.blue('Finished in')) // Start time counter
         spinner.start()
@@ -151,9 +151,9 @@ const init = () => {
 
         childThemeFiles.forEach((file) => {
           bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
-          if (file.name === 'theme.xml' || file.name === 'README.md')
+          if (file.name === 'theme.xml' || file.name === 'README.md') {
             addChildThemeFile(file, answers.name, answers.fullName)
-          else {
+          } else {
             addChildThemeFile(file, answers.name)
           }
         })
@@ -197,13 +197,12 @@ const init = () => {
 
         // After succes tasks
         bar.update(100, { info: colors.blue('Enjoy Alpaca :)') })
-        process.stdout.write('\r' + CHECK_MARK_CHARACTER)
+        process.stdout.write(`\r${CHECK_MARK_CHARACTER}`)
         spinner.stop()
         bar.stop()
         console.timeEnd(colors.blue('Finished in')) // Stop time counter
         CLISuccesMessage(answers.fullName)
-      }
-      catch (error) {
+      } catch (error) {
         bar.update(0, { info: colors.red('Installation failed.') })
         spinner.stop()
         bar.stop()

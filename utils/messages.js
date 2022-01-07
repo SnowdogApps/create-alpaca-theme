@@ -1,5 +1,6 @@
-const log = console.log
 import colors from 'colors'
+
+const { log } = console
 
 export const CLISuccesMessage = (themeName) => {
   return log(
