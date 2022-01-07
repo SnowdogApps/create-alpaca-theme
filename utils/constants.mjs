@@ -5,6 +5,9 @@ export const CHECK_MARK_CHARACTER = '\u2713'
 
 // composer download paths
 export const PACKAGE_PATH = {
+  /* TEMP - DELETE AFTER FEATURE/PERFORMANCE RELEASE */
+  THEME_FRONTEND_ALPACA_TEST: 'snowdog/theme-frontend-alpaca:dev-test',
+
   ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
   FRONTOOLS: 'snowdog/frontools'
 }
@@ -21,8 +24,8 @@ export const TEMPLATE_PATHS = {
   NODE_VERSIONS: './templates/components/.node-version.sample',
   SASS_LINT: './templates/components/.sass-lint.yml.sample',
   STYLE_LINT_RC: './templates/components/.stylelintrc.sample',
-  GULPFILE: './templates/components/gulpfile.js.sample',
-  MODULES_JSON: './templates/components/modules.json.sample',
+  GULPFILE: './templates/components/gulpfile.mjs.sample',
+  MODULES_JSON: './templates/components/modules.mjs.sample',
   PACKAGE_JSON: './templates/components/package.json.sample',
   DOCS_CHECKOUT_SCSS: './templates/components/docs_checkout.scss.sample',
   DOCS_STYLES_SCSS: './templates/components/docs_styles.scss.sample',

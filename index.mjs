@@ -50,7 +50,7 @@ const snowdogComponentsFiles = [
   { name: '.node-version', path: TEMPLATE_PATHS.NODE_VERSIONS },
   { name: '.sass-lint.yml', path: TEMPLATE_PATHS.SASS_LINT },
   { name: '.stylelintrc', path: TEMPLATE_PATHS.STYLE_LINT_RC },
-  { name: 'gulpfile.js', path: TEMPLATE_PATHS.GULPFILE, },
+  { name: 'gulpfile.mjs', path: TEMPLATE_PATHS.GULPFILE, },
   { name: 'modules.json ', path: TEMPLATE_PATHS.MODULES_JSON, },
 ]
 const styleCssFiles = [
@@ -119,7 +119,7 @@ if (isMagentoInstance()) {
     },
     {
       type: 'input',
-      message: `Enter theme registration name (${colors.yellow('One word, could be in camelCase etc.')}):`,
+      message: `Enter theme registration name (${colors.yellow('one string, ex. child-theme')}):`,
       name: 'name',
       validate: validateRegistrationName
     }
@@ -137,7 +137,11 @@ if (isMagentoInstance()) {
       progressBar.update(2, {
         info: barInfoColor("Downloading Alpaca Packages...")
       });
-      await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
+      /* ENABLE AFTER FEATURE-PERFORMANCE REALEASE */
+      // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
+
+      /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */
+      await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA_TEST)
 
       progressBar.update(25, {
         info: barInfoColor("Downloading Frontools...")
@@ -170,7 +174,7 @@ if (isMagentoInstance()) {
         info: barInfoColor("Creating Snowdog_Components directories...")
       });
       await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/docs/styles`)
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/atoms/variables`)
+      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/Atoms/variables`)
       await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Magento_Checkout/styles`)
       await createDirectory(`app/design/frontend/Snowdog/${answers.name}/styles`)
 
@@ -185,7 +189,7 @@ if (isMagentoInstance()) {
         info: barInfoColor("Creating theme-variables.scss file...")
       });
       const themeVariables = await readFile(new URL(TEMPLATE_PATHS.THEME_VARIABLES, import.meta.url));
-      createFile(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/atoms/variables/_${answers.name}-variables.scss`, themeVariables)
+      createFile(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/Atoms/variables/_${answers.name}-variables.scss`, themeVariables)
 
       snowdogComponentsFiles.forEach((file) => {
         progressBar.increment(1, {
@@ -243,6 +247,6 @@ if (isMagentoInstance()) {
     }
   })
 } else {
-  console.error(colors.colors.red(NOT_MAGENTO_MSG_TOP))
+  console.error(colors.red(NOT_MAGENTO_MSG_TOP))
   console.error(colors.yellow(NOT_MAGENTO_MSG_BOTTOM))
 }

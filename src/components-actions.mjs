@@ -4,11 +4,11 @@ import promiseExec from '../utils/promiseExec.mjs'
 
 export async function addFile(templatePath, fileName, themeName, dirPath = null) {
   try {
+    const template = await readFile(new URL(`../${templatePath}`, import.meta.url));
+
     if (dirPath === null) {
-      const template = await readFile(new URL(`../${templatePath}`, import.meta.url));
       createFile(`app/design/frontend/Snowdog/${themeName}/Snowdog_Components/${fileName}`, template)
     } else {
-      const template = await readFile(new URL(`../${templatePath}`, import.meta.url));
       const templateUpdated = template.toString().replace(/YOUR_THEME_NAME/gim, themeName)
       createFile(dirPath, templateUpdated)
     }
