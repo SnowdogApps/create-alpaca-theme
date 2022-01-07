@@ -2,13 +2,14 @@
   "name": "alpaca-theme",
   "version": "1.0.0",
   "description": "Snowdog Alpaca Theme for Magento 2 projects",
-  "main": "index.mjs",
+  "type": "module",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://lab.snowdog.pro/patrykbura/alpaca-theme-npm"
   },
   "scripts": {
-    "lint": "eslint ./src ./utils index.mjs --ext .mjs"
+    "lint": "eslint ./src ./utils index.js --ext .js"
   },
   "keywords": [
     "alpaca",
@@ -19,13 +20,14 @@
     "theme"
   ],
   "author": "Patryk Bura",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "cli-progress": "3.9.1",
+    "colors": "1.4.0",
     "inquirer": "8.2.0"
   },
   "bin": {
-    "alpaca-theme": "./index.mjs"
+    "alpaca-theme": "./index.js"
   },
   "devDependencies": {
     "eslint": "^8.6.0",
