@@ -51,7 +51,7 @@ const snowdogComponentsFiles = [
   { name: '.sass-lint.yml', path: TEMPLATE_PATHS.SASS_LINT },
   { name: '.stylelintrc', path: TEMPLATE_PATHS.STYLE_LINT_RC },
   { name: 'gulpfile.mjs', path: TEMPLATE_PATHS.GULPFILE, },
-  { name: 'modules.json ', path: TEMPLATE_PATHS.MODULES_JSON, },
+  { name: 'modules.mjs', path: TEMPLATE_PATHS.MODULES_JSON, },
 ]
 const styleCssFiles = [
   { name: 'checkout.scss', path: TEMPLATE_PATHS.DOCS_CHECKOUT_SCSS, dirPath: 'Snowdog_Components/docs/styles/checkout.scss'},
