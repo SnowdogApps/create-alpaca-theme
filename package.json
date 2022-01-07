@@ -11,7 +11,9 @@
     "alpaca",
     "alpaca-theme",
     "magento",
-    "snowdog"
+    "magento2",
+    "snowdog",
+    "theme"
   ],
   "author": "Patryk Bura",
   "license": "ISC",

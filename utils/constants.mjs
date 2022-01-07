@@ -2,6 +2,8 @@ import colors from 'colors'
 
 // global
 export const CHECK_MARK_CHARACTER = '\u2713'
+export const BASE_PATH = 'app/design/frontend/Snowdog/'
+export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 
 // composer download paths
 export const PACKAGE_PATH = {

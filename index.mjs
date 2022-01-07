@@ -1,37 +1,35 @@
 #!/usr/bin/env node
 
+import colors from 'colors'
 import Inquirer from 'inquirer';
 import cliProgress from 'cli-progress';
-import colors from 'colors'
 import Spinner from './utils/spinner.mjs'
-import { CLISuccesMessage } from './utils/messages.mjs';
 import { readFile } from 'fs/promises';
-import { composerRequire } from './src/composer-actions.mjs';
+import { CLISuccesMessage } from './utils/messages.mjs';
 import { magentoUpgrade } from './src/magento-actions.mjs'
+import { composerRequire } from './src/composer-actions.mjs';
 import { addFile, installComponents } from './src/components-actions.mjs';
+import { installFrontools, compileFiles } from './src/frontools-actions.mjs'
 import {
   validateName,
-  validateRegistrationName,
   validateComposer,
-  isMagentoInstance
+  isMagentoInstance,
+  validateRegistrationName
 } from './src/validators.mjs';
 import {
-  createDirectory,
   createFile,
+  createDirectory,
   addChildThemeFile
 } from './src/local-env-actions.mjs'
 import {
-  installFrontools,
-  compileFiles
-} from './src/frontools-actions.mjs'
-import {
-  NOT_MAGENTO_MSG_BOTTOM,
+  BASE_PATH,
+  LOADING_BAR,
+  PACKAGE_PATH,
+  TEMPLATE_PATHS,
+  LOCAL_ENV_PATHS,
   NOT_MAGENTO_MSG_TOP,
   CHECK_MARK_CHARACTER,
-  PACKAGE_PATH,
-  LOADING_BAR,
-  TEMPLATE_PATHS,
-  LOCAL_ENV_PATHS
+  NOT_MAGENTO_MSG_BOTTOM
 } from './utils/constants.mjs';
 
 const log = console.log
@@ -121,97 +119,104 @@ const promptQuestions = [
   }
 ]
 
-/* BEFORE INITIALIZING CHECK IF VALID MAGENTO INSTANCE */
-if (isMagentoInstance()) {
-  console.clear()
-  log(colors.blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
+const init = () => {
+  /* BEFORE INITIALIZING CHECK IF VALID MAGENTO INSTANCE */
+  if (isMagentoInstance()) {
+    console.clear()
+    log(colors.blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
 
-  Inquirer.prompt(promptQuestions).then(async answers => {
-    try {
-      console.time(colors.blue('Finished in')) // Start task time counter
-      spinner.start()
-      bar.start(100, 0, { info: infoColor("Validating composer...") })
-      await validateComposer()
+    Inquirer.prompt(promptQuestions).then(async answers => {
+      try {
+        console.time(colors.blue('Finished in')) // Start time counter
+        spinner.start()
+        bar.start(100, 0, { info: infoColor("Validating composer...") })
+        await validateComposer()
 
-      // Creating, registering copying files of Alpaca Theme and Child Theme
-      bar.update(2, { info: infoColor("Downloading Alpaca Packages...") });
-      /* ENABLE AFTER FEATURE-PERFORMANCE REALEASE */
-      // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
+        // Creating, registering copying files of Alpaca Theme and Child Theme
+        bar.update(2, { info: infoColor("Downloading Alpaca Packages...") });
+        /* ENABLE AFTER FEATURE-PERFORMANCE REALEASE */
+        // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
 
-      /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */
-      await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA_TEST)
+        /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */
+        await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA_TEST)
 
-      bar.update(25, { info: infoColor("Downloading Frontools...") });
-      await composerRequire(PACKAGE_PATH.FRONTOOLS)
+        bar.update(20, { info: infoColor("Downloading Frontools...") });
+        await composerRequire(PACKAGE_PATH.FRONTOOLS)
 
-      bar.update(35, { info: infoColor("Installing Frontools...") });
-      await installFrontools()
+        bar.update(30, { info: infoColor("Installing Frontools...") });
+        await installFrontools()
 
-      bar.update(45, { info: infoColor("Creating child theme directory...") });
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}`)
+        bar.update(40, { info: infoColor("Creating child theme directory...") });
+        await createDirectory(`${BASE_PATH}${answers.name}`)
 
-      childThemeFiles.forEach((file) => {
-        bar.increment(1, { info: infoColor(`Creating ${file.name} file...`) });
-        if (file.name === 'theme.xml' || file.name === 'README.md')
-          addChildThemeFile(file, answers.name, answers.fullName)
-        else {
-          addChildThemeFile(file, answers.name)
-        }
-      })
+        childThemeFiles.forEach((file) => {
+          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) });
+          if (file.name === 'theme.xml' || file.name === 'README.md')
+            addChildThemeFile(file, answers.name, answers.fullName)
+          else {
+            addChildThemeFile(file, answers.name)
+          }
+        })
 
-      // Scaffolding Snowdog_Components and related files
-      bar.update(54, { info: infoColor("Creating Snowdog_Components directories...") });
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/docs/styles`)
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/Atoms/variables`)
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/Magento_Checkout/styles`)
-      await createDirectory(`app/design/frontend/Snowdog/${answers.name}/styles`)
+        // Scaffolding Snowdog_Components and related files
+        bar.update(50, { info: infoColor("Creating Snowdog_Components directories...") });
+        await createDirectory(`${BASE_PATH}${answers.name}/Snowdog_Components/docs/styles`)
+        await createDirectory(`${BASE_PATH}${answers.name}/Snowdog_Components/components/Atoms/variables`)
+        await createDirectory(`${BASE_PATH}${answers.name}/Magento_Checkout/styles`)
+        await createDirectory(`${BASE_PATH}${answers.name}/styles`)
 
-      bar.update(58, { info: infoColor("Creating package.json file...") });
-      const packageJson = await readFile(new URL(TEMPLATE_PATHS.PACKAGE_JSON, import.meta.url));
-      const packageJsonUpdated = packageJson.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
-      createFile(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/package.json`, packageJsonUpdated)
+        bar.update(51, { info: infoColor("Creating package.json file...") });
+        const packageJson = await readFile(new URL(TEMPLATE_PATHS.PACKAGE_JSON, import.meta.url));
+        const packageJsonUpdated = packageJson.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
+        createFile(`${BASE_PATH}${answers.name}/Snowdog_Components/package.json`, packageJsonUpdated)
 
-      bar.update(59, { info: infoColor("Creating theme-variables.scss file...") });
-      const themeVariables = await readFile(new URL(TEMPLATE_PATHS.THEME_VARIABLES, import.meta.url));
-      createFile(`app/design/frontend/Snowdog/${answers.name}/Snowdog_Components/components/Atoms/variables/_${answers.name}-variables.scss`, themeVariables)
+        bar.update(52, { info: infoColor("Creating theme-variables.scss file...") });
+        const themeVariables = await readFile(new URL(TEMPLATE_PATHS.THEME_VARIABLES, import.meta.url));
+        const variablesPath = `/Snowdog_Components/components/Atoms/variables/_${answers.name}-variables.scss`
+        createFile(`${BASE_PATH}${answers.name}${variablesPath}`, themeVariables)
 
-      snowdogComponentsFiles.forEach((file) => {
-        bar.increment(1, { info: infoColor(`Creating ${file.name} file...`) });
-        addFile(file.path, file.name, answers.name)
-      })
+        snowdogComponentsFiles.forEach((file) => {
+          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) });
+          addFile(file.path, file.name, answers.name)
+        })
 
-      styleCssFiles.forEach((file) => {
-        bar.increment(1, { info: infoColor(`Creating ${file.name} file...`) });
-        addFile(file.path, file.name, answers.name, `app/design/frontend/Snowdog/${answers.name}/${file.dirPath}`)
-      })
+        styleCssFiles.forEach((file) => {
+          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) });
+          addFile(file.path, file.name, answers.name, `${BASE_PATH}${answers.name}/${file.dirPath}`)
+        })
 
-      bar.update(65, { info: infoColor("Installing Snowdog Components...") });
-      await installComponents(answers.name)
+        bar.update(60, { info: infoColor("Installing Snowdog Components...") });
+        await installComponents(answers.name)
 
-      // Magento and Frontools tasks
-      bar.update(77, { info: infoColor("Upgrading Magneto instance...") });
-      await magentoUpgrade()
+        // Magento and Frontools tasks
+        bar.update(70, { info: infoColor("Upgrading Magneto instance...") });
+        await magentoUpgrade()
 
-      bar.update(93, { info: infoColor("Compiling files...") });
-      await compileFiles()
+        bar.update(90, { info: infoColor("Compiling files...") });
+        await compileFiles()
 
-      // After succes tasks
-      bar.update(100, { info: colors.blue("Enjoy Alpaca :)") });
-      process.stdout.write("\r" + CHECK_MARK_CHARACTER)
-      spinner.stop()
-      bar.stop();
-      console.timeEnd(colors.blue('Finished in')) // Stop task time counter
-      CLISuccesMessage(answers.fullName)
-    }
-    catch (error) {
-      bar.update(0, { info: colors.red("Installation failed.")  });
-      spinner.stop()
-      bar.stop();
-      log(`\n${colors.red(error)}`)
-      process.exit()
-    }
-  })
-} else {
-  console.error(colors.red(NOT_MAGENTO_MSG_TOP))
-  console.error(colors.yellow(NOT_MAGENTO_MSG_BOTTOM))
+        // After succes tasks
+        bar.update(100, { info: colors.blue("Enjoy Alpaca :)") });
+        process.stdout.write("\r" + CHECK_MARK_CHARACTER)
+        spinner.stop()
+        bar.stop();
+        console.timeEnd(colors.blue('Finished in')) // Stop time counter
+        CLISuccesMessage(answers.fullName)
+      }
+      catch (error) {
+        bar.update(0, { info: colors.red("Installation failed.") });
+        spinner.stop()
+        bar.stop();
+        log(`\n${colors.red(error)}`)
+        process.exit()
+      }
+    })
+  } else {
+    console.error(
+      colors.red(NOT_MAGENTO_MSG_TOP),
+      colors.yellow(NOT_MAGENTO_MSG_BOTTOM)
+    )
+  }
 }
+
+init()
