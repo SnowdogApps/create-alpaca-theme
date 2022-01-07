@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
 import colors from 'colors'
-import Inquirer from 'inquirer';
-import cliProgress from 'cli-progress';
+import Inquirer from 'inquirer'
+import cliProgress from 'cli-progress'
 import Spinner from './utils/spinner.mjs'
-import { readFile } from 'fs/promises';
-import { CLISuccesMessage } from './utils/messages.mjs';
+import { readFile } from 'fs/promises'
+import { CLISuccesMessage } from './utils/messages.mjs'
 import { magentoUpgrade } from './src/magento-actions.mjs'
-import { composerRequire } from './src/composer-actions.mjs';
-import { addFile, installComponents } from './src/components-actions.mjs';
+import { composerRequire } from './src/composer-actions.mjs'
+import { addFile, installComponents } from './src/components-actions.mjs'
 import { installFrontools, compileFiles } from './src/frontools-actions.mjs'
 import {
   validateName,
   validateComposer,
   isMagentoInstance,
   validateRegistrationName
-} from './src/validators.mjs';
+} from './src/validators.mjs'
 import {
   createFile,
   createDirectory,
@@ -30,7 +30,7 @@ import {
   NOT_MAGENTO_MSG_TOP,
   CHECK_MARK_CHARACTER,
   NOT_MAGENTO_MSG_BOTTOM
-} from './utils/constants.mjs';
+} from './utils/constants.mjs'
 
 const log = console.log
 const spinner = new Spinner()
@@ -107,7 +107,7 @@ const childThemeFiles = [
 const promptQuestions = [
   {
     type: 'input',
-    message: "Enter your theme full name:",
+    message: 'Enter your theme full name:',
     name: 'fullName',
     validate: validateName
   },
@@ -129,28 +129,28 @@ const init = () => {
       try {
         console.time(colors.blue('Finished in')) // Start time counter
         spinner.start()
-        bar.start(100, 0, { info: infoColor("Validating composer...") })
+        bar.start(100, 0, { info: infoColor('Validating composer...') })
         await validateComposer()
 
         // Creating, registering copying files of Alpaca Theme and Child Theme
-        bar.update(2, { info: infoColor("Downloading Alpaca Packages...") });
+        bar.update(2, { info: infoColor('Downloading Alpaca Packages...') })
         /* ENABLE AFTER FEATURE-PERFORMANCE REALEASE */
         // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
 
         /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */
         await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA_TEST)
 
-        bar.update(20, { info: infoColor("Downloading Frontools...") });
+        bar.update(20, { info: infoColor('Downloading Frontools...') })
         await composerRequire(PACKAGE_PATH.FRONTOOLS)
 
-        bar.update(30, { info: infoColor("Installing Frontools...") });
+        bar.update(30, { info: infoColor('Installing Frontools...') })
         await installFrontools()
 
-        bar.update(40, { info: infoColor("Creating child theme directory...") });
+        bar.update(40, { info: infoColor('Creating child theme directory...') })
         await createDirectory(`${BASE_PATH}${answers.name}`)
 
         childThemeFiles.forEach((file) => {
-          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) });
+          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
           if (file.name === 'theme.xml' || file.name === 'README.md')
             addChildThemeFile(file, answers.name, answers.fullName)
           else {
@@ -159,54 +159,54 @@ const init = () => {
         })
 
         // Scaffolding Snowdog_Components and related files
-        bar.update(50, { info: infoColor("Creating Snowdog_Components directories...") });
+        bar.update(50, { info: infoColor('Creating Snowdog_Components directories...') })
         await createDirectory(`${BASE_PATH}${answers.name}/Snowdog_Components/docs/styles`)
         await createDirectory(`${BASE_PATH}${answers.name}/Snowdog_Components/components/Atoms/variables`)
         await createDirectory(`${BASE_PATH}${answers.name}/Magento_Checkout/styles`)
         await createDirectory(`${BASE_PATH}${answers.name}/styles`)
 
-        bar.update(51, { info: infoColor("Creating package.json file...") });
-        const packageJson = await readFile(new URL(TEMPLATE_PATHS.PACKAGE_JSON, import.meta.url));
+        bar.update(51, { info: infoColor('Creating package.json file...') })
+        const packageJson = await readFile(new URL(TEMPLATE_PATHS.PACKAGE_JSON, import.meta.url))
         const packageJsonUpdated = packageJson.toString().replace(/YOUR_THEME_NAME/gim, answers.name)
         createFile(`${BASE_PATH}${answers.name}/Snowdog_Components/package.json`, packageJsonUpdated)
 
-        bar.update(52, { info: infoColor("Creating theme-variables.scss file...") });
-        const themeVariables = await readFile(new URL(TEMPLATE_PATHS.THEME_VARIABLES, import.meta.url));
+        bar.update(52, { info: infoColor('Creating theme-variables.scss file...') })
+        const themeVariables = await readFile(new URL(TEMPLATE_PATHS.THEME_VARIABLES, import.meta.url))
         const variablesPath = `/Snowdog_Components/components/Atoms/variables/_${answers.name}-variables.scss`
         createFile(`${BASE_PATH}${answers.name}${variablesPath}`, themeVariables)
 
         snowdogComponentsFiles.forEach((file) => {
-          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) });
+          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
           addFile(file.path, file.name, answers.name)
         })
 
         styleCssFiles.forEach((file) => {
-          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) });
+          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
           addFile(file.path, file.name, answers.name, `${BASE_PATH}${answers.name}/${file.dirPath}`)
         })
 
-        bar.update(60, { info: infoColor("Installing Snowdog Components...") });
+        bar.update(60, { info: infoColor('Installing Snowdog Components...') })
         await installComponents(answers.name)
 
         // Magento and Frontools tasks
-        bar.update(70, { info: infoColor("Upgrading Magneto instance...") });
+        bar.update(70, { info: infoColor('Upgrading Magneto instance...') })
         await magentoUpgrade()
 
-        bar.update(90, { info: infoColor("Compiling files...") });
+        bar.update(90, { info: infoColor('Compiling files...') })
         await compileFiles()
 
         // After succes tasks
-        bar.update(100, { info: colors.blue("Enjoy Alpaca :)") });
-        process.stdout.write("\r" + CHECK_MARK_CHARACTER)
+        bar.update(100, { info: colors.blue('Enjoy Alpaca :)') })
+        process.stdout.write('\r' + CHECK_MARK_CHARACTER)
         spinner.stop()
-        bar.stop();
+        bar.stop()
         console.timeEnd(colors.blue('Finished in')) // Stop time counter
         CLISuccesMessage(answers.fullName)
       }
       catch (error) {
-        bar.update(0, { info: colors.red("Installation failed.") });
+        bar.update(0, { info: colors.red('Installation failed.') })
         spinner.stop()
-        bar.stop();
+        bar.stop()
         log(`\n${colors.red(error)}`)
         process.exit()
       }

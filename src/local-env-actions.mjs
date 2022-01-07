@@ -1,6 +1,6 @@
 import fs from 'fs'
-import { readFile } from 'fs/promises';
-import { BASE_PATH } from '../utils/constants.mjs';
+import { readFile } from 'fs/promises'
+import { BASE_PATH } from '../utils/constants.mjs'
 
 export function createDirectory(path) {
   return new Promise((resolve, reject) => {
@@ -26,10 +26,10 @@ export async function addChildThemeFile(file, themeName, fullThemeName = null) {
   const { name, path, dirPath, shouldReplace } = file
 
   try {
-    const template = await readFile(new URL(`../${path}`, import.meta.url));
+    const template = await readFile(new URL(`../${path}`, import.meta.url))
 
     if (shouldReplace) {
-      let templateUpdated = null;
+      let templateUpdated = null
 
       if (fullThemeName) {
         templateUpdated = template.toString().replace(/YOUR_THEME_NAME/gim, fullThemeName)

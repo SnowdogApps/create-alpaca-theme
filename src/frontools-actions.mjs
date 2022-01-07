@@ -1,6 +1,6 @@
 import promiseExec from '../utils/promiseExec.mjs'
-import { validateYarn } from './validators.mjs';
-import { FRONTOOLS_PATH } from '../utils/constants.mjs';
+import { validateYarn } from './validators.mjs'
+import { FRONTOOLS_PATH } from '../utils/constants.mjs'
 
 export function installFrontools() {
   if (validateYarn()) {

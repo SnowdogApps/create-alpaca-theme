@@ -1,5 +1,5 @@
-const SPINNER_PATH = ["\\", "|", "/", "-"];
-const DEAFULT_SPINNER_SPEED = 100;
+const SPINNER_PATH = ['\\', '|', '/', '-']
+const DEAFULT_SPINNER_SPEED = 100
 
 export default class Spinner {
   constructor(spinnerSpeed = DEAFULT_SPINNER_SPEED) {
@@ -10,9 +10,9 @@ export default class Spinner {
 
   start() {
     this.spinnerId = setInterval(() => {
-      process.stdout.write("\r" + SPINNER_PATH[this.iteratorValue++]);
-      this.iteratorValue &= 3;
-    }, this.spinnerSpeed);
+      process.stdout.write('\r' + SPINNER_PATH[this.iteratorValue++])
+      this.iteratorValue &= 3
+    }, this.spinnerSpeed)
   }
 
   stop() {

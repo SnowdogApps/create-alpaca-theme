@@ -1,12 +1,12 @@
-import { readFile } from 'fs/promises';
-import { createFile } from './local-env-actions.mjs';
-import { validateYarn } from './validators.mjs';
+import { readFile } from 'fs/promises'
+import { createFile } from './local-env-actions.mjs'
+import { validateYarn } from './validators.mjs'
 import promiseExec from '../utils/promiseExec.mjs'
-import { BASE_PATH } from '../utils/constants.mjs';
+import { BASE_PATH } from '../utils/constants.mjs'
 
 export async function addFile(templatePath, fileName, themeName, dirPath = null) {
   try {
-    const template = await readFile(new URL(`../${templatePath}`, import.meta.url));
+    const template = await readFile(new URL(`../${templatePath}`, import.meta.url))
 
     if (dirPath === null) {
       createFile(`${BASE_PATH}${themeName}/Snowdog_Components/${fileName}`, template)

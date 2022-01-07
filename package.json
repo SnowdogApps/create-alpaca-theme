@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://lab.snowdog.pro/patrykbura/alpaca-theme-npm"
   },
+  "scripts": {
+    "lint": "eslint ./src ./utils index.mjs --ext .mjs"
+  },
   "keywords": [
     "alpaca",
     "alpaca-theme",
@@ -22,6 +25,11 @@
     "inquirer": "8.2.0"
   },
   "bin": {
-    "alpaca-theme": "/index.mjs"
+    "alpaca-theme": "./index.mjs"
+  },
+  "devDependencies": {
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   }
 }
