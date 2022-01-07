@@ -13,10 +13,10 @@ Visit links below to fully utilize Alpaca Theme:</br>
 * See Alpaca Components - [Alpaca Componenets demo](https://magento2-alpaca-theme-git-master-snowdog1.vercel.app/)
 * See Alpaca Boilerplate exemplary code - [Alpaca Boilerplate](https://lab.snowdog.pro/patrykbura/alpaca-boilerplate/-/tree/feature/80366)
 
-_Gitlab links will be changed before publishing to npm_
+
 ***
 ## Testing locally
-_This section will be deleted before publishng to npm._</br>
+
 
 * Clone this repo
 ```
@@ -38,3 +38,11 @@ npm install -g
 ```
 npx alpaca-theme
 ```
+
+## To do before realease:
+
+* _Gitlab links need to be changed to Github_
+* _Testing locally section will be deleted_
+* _Enable Alpaca Packages download & disable theme-fronetned-alpaca test branch_
+* _Add license file_
+* _Move this repo to OpenSource_
