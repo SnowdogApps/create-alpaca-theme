@@ -49,3 +49,9 @@ export function isMagentoInstance() {
     return false
   }
 }
+
+export function validateYarn() {
+  return promiseExec('yarn -v', msg => {
+    return `There was an issue validating yarn: ${msg}`
+  })
+}

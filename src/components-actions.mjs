@@ -1,5 +1,6 @@
 import { readFile } from 'fs/promises';
 import { createFile } from './local-env-actions.mjs';
+import { validateYarn } from './validators.mjs';
 import promiseExec from '../utils/promiseExec.mjs'
 
 export async function addFile(templatePath, fileName, themeName, dirPath = null) {
@@ -18,7 +19,13 @@ export async function addFile(templatePath, fileName, themeName, dirPath = null)
 }
 
 export function installComponents(themeName) {
-  return promiseExec(`cd app/design/frontend/Snowdog/${themeName}/Snowdog_Components && yarn install`, msg => {
-    return `There was an error installing Snowdog_Components: ${msg}`
-  })
+  if (validateYarn()) {
+    return promiseExec(`cd app/design/frontend/Snowdog/${themeName}/Snowdog_Components && yarn install`, msg => {
+      return `There was an error installing Snowdog_Components: ${msg}`
+    })
+  } else {
+    return promiseExec(`cd app/design/frontend/Snowdog/${themeName}/Snowdog_Components && npm install`, msg => {
+      return `There was an error installing Snowdog_Components: ${msg}`
+    })
+  }
 }
