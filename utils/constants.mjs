@@ -25,7 +25,7 @@ export const TEMPLATE_PATHS = {
   SASS_LINT: './templates/components/.sass-lint.yml.sample',
   STYLE_LINT_RC: './templates/components/.stylelintrc.sample',
   GULPFILE: './templates/components/gulpfile.mjs.sample',
-  MODULES_JSON: './templates/components/modules.mjs.sample',
+  MODULES_MJS: './templates/components/modules.mjs.sample',
   PACKAGE_JSON: './templates/components/package.json.sample',
   DOCS_CHECKOUT_SCSS: './templates/components/docs_checkout.scss.sample',
   DOCS_STYLES_SCSS: './templates/components/docs_styles.scss.sample',
@@ -35,7 +35,8 @@ export const TEMPLATE_PATHS = {
   CRITICAL_STYLES: './templates/components/critical.scss.sample',
   README: './templates/theme/README.md.sample',
   CHANGELOG: './templates/theme/CHANGELOG.md.sample',
-  GITIGNORE: './templates/theme/.gitignore.sample'
+  GITIGNORE: './templates/theme/.gitignore.sample',
+  BROWSER_LIST_RC: './templates/components/.browserslistrc.sample'
 }
 
 // local environment paths
