@@ -1,7 +1,7 @@
 {
   "name": "alpaca-theme",
   "version": "1.0.0",
-  "description": "Snowdog Alpaca Theme for Magento 2 projects",
+  "description": "Create Magento 2 child theme based on Snowdog Alpaca Theme",
   "type": "module",
   "main": "index.js",
   "repository": {
