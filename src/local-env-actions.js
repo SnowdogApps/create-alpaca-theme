@@ -31,7 +31,7 @@ export async function addChildThemeFile(file, themeName, fullThemeName = null) {
   } = file
 
   try {
-    const template = await readFile(new URL(`../${path}`, import.meta.url))
+    const template = await readFile(new URL(path, import.meta.url))
     const replaceTemplate = (newThemeName) => template.toString().replace(/YOUR_THEME_NAME/gim, newThemeName)
 
     if (shouldReplace) {

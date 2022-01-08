@@ -6,7 +6,7 @@ import { BASE_PATH } from '../utils/constants.js'
 
 export async function addFile(templatePath, fileName, themeName, dirPath = null) {
   try {
-    const template = await readFile(new URL(`../${templatePath}`, import.meta.url))
+    const template = await readFile(new URL(templatePath, import.meta.url))
 
     if (dirPath === null) {
       createFile(`${BASE_PATH}${themeName}/Snowdog_Components/${fileName}`, template)
