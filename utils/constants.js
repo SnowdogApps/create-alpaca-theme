@@ -64,6 +64,7 @@ export const NOT_MAGENTO_MSG_TOP = 'This directory is not valid Magento instance
 export const NOT_MAGENTO_MSG_BOTTOM = 'Try again from Magento project root directory.'
 export const REGISTRATION_NAME_NOT_SINGULAR = 'Registration name needs to be one word'
 export const BANNED_NAMES_MSG = 'This name is forbidden. Choose diffrent name.'
+export const NAME_NOT_LOWERCASE = 'All characters in registration name must be lower case.'
 export const BANNED_NAMES_LIST = [
   'alpaca',
   'Alpaca Theme',

@@ -6,10 +6,11 @@ import {
   NAME_NOT_PROVIDED_MSG,
   REGISTRATION_NAME_NOT_SINGULAR,
   BANNED_NAMES_MSG,
-  BANNED_NAMES_LIST
+  BANNED_NAMES_LIST,
+  NAME_NOT_LOWERCASE
 } from '../utils/constants.js'
 
-function getNameValidator(customRules = []) {
+function getNameValidator(customRule) {
   return (name) => {
     if (name.length === 0) {
       return NAME_NOT_PROVIDED_MSG
@@ -21,21 +22,22 @@ function getNameValidator(customRules = []) {
       return BANNED_NAMES_MSG
     }
 
-    const customRulesResults = customRules.map((rule) => rule(name))
-
-    return customRulesResults.length ? customRulesResults[0] : true
+    return customRule ? customRule(name) : true
   }
 }
 
-export const validateName = getNameValidator() // TODO function?
+export const validateName = getNameValidator()
 
-export const validateRegistrationName = getNameValidator([(name) => {
+export const validateRegistrationName = getNameValidator((name) => {
   if (name.split(' ').length > 1) {
     return REGISTRATION_NAME_NOT_SINGULAR
   }
+  if (name !== name.toLowerCase()) {
+    return NAME_NOT_LOWERCASE
+  }
 
   return true
-}])
+})
 
 export function validateComposer() {
   return promiseExec('composer -v', (msg) => {
