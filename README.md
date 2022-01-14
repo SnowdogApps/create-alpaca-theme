@@ -2,6 +2,12 @@
 
 This is a tool for quickly scaffolding Snowdog Alpaca Theme based child theme for Magento 2 projects.</br>
 
+### Requirements
+  * Node >= 14
+  * Composer
+
+### Usage
+
 Run command bellow from Magento project root directory:
 ```
 npx alpaca-theme
