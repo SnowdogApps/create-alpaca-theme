@@ -2,8 +2,6 @@ import colors from 'colors'
 
 // GLOBAL CONSTANTS
 export const CHECK_MARK_CHARACTER = '\u2713'
-export const BASE_PATH = 'app/design/frontend/Snowdog/'
-export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 
 // COMPOSER PACLAGES NAMES
 export const PACKAGE_PATH = {
@@ -13,6 +11,10 @@ export const PACKAGE_PATH = {
   ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
   FRONTOOLS: 'snowdog/frontools'
 }
+
+// BASE PATHS
+export const BASE_PATH = 'app/design/frontend/Snowdog/'
+export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 
 // TEMPLATE FILES PATHS
 export const TEMPLATE_PATHS = {
