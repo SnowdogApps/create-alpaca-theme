@@ -7,10 +7,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// ----------------------------
-// DO NOT MODIFY THIS FILE !
-// ----------------------------
-
 import init from './src/create-alpaca-theme.js'
 
 const localNodeVersion = process.versions.node
