@@ -27,8 +27,8 @@ export async function addTemplateFile(file, themeName = null) {
     name,
     templateFilePath,
     childFileDestination,
-    rename,
-    phraseToRename,
+    replacePhrase,
+    phraseToReplace,
     useSampleTemplate,
     addThemeNameToFileName
   } = file
@@ -37,9 +37,9 @@ export async function addTemplateFile(file, themeName = null) {
     const template = useSampleTemplate
       ? await readFile(new URL(templateFilePath, import.meta.url))
       : await readFile(templateFilePath)
-    const re = new RegExp(phraseToRename, 'gim')
+    const re = new RegExp(phraseToReplace, 'gim')
 
-    if (rename) {
+    if (replacePhrase) {
       const updatedTemplate = template.toString().replace(re, themeName)
 
       if (childFileDestination.includes('dev')) {
