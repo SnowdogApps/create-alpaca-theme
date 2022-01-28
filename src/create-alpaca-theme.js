@@ -42,13 +42,13 @@ const bar = new cliProgress.SingleBar({
 const promptQuestions = [
   {
     type: 'input',
-    message: 'Enter your theme full name:',
+    message: `Enter your theme full name (${colors.yellow('e.g. Child Theme')}):`,
     name: 'fullName',
     validate: validateName
   },
   {
     type: 'input',
-    message: `Enter theme registration name (${colors.yellow('one string, eg. child-theme')}):`,
+    message: `Enter theme registration name (${colors.yellow('one phrase, e.g. child-theme')}):`,
     name: 'name',
     validate: validateRegistrationName
   }
@@ -66,20 +66,20 @@ const init = () => {
         bar.start(100, 0, { info: infoColor('Validating composer...') })
         await validateComposer()
 
-        bar.update(2, { info: infoColor('Downloading Alpaca Packages...') })
+        bar.update(1, { info: infoColor('Downloading Alpaca Packages...') })
         /* ENABLE AFTER FEATURE-PERFORMANCE REALEASE */
         // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
 
         /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */
         await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA_TEST)
 
-        bar.update(20, { info: infoColor('Downloading Frontools...') })
+        bar.update(16, { info: infoColor('Downloading Frontools...') })
         await composerRequire(PACKAGE_PATH.FRONTOOLS)
 
-        bar.update(40, { info: infoColor('Installing Frontools...') })
+        bar.update(31, { info: infoColor('Installing Frontools...') })
         await installFrontools()
 
-        bar.update(52, { info: infoColor('Creating directories...') })
+        bar.update(35, { info: infoColor('Creating directories...') })
         await Promise.all(directoriesList.map(async (dir) => {
           await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
         }))
@@ -89,13 +89,13 @@ const init = () => {
           addTemplateFile(file, answers.name, answers.fullName)
         })
 
-        bar.update(60, { info: infoColor('Installing Snowdog Components...') })
+        bar.update(40, { info: infoColor('Installing Snowdog Components...') })
         await installComponents(answers.name)
 
-        bar.update(70, { info: infoColor('Upgrading Magneto instance...') })
+        bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
         await magentoUpgrade()
 
-        bar.update(90, { info: infoColor('Compiling files...') })
+        bar.update(87, { info: infoColor('Compiling files...') })
         await compileFiles()
 
         bar.update(100, { info: colors.blue('Enjoy Alpaca :)') })
