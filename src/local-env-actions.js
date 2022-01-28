@@ -22,29 +22,6 @@ export function createFile(path, payload) {
   })
 }
 
-export async function addChildThemeFile(file, themeName, fullThemeName = null) {
-  const {
-    name,
-    path,
-    dirPath,
-    shouldReplace
-  } = file
-
-  try {
-    const template = await readFile(new URL(path, import.meta.url))
-    const replaceTemplate = (newThemeName) => template.toString().replace(/YOUR_THEME_NAME/gim, newThemeName)
-
-    if (shouldReplace) {
-      const templateUpdated = replaceTemplate(fullThemeName || themeName)
-      createFile(dirPath || `${BASE_PATH}${themeName}/${name}`, templateUpdated)
-    } else {
-      createFile(dirPath || `${BASE_PATH}${themeName}/${name}`, template)
-    }
-  } catch (error) {
-    console.error(`\n${error}`)
-  }
-}
-
 export async function addTemplateFile(file, themeName = null) {
   const {
     name,
@@ -57,14 +34,10 @@ export async function addTemplateFile(file, themeName = null) {
   } = file
 
   try {
-    let template = null
+    const template = useSampleTemplate
+      ? await readFile(new URL(templateFilePath, import.meta.url))
+      : await readFile(templateFilePath)
     const re = new RegExp(phraseToRename, 'gim')
-
-    if (useSampleTemplate) {
-      template = await readFile(new URL(templateFilePath, import.meta.url))
-    } else {
-      template = await readFile(templateFilePath)
-    }
 
     if (rename) {
       const updatedTemplate = template.toString().replace(re, themeName)
