@@ -2,8 +2,6 @@ import colors from 'colors'
 
 // GLOBAL CONSTANTS
 export const CHECK_MARK_CHARACTER = '\u2713'
-export const BASE_PATH = 'app/design/frontend/Snowdog/'
-export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 
 // COMPOSER PACLAGES NAMES
 export const PACKAGE_PATH = {
@@ -14,37 +12,49 @@ export const PACKAGE_PATH = {
   FRONTOOLS: 'snowdog/frontools'
 }
 
+// BASE PATHS
+export const BASE_PATH = 'app/design/frontend/Snowdog/'
+export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
+
 // TEMPLATE FILES PATHS
 export const TEMPLATE_PATHS = {
   BROWSER_SYNC: '../templates/frontools/browser-sync.json.sample',
   REGISTRATION: '../templates/theme/registration.php.sample',
   THEME_XML: '../templates/theme/theme.xml.sample',
   THEMES_JSON: '../templates/frontools/themes.json.sample',
-  EDITOR_CONFIG: '../templates/components/.editorconfig.sample',
-  ESLINT_IGNORE: '../templates/components/.eslintignore.sample',
-  ESLINT_RC: '../templates/components/.eslintrc.json.sample',
-  NODE_VERSIONS: '../templates/components/.node-version.sample',
-  SASS_LINT: '../templates/components/.sass-lint.yml.sample',
-  STYLE_LINT_RC: '../templates/components/.stylelintrc.sample',
-  GULPFILE: '../templates/components/gulpfile.mjs.sample',
+  EDITOR_CONFIG: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.editorconfig',
+  ESLINT_IGNORE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintignore',
+  ESLINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintrc.json',
+  NODE_VERSIONS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.node-version',
+  SASS_LINT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.sass-lint.yml',
+  STYLE_LINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.stylelintrc',
+  GULPFILE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/gulpfile.mjs',
   MODULES_MJS: '../templates/components/modules.mjs.sample',
-  PACKAGE_JSON: '../templates/components/package.json.sample',
-  DOCS_CHECKOUT_SCSS: '../templates/components/docs_checkout.scss.sample',
-  DOCS_STYLES_SCSS: '../templates/components/docs_styles.scss.sample',
-  MAGENTO_CHECKOUT_SCSS: '../templates/components/magento-checkout.scss.sample',
-  THEME_VARIABLES: '../templates/components/theme-variables.scss.sample',
-  THEME_STYLES: '../templates/components/styles.scss.sample',
-  CRITICAL_STYLES: '../templates/components/critical.scss.sample',
+  PACKAGE_JSON: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/package.json',
+  DOCS_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/checkout.scss',
+  DOCS_STYLES_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/styles.scss',
+  MAGENTO_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Magento_Checkout/styles/checkout.scss',
+  THEME_VARIABLES: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/Atoms/variables/_variables.scss',
+  THEME_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/styles.scss',
+  CRITICAL_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/critical.scss',
   README: '../templates/theme/README.md.sample',
   CHANGELOG: '../templates/theme/CHANGELOG.md.sample',
-  GITIGNORE: '../templates/theme/.gitignore.sample',
-  BROWSER_LIST_RC: '../templates/components/.browserslistrc.sample'
+  GITIGNORE: 'vendor/snowdog/theme-frontend-alpaca/.gitignore',
+  BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc'
 }
 
 // LOCAL ENVIRONMENT PATHS
 export const LOCAL_ENV_PATHS = {
   BROWSER_SYNC: 'dev/tools/frontools/config/browser-sync.json',
   THEMES_JSON: 'dev/tools/frontools/config/themes.json'
+}
+
+// ATOM VARIABALES PATHS
+export const VARIABLES_IMPORT_PATHS = {
+  COMMENT: '// Child theme variables\n',
+  MAIN: '@import "../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n',
+  DOCS: '@import "../../components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n',
+  CHECKOUT: '@import "../../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n'
 }
 
 // PROGRESS BAR

@@ -1,4 +1,5 @@
-import fs from 'fs'
+import * as fs from 'fs'
+import * as fsPromises from 'fs/promises'
 import { readFile } from 'fs/promises'
 import { BASE_PATH } from '../utils/constants.js'
 
@@ -14,31 +15,57 @@ export function createDirectory(path) {
   })
 }
 
-export function createFile(path, payload) {
-  fs.writeFile(path, payload, (err) => {
+export async function createFile(path, payload) {
+  return fsPromises.writeFile(path, payload, (err) => {
     if (err) {
       throw err
     }
   })
 }
 
-export async function addChildThemeFile(file, themeName, fullThemeName = null) {
+export async function addTemplateFile(file, themeName = null) {
   const {
     name,
-    path,
-    dirPath,
-    shouldReplace
+    templateFilePath,
+    childFileDestination,
+    replacePhrase,
+    phraseToReplace,
+    useSampleTemplate,
+    addThemeNameToFileName,
+    prependedImport
   } = file
 
   try {
-    const template = await readFile(new URL(path, import.meta.url))
-    const replaceTemplate = (newThemeName) => template.toString().replace(/YOUR_THEME_NAME/gim, newThemeName)
+    const template = useSampleTemplate
+      ? await readFile(new URL(templateFilePath, import.meta.url))
+      : await readFile(templateFilePath)
+    const re = new RegExp(phraseToReplace, 'gim')
+    const filePath = `${BASE_PATH}${themeName}${childFileDestination}`
+    let updatedTemplate = null
 
-    if (shouldReplace) {
-      const templateUpdated = replaceTemplate(fullThemeName || themeName)
-      createFile(dirPath || `${BASE_PATH}${themeName}/${name}`, templateUpdated)
+    if (replacePhrase) {
+      updatedTemplate = template.toString().replace(re, themeName)
+    } else if (name === 'variables.scss') {
+      updatedTemplate = template.toString().replace(/^/gm, '//')
     } else {
-      createFile(dirPath || `${BASE_PATH}${themeName}/${name}`, template)
+      updatedTemplate = template
+    }
+
+    if (childFileDestination.includes('dev')) {
+      await createFile(childFileDestination, updatedTemplate)
+    } else if (addThemeNameToFileName) {
+      await createFile(`${filePath}_${themeName}-${name}`, updatedTemplate)
+    } else {
+      await createFile(`${filePath}${name}`, updatedTemplate)
+    }
+
+    if (prependedImport) {
+      const data = fs.readFileSync(`${filePath}${name}`)
+      const fd = fs.openSync(`${filePath}${name}`, 'w+')
+      const buffer = Buffer.from(prependedImport.replace(re, themeName))
+      fs.writeSync(fd, buffer, 0, buffer.length, 0)
+      fs.writeSync(fd, data, 0, data.length, buffer.length)
+      fs.close(fd)
     }
   } catch (error) {
     console.error(`\n${error}`)
