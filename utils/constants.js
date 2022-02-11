@@ -49,6 +49,14 @@ export const LOCAL_ENV_PATHS = {
   THEMES_JSON: 'dev/tools/frontools/config/themes.json'
 }
 
+// ATOM VARIABALES PATHS
+export const VARIABLES_IMPORT_PATHS = {
+  COMMENT: '// Child theme variables\n',
+  MAIN: '@import "../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n',
+  DOCS: '@import "../../components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n',
+  CHECKOUT: '@import "../../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n'
+}
+
 // PROGRESS BAR
 export const LOADING_BAR = {
   FORMAT: `  | ${colors.cyan('{bar}')} | {percentage}% || {info}`,

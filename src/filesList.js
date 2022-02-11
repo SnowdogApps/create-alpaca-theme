@@ -7,7 +7,8 @@
 
 import {
   TEMPLATE_PATHS,
-  LOCAL_ENV_PATHS
+  LOCAL_ENV_PATHS,
+  VARIABLES_IMPORT_PATHS
 } from '../utils/constants.js'
 
 export const templateFiles = [
@@ -18,7 +19,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: '.editorconfig',
@@ -27,7 +29,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: '.eslintignore',
@@ -36,7 +39,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: '.eslintrc.json',
@@ -45,7 +49,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: '.node-version',
@@ -63,7 +68,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: '.stylelintrc',
@@ -72,7 +78,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'gulpfile.mjs',
@@ -81,7 +88,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'package.json',
@@ -90,7 +98,8 @@ export const templateFiles = [
     replacePhrase: true,
     phraseToReplace: 'alpaca-components',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'modules.mjs',
@@ -99,52 +108,58 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'checkout.scss',
     templateFilePath: TEMPLATE_PATHS.DOCS_CHECKOUT_SCSS,
     childFileDestination: '/Snowdog_Components/docs/styles/',
-    replacePhrase: false,
-    phraseToReplace: '',
+    replacePhrase: true,
+    phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.DOCS
   },
   {
     name: 'styles.scss',
     templateFilePath: TEMPLATE_PATHS.DOCS_STYLES_SCSS,
     childFileDestination: '/Snowdog_Components/docs/styles/',
-    replacePhrase: false,
-    phraseToReplace: '',
+    replacePhrase: true,
+    phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.DOCS
   },
   {
     name: 'checkout.scss',
     templateFilePath: TEMPLATE_PATHS.MAGENTO_CHECKOUT_SCSS,
     childFileDestination: '/Magento_Checkout/styles/',
-    replacePhrase: false,
-    phraseToReplace: '',
+    replacePhrase: true,
+    phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.CHECKOUT
   },
   {
     name: 'critical.scss',
     templateFilePath: TEMPLATE_PATHS.CRITICAL_STYLES,
     childFileDestination: '/styles/',
-    replacePhrase: false,
-    phraseToReplace: '',
+    replacePhrase: true,
+    phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.MAIN
   },
   {
     name: 'styles.scss',
     templateFilePath: TEMPLATE_PATHS.THEME_STYLES,
     childFileDestination: '/styles/',
-    replacePhrase: false,
-    phraseToReplace: '',
+    replacePhrase: true,
+    phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: false,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.MAIN
   },
   {
     name: 'theme.xml',
@@ -153,7 +168,8 @@ export const templateFiles = [
     replacePhrase: true,
     phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'registration.php',
@@ -162,7 +178,8 @@ export const templateFiles = [
     replacePhrase: true,
     phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: '.gitignore',
@@ -170,7 +187,8 @@ export const templateFiles = [
     childFileDestination: '/',
     replacePhrase: false,
     phraseToReplace: '',
-    useSampleTemplate: false
+    useSampleTemplate: false,
+    prependedImport: null
   },
   {
     name: 'README.md',
@@ -179,7 +197,8 @@ export const templateFiles = [
     replacePhrase: true,
     phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'CHANGELOG.md',
@@ -188,7 +207,8 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'themes.json',
@@ -197,7 +217,8 @@ export const templateFiles = [
     replacePhrase: true,
     phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'browser-sync.json',
@@ -206,7 +227,8 @@ export const templateFiles = [
     replacePhrase: true,
     phraseToReplace: 'YOUR_THEME_NAME',
     useSampleTemplate: true,
-    addThemeNameToFileName: false
+    addThemeNameToFileName: false,
+    prependedImport: null
   },
   {
     name: 'variables.scss',
@@ -215,6 +237,7 @@ export const templateFiles = [
     replacePhrase: false,
     phraseToReplace: '',
     useSampleTemplate: false,
-    addThemeNameToFileName: true
+    addThemeNameToFileName: true,
+    prependedImport: null
   }
 ]
