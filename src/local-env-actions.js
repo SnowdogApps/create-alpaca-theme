@@ -41,7 +41,15 @@ export async function addTemplateFile(file, themeName = null) {
       : await readFile(templateFilePath)
     const re = new RegExp(phraseToReplace, 'gim')
     const filePath = `${BASE_PATH}${themeName}${childFileDestination}`
-    const updatedTemplate = replacePhrase ? template.toString().replace(re, themeName) : template
+    let updatedTemplate = null
+
+    if (replacePhrase) {
+      updatedTemplate = template.toString().replace(re, themeName)
+    } else if (name === 'variables.scss') {
+      updatedTemplate = template.toString().replace(/^/gm, '//')
+    } else {
+      updatedTemplate = template
+    }
 
     if (childFileDestination.includes('dev')) {
       await createFile(childFileDestination, updatedTemplate)
