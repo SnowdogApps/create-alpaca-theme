@@ -94,4 +94,5 @@ export const BANNED_NAMES_LIST = [
   'theme-blank-sass'
 ]
 
+// OTHER
 export const COMPONENT_EXTEND_COMMENT = '// WHEN EXTENDING COMPONENT, CHANGE IMPORT PATH (ADD -extend) - SEE BUTTON AS A EXAMPLE\n\n'

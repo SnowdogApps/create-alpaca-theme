@@ -2,13 +2,13 @@ import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
 import Spinner from '../utils/spinner.js'
-import { templateFiles, exemplaryComponent } from './filesList.js'
 import { directoriesList } from './directioriesList.js'
 import { CLISuccesMessage } from '../utils/messages.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
 import { installFrontools, compileFiles } from './frontools-actions.js'
+import { templateFiles, exemplaryComponent } from './filesList.js'
 import {
   validateName,
   validateComposer,
@@ -54,7 +54,7 @@ const promptQuestions = [
   },
   {
     type: 'confirm',
-    message: `Extend examplary Alpaca Component? (${colors.yellow('recommended')})`,
+    message: `Extend exemplary Alpaca Component? (${colors.yellow('recommended')})`,
     name: 'exemplaryComponent'
   }
 ]
@@ -124,7 +124,7 @@ const init = () => {
         spinner.stop()
         bar.stop()
         log(`\n${colors.red(error)}`)
-        process.exit()
+        process.exit(1)
       }
     })
   } else {
