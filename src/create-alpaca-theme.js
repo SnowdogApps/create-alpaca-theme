@@ -55,7 +55,7 @@ const promptQuestions = [
   },
   {
     type: 'confirm',
-    message: `Update database with essential Alpaca tables? (${colors.yellow('Highly recommended')})`,
+    message: `Update database with essential Alpaca tables? (${colors.yellow('recommended')})`,
     name: 'database'
   }
 ]
@@ -98,6 +98,7 @@ const init = () => {
 
         bar.update(40, { info: infoColor('Installing Snowdog Components...') })
         await installComponents(answers.name)
+
         if (answers.database) {
           bar.update(55, { info: infoColor('Running database queries...') })
           dbErrors = await runQueries()
@@ -117,8 +118,12 @@ const init = () => {
         CLISuccesMessage(answers.fullName)
 
         if (dbErrors.length !== 0) {
-          log(colors.bgRed('There was an issue running some database queries:'))
-          console.log(dbErrors)
+          log(colors.red('During installation there was an issue running some database queries.'))
+          log(colors.red('It will not affect the basic functioning of Alpaca but might cause some problems with certain features.'))
+          log(colors.red('See details below:'))
+          dbErrors.forEach((err) => {
+            log(colors.magenta(err))
+          })
         }
       } catch (error) {
         bar.update(0, { info: colors.red('Installation failed.') })
