@@ -32,7 +32,8 @@ export async function addTemplateFile(file, themeName = null) {
     phraseToReplace,
     useSampleTemplate,
     addThemeNameToFileName,
-    prependedImport
+    prependedImport,
+    replaceWith
   } = file
 
   try {
@@ -44,7 +45,7 @@ export async function addTemplateFile(file, themeName = null) {
     let updatedTemplate = null
 
     if (replacePhrase) {
-      updatedTemplate = template.toString().replace(re, themeName)
+      updatedTemplate = template.toString().replace(re, replaceWith || themeName)
     } else if (name === 'variables.scss') {
       updatedTemplate = template.toString().replace(/^/gm, '//')
     } else {
