@@ -2,6 +2,7 @@ import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
 import Spinner from '../utils/spinner.js'
+import runQueries from './database-actions.js'
 import { templateFiles } from './filesList.js'
 import { directoriesList } from './directioriesList.js'
 import { CLISuccesMessage } from '../utils/messages.js'
@@ -51,8 +52,14 @@ const promptQuestions = [
     message: `Enter theme registration name (${colors.yellow('one phrase, e.g. child-theme')}):`,
     name: 'name',
     validate: validateRegistrationName
+  },
+  {
+    type: 'confirm',
+    message: `Update database with essential Alpaca tables? (${colors.yellow('Highly recommended')})`,
+    name: 'database'
   }
 ]
+let dbErrors = []
 
 const init = () => {
   if (isMagentoInstance()) {
@@ -91,6 +98,10 @@ const init = () => {
 
         bar.update(40, { info: infoColor('Installing Snowdog Components...') })
         await installComponents(answers.name)
+        if (answers.database) {
+          bar.update(55, { info: infoColor('Running database queries...') })
+          dbErrors = await runQueries()
+        }
 
         bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
         await magentoUpgrade()
@@ -104,6 +115,11 @@ const init = () => {
         bar.stop()
         console.timeEnd(colors.blue('Finished in')) // Stop time counter
         CLISuccesMessage(answers.fullName)
+
+        if (dbErrors.length !== 0) {
+          log(colors.bgRed('There was an issue running some database queries:'))
+          console.log(dbErrors)
+        }
       } catch (error) {
         bar.update(0, { info: colors.red('Installation failed.') })
         spinner.stop()
