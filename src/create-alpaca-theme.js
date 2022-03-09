@@ -109,7 +109,7 @@ const init = () => {
             await createDirectory(dir)
           }))
 
-          bar.update(57, { info: infoColor('Copying media') })
+          bar.update(57, { info: infoColor('Copying media...') })
           templateMedia.forEach((img) => {
             copyImage(img)
           })

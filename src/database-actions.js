@@ -1,4 +1,4 @@
-import mysql from 'mysql';
+import mysql from 'mysql'
 import { readFile } from 'fs/promises'
 
 // GETTING DATABASE VALUES FROM .ENV TABLE IN PHP FORMAT
@@ -47,7 +47,6 @@ async function execute(connection, dataSql) {
       }
 
       const sqlQueryArray = dataSql.toString().split(');')
-
       const result = await Promise.allSettled(sqlQueryArray.map(async (query) => {
         const updatedQuery = query + ');' // eslint-disable-line
 
@@ -66,8 +65,9 @@ async function execute(connection, dataSql) {
 export default async function runQueries() {
   const dataSql = await readFile(new URL('../templates/database/queries.sql', import.meta.url))
   const connection = mysql.createConnection(await getDatabaseDetails())
-
   const errors = await execute(connection, dataSql)
+
   connection.end()
+
   return errors
 }

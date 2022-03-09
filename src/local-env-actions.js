@@ -78,9 +78,10 @@ export async function copyImage(image) {
     localImgPath
   } = image
   const img = await readFile(new URL(imgTemplatePath, import.meta.url))
+
   try {
     await createFile(localImgPath, img)
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    console.error(`\n${error}`)
   }
 }

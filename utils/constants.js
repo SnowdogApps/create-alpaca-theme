@@ -90,6 +90,7 @@ export const BANNED_NAMES_LIST = [
   'theme-blank-sass'
 ]
 
+// IMAGES PATHS
 export const MEDIA_PATHS = {
   BANNER_MED_MEN: '../templates/images/banners/banner-medium-men-now-656_264.jpg',
   BANNER_MED_WOMEN: '../templates/images/banners/banner-medium-women-now-656_264.jpg',
