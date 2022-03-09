@@ -40,7 +40,11 @@ export const TEMPLATE_PATHS = {
   README: '../templates/theme/README.md.sample',
   CHANGELOG: '../templates/theme/CHANGELOG.md.sample',
   GITIGNORE: 'vendor/snowdog/theme-frontend-alpaca/.gitignore',
-  BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc'
+  BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc',
+  EXEMPLARY_COMPONENT: '../templates/components/extend.scss.sample',
+  EMPTY: '../templates/components/empty.scss.sample',
+  COMPONENTS_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical.scss',
+  COMPONENTS_NON_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_non-critical.scss'
 }
 
 // LOCAL ENVIRONMENT PATHS
@@ -89,3 +93,6 @@ export const BANNED_NAMES_LIST = [
   'Colibri',
   'theme-blank-sass'
 ]
+
+// OTHER
+export const COMPONENT_EXTEND_COMMENT = '// WHEN EXTENDING COMPONENT, CHANGE IMPORT PATH (ADD -extend) - SEE BUTTON AS A EXAMPLE\n\n'

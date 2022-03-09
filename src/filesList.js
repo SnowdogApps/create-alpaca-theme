@@ -8,8 +8,24 @@
 import {
   TEMPLATE_PATHS,
   LOCAL_ENV_PATHS,
-  VARIABLES_IMPORT_PATHS
+  VARIABLES_IMPORT_PATHS,
+  COMPONENT_EXTEND_COMMENT
 } from '../utils/constants.js'
+
+/*
+  TEMPLATE FILES FORMAT - ARRAY OF OBJECTS CONTAINING:
+  {
+    name: FAILE NAME (STRING)
+    templateFilePath: TEMPLATE PATH LOCATED IN UTILS/CONSTANTS (STRING PATH)
+    childFileDestination: DESTINATION PATH OF FILE LOCATION (STRING PATH)
+    replacePhrase: SHOULD REPLACE ALL PHRASE OCCURANCES IN FILE? (TRUE/FALSE)
+    phraseToReplace: PHRASE TO BE REPLACED (STRING)
+    useSampleTemplate: IF USING TEMPLATE LOCATED IN /TEMPLATES FOLDER SET TRUE (TRUE/FALSE)
+    addThemeNameToFileName: SHOULD ADD THEME NAME AT BEGINNING OF FILE NAME? (TRUE/FALSE)
+    prependedImport: STRING TO APPEAR AT BEGINNING OF FILE, IF NONE SET NULL (STRING/NULL)
+    replaceWith: IF REQUESTED TO REPLACE PHRASE - NEW PHRASE (STRING) | OPTIONAL
+  }
+*/
 
 export const templateFiles = [
   {
@@ -238,6 +254,60 @@ export const templateFiles = [
     phraseToReplace: '',
     useSampleTemplate: false,
     addThemeNameToFileName: true,
+    prependedImport: null
+  }
+]
+
+export const exemplaryComponent = [
+  {
+    name: '_button-extend.scss',
+    templateFilePath: TEMPLATE_PATHS.EXEMPLARY_COMPONENT,
+    childFileDestination: '/Snowdog_Components/components/Molecules/button/',
+    replacePhrase: true,
+    phraseToReplace: 'themeName',
+    useSampleTemplate: true,
+    addThemeNameToFileName: false,
+    prependedImport: null
+  },
+  {
+    name: 'button-variables.scss',
+    templateFilePath: TEMPLATE_PATHS.EMPTY,
+    childFileDestination: '/Snowdog_Components/components/Molecules/button/',
+    replacePhrase: false,
+    phraseToReplace: '',
+    useSampleTemplate: true,
+    addThemeNameToFileName: true,
+    prependedImport: null
+  },
+  {
+    name: 'button.scss',
+    templateFilePath: TEMPLATE_PATHS.EMPTY,
+    childFileDestination: '/Snowdog_Components/components/Molecules/button/',
+    replacePhrase: false,
+    phraseToReplace: '',
+    useSampleTemplate: true,
+    addThemeNameToFileName: true,
+    prependedImport: null
+  },
+  {
+    name: '_critical.scss',
+    templateFilePath: TEMPLATE_PATHS.COMPONENTS_CRITICAL,
+    childFileDestination: '/Snowdog_Components/components/styles/',
+    replacePhrase: true,
+    phraseToReplace: '../Molecules/button/button',
+    useSampleTemplate: false,
+    addThemeNameToFileName: false,
+    prependedImport: COMPONENT_EXTEND_COMMENT,
+    replaceWith: '../Molecules/button/button-extend'
+  },
+  {
+    name: '_non-critical.scss',
+    templateFilePath: TEMPLATE_PATHS.COMPONENTS_NON_CRITICAL,
+    childFileDestination: '/Snowdog_Components/components/styles/',
+    replacePhrase: false,
+    phraseToReplace: '',
+    useSampleTemplate: false,
+    addThemeNameToFileName: false,
     prependedImport: null
   }
 ]

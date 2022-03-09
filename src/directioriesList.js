@@ -5,3 +5,8 @@ export const directoriesList = [
   '/Snowdog_Components/components/Atoms/variables',
   '/Magento_Checkout/styles'
 ]
+
+export const exemplaryComponentDirectories = [
+  '/Snowdog_Components/components/Molecules/button/',
+  '/Snowdog_Components/components/styles/'
+]

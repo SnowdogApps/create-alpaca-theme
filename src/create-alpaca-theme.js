@@ -2,13 +2,16 @@ import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
 import Spinner from '../utils/spinner.js'
-import { templateFiles } from './filesList.js'
-import { directoriesList } from './directioriesList.js'
+import {
+  directoriesList,
+  exemplaryComponentDirectories
+} from './directioriesList.js'
 import { CLISuccesMessage } from '../utils/messages.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
 import { installFrontools, compileFiles } from './frontools-actions.js'
+import { templateFiles, exemplaryComponent } from './filesList.js'
 import {
   validateName,
   validateComposer,
@@ -51,6 +54,11 @@ const promptQuestions = [
     message: `Enter theme registration name (${colors.yellow('one phrase, e.g. child-theme')}):`,
     name: 'name',
     validate: validateRegistrationName
+  },
+  {
+    type: 'confirm',
+    message: `Extend exemplary Alpaca Component? (${colors.yellow('recommended')})`,
+    name: 'exemplaryComponent'
   }
 ]
 
@@ -89,6 +97,17 @@ const init = () => {
           addTemplateFile(file, answers.name, answers.fullName)
         })
 
+        if (answers.exemplaryComponent) {
+          await Promise.all(exemplaryComponentDirectories.map(async (dir) => {
+            await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
+          }))
+
+          exemplaryComponent.forEach((file) => {
+            bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
+            addTemplateFile(file, answers.name, answers.fullName)
+          })
+        }
+
         bar.update(40, { info: infoColor('Installing Snowdog Components...') })
         await installComponents(answers.name)
 
@@ -109,7 +128,7 @@ const init = () => {
         spinner.stop()
         bar.stop()
         log(`\n${colors.red(error)}`)
-        process.exit()
+        process.exit(1)
       }
     })
   } else {

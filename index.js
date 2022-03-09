@@ -20,7 +20,7 @@ if (major < 14) {
     '\nnpx alpaca-theme requires Node 14 or higher.',
     '\nIn order to continue update your Node version.'
   )
-  process.exit()
+  process.exit(1)
 }
 
 init()
