@@ -3,13 +3,13 @@ import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
 import Spinner from '../utils/spinner.js'
 import runQueries from './database-actions.js'
-import { templateFiles } from './filesList.js'
-import { directoriesList } from './directioriesList.js'
 import { CLISuccesMessage } from '../utils/messages.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
+import { templateFiles, templateMedia } from './filesList.js'
 import { installFrontools, compileFiles } from './frontools-actions.js'
+import { directoriesList, mediaDirList } from './directioriesList.js'
 import {
   validateName,
   validateComposer,
@@ -18,7 +18,8 @@ import {
 } from './validators.js'
 import {
   createDirectory,
-  addTemplateFile
+  addTemplateFile,
+  copyImage
 } from './local-env-actions.js'
 import {
   BASE_PATH,
@@ -102,6 +103,16 @@ const init = () => {
         if (answers.database) {
           bar.update(55, { info: infoColor('Running database queries...') })
           dbErrors = await runQueries()
+
+          bar.update(56, { info: infoColor('Creating media directories...') })
+          await Promise.all(mediaDirList.map(async (dir) => {
+            await createDirectory(dir)
+          }))
+
+          bar.update(57, { info: infoColor('Copying media') })
+          templateMedia.forEach((img) => {
+            copyImage(img)
+          })
         }
 
         bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
