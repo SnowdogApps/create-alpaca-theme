@@ -2,7 +2,10 @@ import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
 import Spinner from '../utils/spinner.js'
-import { directoriesList } from './directioriesList.js'
+import {
+  directoriesList,
+  exemplaryComponentDirectories
+} from './directioriesList.js'
 import { CLISuccesMessage } from '../utils/messages.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
@@ -95,8 +98,9 @@ const init = () => {
         })
 
         if (answers.exemplaryComponent) {
-          await createDirectory(`${BASE_PATH}${answers.name}/Snowdog_Components/components/Molecules/button/`)
-          await createDirectory(`${BASE_PATH}${answers.name}/Snowdog_Components/components/styles/`)
+          await Promise.all(exemplaryComponentDirectories.map(async (dir) => {
+            await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
+          }))
 
           exemplaryComponent.forEach((file) => {
             bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
