@@ -89,3 +89,34 @@ export const BANNED_NAMES_LIST = [
   'Colibri',
   'theme-blank-sass'
 ]
+
+export const MEDIA_PATHS = {
+  BANNER_MED_MEN: '../templates/images/banners/banner-medium-men-now-656_264.jpg',
+  BANNER_MED_WOMEN: '../templates/images/banners/banner-medium-women-now-656_264.jpg',
+  CATEGORY_ACCERSORES_144: '../templates/images/banners/category-accessories-144_200.jpg',
+  CATEGORY_ACCERSORES_320: '../templates/images/banners/category-accessories-320_432.jpg',
+  CATEGORY_CLOTHING_144: '../templates/images/banners/category-clothing-144_200.jpg',
+  CATEGORY_CLOTHING_320: '../templates/images/banners/category-clothing-320_432.jpg',
+  CATEGORY_NEW_144: '../templates/images/banners/category-new-in-144_200.jpg',
+  CATEGORY_NEW_320: '../templates/images/banners/category-new-in-320_432.jpg',
+  CATEGORY_SHOES_144: '../templates/images/banners/category-shoes-144_200.jpg',
+  CATEGORY_SHOES_320: '../templates/images/banners/category-shoes-320_432.jpg',
+  TEASER_SMALL: '../templates/images/teasers/teaser-small-girl_304-304.jpg',
+  TEASER_MEDIUM_376: '../templates/images/teasers/teaser-medium-girl_376-432.jpg',
+  TEASER_MEDIUM_472: '../templates/images/teasers/teaser-medium-girl_472-432.jpg',
+  TEASER_LARGE: '../templates/images/teasers/teaser-large-girl_1328-1200.jpg',
+  LOCAL_BANNER_MED_MEN: 'pub/media/cms/home/banners/banner-medium-men-now-656_264.jpg',
+  LOCAL_BANNER_MED_WOMEN: 'pub/media/cms/home/banners/banner-medium-women-now-656_264.jpg',
+  LOCAL_CATEGORY_ACCERSORES_144: 'pub/media/cms/home/banners/category-accessories-144_200.jpg',
+  LOCAL_CATEGORY_ACCERSORES_320: 'pub/media/cms/home/banners/category-accessories-320_432.jpg',
+  LOCAL_CATEGORY_CLOTHING_144: 'pub/media/cms/home/banners/category-clothing-144_200.jpg',
+  LOCAL_CATEGORY_CLOTHING_320: 'pub/media/cms/home/banners/category-clothing-320_432.jpg',
+  LOCAL_CATEGORY_NEW_144: 'pub/media/cms/home/banners/category-new-in-144_200.jpg',
+  LOCAL_CATEGORY_NEW_320: 'pub/media/cms/home/banners/category-new-in-320_432.jpg',
+  LOCAL_CATEGORY_SHOES_144: 'pub/media/cms/home/banners/category-shoes-144_200.jpg',
+  LOCAL_CATEGORY_SHOES_320: 'pub/media/cms/home/banners/category-shoes-320_432.jpg',
+  LOCAL_TEASER_SMALL: 'pub/media/cms/home/teasers/teaser-small-girl_304-304.jpg',
+  LOCAL_TEASER_MEDIUM_376: 'pub/media/cms/home/teasers/teaser-medium-girl_376-432.jpg',
+  LOCAL_TEASER_MEDIUM_472: 'pub/media/cms/home/teasers/teaser-medium-girl_472-432.jpg',
+  LOCAL_TEASER_LARGE: 'pub/media/cms/home/teasers/teaser-large-girl_1328-1200.jpg'
+}
