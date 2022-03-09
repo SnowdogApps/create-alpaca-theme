@@ -35,8 +35,10 @@ async function execute(connection, dataSql) {
       const sqlQueryArray = dataSql.toString().split(');')
 
       const result = await Promise.allSettled(sqlQueryArray.map(async(query) => {
-        const updatedQuery = query += ");";
-        await executeQuery(connection, updatedQuery)
+        if (query) {
+          const updatedQuery = query += ");";
+          await executeQuery(connection, updatedQuery)
+        }
       }))
 
       resolve(result.map((r) => {
