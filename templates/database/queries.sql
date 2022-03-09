@@ -1,4 +1,4 @@
-INSERT INTO `cms_block` (`block_id`, `title`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`)
+INSERT IGNORE INTO `cms_block` (`block_id`, `title`, `identifier`, `content`, `creation_time`, `update_time`, `is_active`)
 VALUES
     (500, 'Menu - Clothes - Row with Images', 'menu-clothes-images', '<ul class=\"list mega-menu__inner-list\">\r\n<li class=\"list__item mega-menu__inner-item\">\r\n<a class=\"link mega-menu__inner-link\" tabindex=\"-1\">\r\n<span class=\"lazyload-wrapper\"><img class=\"image lazyload\" alt=\"Title 1\" data-src=\"{{config path=\"web/secure/base_url\"}}media/wysiwyg/menu/160x160.jpg\"></span>\r\nTitle 1</a>\r\n</li>\r\n<li class=\"list__item mega-menu__inner-item\">\r\n<a class=\"link mega-menu__inner-link\" tabindex=\"-1\">\r\n<span class=\"lazyload-wrapper\"><img class=\"image lazyload\" alt=\"Title 2\" data-src=\"{{config path=\"web/secure/base_url\"}}media/wysiwyg/menu/160x160.jpg\"></span>\r\nTitle 2</a>\r\n</li>\r\n<li class=\"list__item mega-menu__inner-item\">\r\n<a class=\"link mega-menu__inner-link\" tabindex=\"-1\">\r\n<span class=\"lazyload-wrapper\"><img class=\"image lazyload\" alt=\"Title 3\" data-src=\"{{config path=\"web/secure/base_url\"}}media/wysiwyg/menu/160x160.jpg\"></span>\r\nTitle 3</a>\r\n</li>\r\n<li class=\"list__item mega-menu__inner-item\">\r\n<a class=\"link mega-menu__inner-link\" tabindex=\"-1\">\r\n<span class=\"lazyload-wrapper\"><img class=\"image lazyload\" alt=\"Title 4\" data-src=\"{{config path=\"web/secure/base_url\"}}media/wysiwyg/menu/160x160.jpg\"></span>\r\nTitle 4</a>\r\n</li>\r\n<li class=\"list__item mega-menu__inner-item\">\r\n<a class=\"link mega-menu__inner-link\" tabindex=\"-1\">\r\n<span class=\"lazyload-wrapper\"><img class=\"image lazyload\" alt=\"Title 5\" data-src=\"{{config path=\"web/secure/base_url\"}}media/wysiwyg/menu/160x160.jpg\"></span>\r\nTitle 5</a>\r\n</li>\r\n<li class=\"list__item mega-menu__inner-item\">\r\n<a class=\"link mega-menu__inner-link\" tabindex=\"-1\">\r\n<span class=\"lazyload-wrapper\"><img class=\"image lazyload\" alt=\"Title 6\" data-src=\"{{config path=\"web/secure/base_url\"}}media/wysiwyg/menu/160x160.jpg\"></span>\r\nTitle 6</a>\r\n</li>\r\n</ul>', '2019-10-03 20:34:04', '2020-09-08 16:28:28', 1),
     (501, 'Header Top Promo Bar', 'header-top-bar', 'Subscribe and get 10$ for Shopping!', '2019-10-03 22:17:05', '2019-10-03 22:17:05', 1),
@@ -29,7 +29,7 @@ VALUES
     (526, 'Stock Status - Expanded Lead Time', 'expanded_lead_time', 'Expanded Lead Time content to be added via expanded_lead_time cms block', '2020-03-10 12:22:09', '2020-03-10 12:22:09', 1),
     (527, 'Stock Status - Sold Out', 'sold_out', 'Sold Out content to be added via sold_out cms block', '2020-03-10 12:22:09', '2020-03-10 12:22:09', 1),
     (528, 'In Stock popup content', 'one-day-shipping', '<h3 id=\"shipping-latency-title\">The product is in stock</h3>\r\n<p>Usually shipps in less than 24 hours</p>', '2020-03-10 13:03:15', '2020-03-10 13:09:47', 1);
-INSERT INTO `cms_block_store` (`block_id`, `store_id`)
+INSERT IGNORE INTO `cms_block_store` (`block_id`, `store_id`)
 VALUES
     (500, 0),
     (501, 0),
@@ -60,17 +60,17 @@ VALUES
     (526, 0),
     (527, 0),
     (528, 0);
-INSERT INTO `snowmenu_menu` (`menu_id`, `title`, `identifier`, `css_class`, `creation_time`, `update_time`, `is_active`)
+INSERT IGNORE INTO `snowmenu_menu` (`menu_id`, `title`, `identifier`, `css_class`, `creation_time`, `update_time`, `is_active`)
 VALUES
     (1, 'Main menu', 'main-desktop', 'mega-menu', '2019-10-03 13:24:47', '2019-10-03 20:50:28', 1),
     (2, 'Mobile menu', 'main-mobile', 'dropdown-list', '2019-10-03 20:49:39', '2019-10-03 20:49:39', 1),
     (3, 'Footer links', 'main-footer', 'dropdown-list', '2019-10-03 21:28:13', '2019-10-03 21:28:13', 1);
-INSERT INTO `snowmenu_store` (`menu_id`, `store_id`)
+INSERT IGNORE INTO `snowmenu_store` (`menu_id`, `store_id`)
 VALUES
     (1, 1),
     (2, 1),
     (3, 1);
-INSERT INTO `snowmenu_node` (`node_id`, `menu_id`, `type`, `content`, `classes`, `parent_id`, `position`, `level`, `title`, `target`, `image`, `image_alt_text`, `node_template`, `submenu_template`, `creation_time`, `update_time`, `is_active`)
+INSERT IGNORE INTO `snowmenu_node` (`node_id`, `menu_id`, `type`, `content`, `classes`, `parent_id`, `position`, `level`, `title`, `target`, `image`, `image_alt_text`, `node_template`, `submenu_template`, `creation_time`, `update_time`, `is_active`)
 VALUES
     (345, 2, 'category', '38', NULL, NULL, 0, 0, 'What\'s new', 0, NULL, NULL, NULL, NULL, '2019-10-03 21:10:26', '2019-10-03 21:10:26', 1),
     (346, 2, 'category', NULL, NULL, 345, 0, 1, 'Line 1', 0, NULL, NULL, NULL, NULL, '2019-10-03 21:10:26', '2019-10-03 21:10:26', 1),
@@ -173,16 +173,9 @@ VALUES
     (1174, 2, 'category', '4', NULL, 382, 0, 1, 'Bags', 0, NULL, NULL, NULL, NULL, '2020-09-08 16:42:29', '2020-09-08 16:42:29', 1),
     (1175, 2, 'category', '5', NULL, 382, 1, 1, 'Fitness Equipment', 0, NULL, NULL, NULL, NULL, '2020-09-08 16:42:29', '2020-09-08 16:42:29', 1),
     (1176, 2, 'category', '6', NULL, 382, 2, 1, 'Watches', 0, NULL, NULL, NULL, NULL, '2020-09-08 16:42:29', '2020-09-08 16:42:29', 1);
-INSERT INTO `cms_page` (`page_id`, `title`, `page_layout`, `meta_keywords`, `meta_description`, `identifier`, `content_heading`, `content`, `creation_time`, `update_time`, `is_active`, `sort_order`, `layout_update_xml`, `custom_theme`, `custom_root_template`, `custom_layout_update_xml`, `custom_theme_from`, `custom_theme_to`, `meta_title`)
+INSERT IGNORE INTO `cms_page` (`page_id`, `title`, `page_layout`, `meta_keywords`, `meta_description`, `identifier`, `content_heading`, `content`, `creation_time`, `update_time`, `is_active`, `sort_order`, `layout_update_xml`, `custom_theme`, `custom_root_template`, `custom_layout_update_xml`, `custom_theme_from`, `custom_theme_to`, `meta_title`)
 VALUES
     (300, 'Home page', 'empty', NULL, NULL, 'home', NULL, NULL, '2020-02-18 12:45:02', '2020-03-18 13:34:22', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `cms_page_store` (`page_id`, `store_id`)
+INSERT IGNORE INTO `cms_page_store` (`page_id`, `store_id`)
 VALUES
     (300, 0);
-INSERT INTO `amasty_gdprcookie_group_cookie` (`id`, `name`, `description`, `is_essential`, `is_enabled`)
-VALUES
-    (1, 'Essential', 'Necessary cookies enable core functionality of the website. Without these cookies the website can not function properly. They help to make a website usable by enabling basic functionality.', 1, 1),
-    (2, 'Marketing', 'Marketing cookies are used to track and collect visitors actions on the website. Cookies store user data and behaviour information, which allows advertising services to target more audience groups. Also more customized user experience can be provided according to collected information.', 0, 1),
-    (3, 'Google Analytics', 'A set of cookies to collect information and report about website usage statistics without personally identifying individual visitors to Google.', 0, 1),
-    (4, 'Payment', 'Payment cookies are set by various payment gateways in order to follow user activity as it relates to payment gateways to ensure a smooth purchasing experience.', 1, 1),
-    (5, 'Functional', 'Functional cookies help to facilitate additional site features which are not essential but enhance customer experience.', 0, 1);
