@@ -24,7 +24,8 @@
   "dependencies": {
     "cli-progress": "3.9.1",
     "colors": "1.4.0",
-    "inquirer": "8.2.0"
+    "inquirer": "8.2.0",
+    "mysql": "2.18.1"
   },
   "bin": {
     "alpaca-theme": "./index.js"
