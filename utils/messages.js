@@ -24,6 +24,6 @@ export const databaseErrorMessage = () => {
 export const notMagentoInstanceMessage = () => {
   return log(
     colors.red('This directory is not valid Magento instance.'),
-    `\n${colors.yellow('Try again from Magento project root directory.')}`
+    `\n${colors.red('Try again from Magento project root directory.')}`
   )
 }
