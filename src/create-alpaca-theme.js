@@ -3,15 +3,21 @@ import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
 import Spinner from '../utils/spinner.js'
 import {
+  mediaDirList,
   directoriesList,
   exemplaryComponentDirectories
 } from './directioriesList.js'
+import runQueries from './database-actions.js'
 import { CLISuccesMessage } from '../utils/messages.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
+import {
+  templateFiles,
+  templateMedia,
+  exemplaryComponent
+} from './filesList.js'
 import { installFrontools, compileFiles } from './frontools-actions.js'
-import { templateFiles, exemplaryComponent } from './filesList.js'
 import {
   validateName,
   validateComposer,
@@ -20,7 +26,8 @@ import {
 } from './validators.js'
 import {
   createDirectory,
-  addTemplateFile
+  addTemplateFile,
+  copyImage
 } from './local-env-actions.js'
 import {
   BASE_PATH,
@@ -59,8 +66,14 @@ const promptQuestions = [
     type: 'confirm',
     message: `Extend exemplary Alpaca Component? (${colors.yellow('recommended')})`,
     name: 'exemplaryComponent'
+  },
+  {
+    type: 'confirm',
+    message: `Update database with essential Alpaca tables? (${colors.yellow('recommended')})`,
+    name: 'database'
   }
 ]
+let dbErrors = []
 
 const init = () => {
   if (isMagentoInstance()) {
@@ -111,6 +124,21 @@ const init = () => {
         bar.update(40, { info: infoColor('Installing Snowdog Components...') })
         await installComponents(answers.name)
 
+        if (answers.database) {
+          bar.update(55, { info: infoColor('Running database queries...') })
+          dbErrors = await runQueries()
+
+          bar.update(56, { info: infoColor('Creating media directories...') })
+          await Promise.all(mediaDirList.map(async (dir) => {
+            await createDirectory(dir)
+          }))
+
+          bar.update(57, { info: infoColor('Copying media...') })
+          templateMedia.forEach((img) => {
+            copyImage(img)
+          })
+        }
+
         bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
         await magentoUpgrade()
 
@@ -123,6 +151,15 @@ const init = () => {
         bar.stop()
         console.timeEnd(colors.blue('Finished in')) // Stop time counter
         CLISuccesMessage(answers.fullName)
+
+        if (dbErrors.length !== 0) {
+          log(colors.red('During installation there was an issue running some database queries.'))
+          log(colors.red('It will not affect the basic functioning of Alpaca but might cause some problems with certain features.'))
+          log(colors.red('See details below:'))
+          dbErrors.forEach((err) => {
+            log(colors.magenta(err))
+          })
+        }
       } catch (error) {
         bar.update(0, { info: colors.red('Installation failed.') })
         spinner.stop()

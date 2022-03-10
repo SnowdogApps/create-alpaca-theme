@@ -72,3 +72,17 @@ export async function addTemplateFile(file, themeName = null) {
     console.error(`\n${error}`)
   }
 }
+
+export async function copyImage(imagePaths) {
+  const {
+    imgTemplatePath,
+    localImgPath
+  } = imagePaths
+  const img = await readFile(new URL(imgTemplatePath, import.meta.url))
+
+  try {
+    await createFile(localImgPath, img)
+  } catch (error) {
+    console.error(`\n${error}`)
+  }
+}
