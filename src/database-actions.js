@@ -1,7 +1,6 @@
 import mysql from 'mysql'
 import { readFile } from 'fs/promises'
 
-// GETTING DATABASE VALUES FROM .ENV TABLE IN PHP FORMAT
 function getValue(table, name) {
   return table.join('')
     .split(',')
@@ -11,6 +10,7 @@ function getValue(table, name) {
     .replace(/['"]+/g, '')
 }
 
+// EXTRACTING DATABASE CREDENTIALS FROM ETC/.ENV TABLE IN PHP FORMAT
 async function getDatabaseDetails() {
   const file = await readFile(('./app/etc/env.php'))
   const dbTable = file.toString().split('[').filter(x => x.includes('host'))
@@ -41,9 +41,9 @@ async function executeQuery(connection, query) {
 
 async function execute(connection, dataSql) {
   return new Promise((resolve, reject) => {
-    connection.connect(async (err) => {
-      if (err) {
-        reject(err)
+    connection.connect(async (error) => {
+      if (error) {
+        reject(error)
       }
 
       const sqlQueryArray = dataSql.toString().split(');')

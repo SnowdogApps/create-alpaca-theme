@@ -72,11 +72,11 @@ export async function addTemplateFile(file, themeName = null) {
   }
 }
 
-export async function copyImage(image) {
+export async function copyImage(imagePaths) {
   const {
     imgTemplatePath,
     localImgPath
-  } = image
+  } = imagePaths
   const img = await readFile(new URL(imgTemplatePath, import.meta.url))
 
   try {
