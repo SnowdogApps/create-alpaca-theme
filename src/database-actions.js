@@ -1,5 +1,6 @@
 import mysql from 'mysql'
 import { readFile } from 'fs/promises'
+import colors from 'colors'
 
 function getValue(table, name) {
   return table.join('')
@@ -43,6 +44,7 @@ async function execute(connection, dataSql) {
   return new Promise((resolve, reject) => {
     connection.connect(async (error) => {
       if (error) {
+        console.log(colors.bgRed('\nDatabase connection error:'))
         reject(error)
       }
 

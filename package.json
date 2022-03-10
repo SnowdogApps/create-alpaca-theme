@@ -1,5 +1,5 @@
 {
-  "name": "alpaca-theme",
+  "name": "create-alpaca-theme",
   "version": "1.0.0",
   "description": "Create Magento 2 child theme based on Snowdog Alpaca Theme",
   "type": "module",
@@ -28,7 +28,7 @@
     "mysql": "2.18.1"
   },
   "bin": {
-    "alpaca-theme": "./index.js"
+    "create-alpaca-theme": "./index.js"
   },
   "devDependencies": {
     "eslint": "^8.6.0",

@@ -5,10 +5,8 @@ export const CHECK_MARK_CHARACTER = '\u2713'
 
 // COMPOSER PACLAGES NAMES
 export const PACKAGE_PATH = {
-  /* TEMP - DELETE LINE BELOW AFTER FEATURE/PERFORMANCE RELEASE */
-  THEME_FRONTEND_ALPACA_TEST: 'snowdog/theme-frontend-alpaca:dev-test',
-
   ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
+  THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26.0"', // CLI WORKS ONLY WITH ^2.26.0
   FRONTOOLS: 'snowdog/frontools'
 }
 
@@ -74,8 +72,6 @@ export const LOADING_BAR = {
 export const NAME_NOT_PROVIDED_MSG = 'It cannot be empty. Please provide valid theme name.'
 export const NAME_TO_SHORT_MSG = 'Your theme name should be at least 3 characters long.'
 export const NAME_MINIMUM_LENGTH = 3
-export const NOT_MAGENTO_MSG_TOP = 'This directory is not valid Magento instance.'
-export const NOT_MAGENTO_MSG_BOTTOM = 'Try again from Magento project root directory.'
 export const REGISTRATION_NAME_NOT_SINGULAR = 'Registration name needs to be one word'
 export const BANNED_NAMES_MSG = 'This name is forbidden. Choose diffrent name.'
 export const NAME_NOT_LOWERCASE = 'All characters in registration name must be lower case.'
