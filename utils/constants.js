@@ -5,10 +5,8 @@ export const CHECK_MARK_CHARACTER = '\u2713'
 
 // COMPOSER PACLAGES NAMES
 export const PACKAGE_PATH = {
-  /* TEMP - DELETE LINE BELOW AFTER FEATURE/PERFORMANCE RELEASE */
-  THEME_FRONTEND_ALPACA_TEST: 'snowdog/theme-frontend-alpaca:dev-test',
-
   ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
+  THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26.0"', // CLI WORKS ONLY WITH ^2.26.0
   FRONTOOLS: 'snowdog/frontools'
 }
 

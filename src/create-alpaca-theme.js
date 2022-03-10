@@ -90,10 +90,10 @@ const init = () => {
 
         bar.update(1, { info: infoColor('Validating env.php...') })
         validateEnvPhp()
-        // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
 
-        /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */
-        await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA_TEST)
+        bar.update(2, { info: infoColor('Downloading Alpaca Packages...') })
+        await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
+        await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA)
 
         bar.update(16, { info: infoColor('Downloading Frontools...') })
         await composerRequire(PACKAGE_PATH.FRONTOOLS)
