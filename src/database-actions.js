@@ -10,10 +10,10 @@ function getValue(table, name) {
     .replace(/['"]+/g, '')
 }
 
-// EXTRACTING DATABASE CREDENTIALS FROM ETC/.ENV TABLE IN PHP FORMAT
+// EXTRACTING DATABASE CREDENTIALS FROM ETC/ENV FILE IN PHP FORMAT
 async function getDatabaseDetails() {
   const file = await readFile(('./app/etc/env.php'))
-  const dbTable = file.toString().split('[').filter(x => x.includes('host'))
+  const dbTable = file.toString().split('[').filter((x) => x.includes('host'))
   const host = getValue(dbTable, 'host')
   const database = getValue(dbTable, 'dbname')
   const user = getValue(dbTable, 'username')
