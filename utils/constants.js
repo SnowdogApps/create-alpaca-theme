@@ -89,3 +89,36 @@ export const BANNED_NAMES_LIST = [
   'Colibri',
   'theme-blank-sass'
 ]
+
+// IMAGES PATHS
+// LOCAL IMAGES NAMES MUST MATCH NAMES IN MAGENTO CMS BLOCKS
+export const MEDIA_PATHS = {
+  BANNER_MED_MEN: '../templates/images/placeholder-656_254.jpg',
+  BANNER_MED_WOMEN: '../templates/images/placeholder-656_254.jpg',
+  CATEGORY_ACCERSORES_144: '../templates/images/placeholder-144_200.jpg',
+  CATEGORY_ACCERSORES_320: '../templates/images/placeholder-320_432.jpg',
+  CATEGORY_CLOTHING_144: '../templates/images/placeholder-144_200.jpg',
+  CATEGORY_CLOTHING_320: '../templates/images/placeholder-320_432.jpg',
+  CATEGORY_NEW_144: '../templates/images/placeholder-144_200.jpg',
+  CATEGORY_NEW_320: '../templates/images/placeholder-320_432.jpg',
+  CATEGORY_SHOES_144: '../templates/images/placeholder-144_200.jpg',
+  CATEGORY_SHOES_320: '../templates/images/placeholder-320_432.jpg',
+  TEASER_SMALL: '../templates/images/placeholder-304_304.jpg',
+  TEASER_MEDIUM_376: '../templates/images/placeholder-376_432.jpg',
+  TEASER_MEDIUM_472: '../templates/images/placeholder-472_432.jpg',
+  TEASER_LARGE: '../templates/images/placeholder_1328-1200.jpg',
+  LOCAL_BANNER_MED_MEN: 'pub/media/cms/home/banners/banner-medium-men-now-656_264.jpg',
+  LOCAL_BANNER_MED_WOMEN: 'pub/media/cms/home/banners/banner-medium-women-now-656_264.jpg',
+  LOCAL_CATEGORY_ACCERSORES_144: 'pub/media/cms/home/banners/category-accessories-144_200.jpg',
+  LOCAL_CATEGORY_ACCERSORES_320: 'pub/media/cms/home/banners/category-accessories-320_432.jpg',
+  LOCAL_CATEGORY_CLOTHING_144: 'pub/media/cms/home/banners/category-clothing-144_200.jpg',
+  LOCAL_CATEGORY_CLOTHING_320: 'pub/media/cms/home/banners/category-clothing-320_432.jpg',
+  LOCAL_CATEGORY_NEW_144: 'pub/media/cms/home/banners/category-new-in-144_200.jpg',
+  LOCAL_CATEGORY_NEW_320: 'pub/media/cms/home/banners/category-new-in-320_432.jpg',
+  LOCAL_CATEGORY_SHOES_144: 'pub/media/cms/home/banners/category-shoes-144_200.jpg',
+  LOCAL_CATEGORY_SHOES_320: 'pub/media/cms/home/banners/category-shoes-320_432.jpg',
+  LOCAL_TEASER_SMALL: 'pub/media/cms/home/teasers/teaser-small-girl_304-304.jpg',
+  LOCAL_TEASER_MEDIUM_376: 'pub/media/cms/home/teasers/teaser-medium-girl_376-432.jpg',
+  LOCAL_TEASER_MEDIUM_472: 'pub/media/cms/home/teasers/teaser-medium-girl_472-432.jpg',
+  LOCAL_TEASER_LARGE: 'pub/media/cms/home/teasers/teaser-large-girl_1328-1200.jpg'
+}

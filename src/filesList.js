@@ -8,7 +8,8 @@
 import {
   TEMPLATE_PATHS,
   LOCAL_ENV_PATHS,
-  VARIABLES_IMPORT_PATHS
+  VARIABLES_IMPORT_PATHS,
+  MEDIA_PATHS
 } from '../utils/constants.js'
 
 export const templateFiles = [
@@ -239,5 +240,65 @@ export const templateFiles = [
     useSampleTemplate: false,
     addThemeNameToFileName: true,
     prependedImport: null
+  }
+]
+
+// HOMEPAGE IMAGES
+export const templateMedia = [
+  {
+    imgTemplatePath: MEDIA_PATHS.BANNER_MED_MEN,
+    localImgPath: MEDIA_PATHS.LOCAL_BANNER_MED_MEN
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.BANNER_MED_WOMEN,
+    localImgPath: MEDIA_PATHS.LOCAL_BANNER_MED_WOMEN
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_ACCERSORES_144,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_ACCERSORES_144
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_ACCERSORES_320,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_ACCERSORES_320
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_CLOTHING_144,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_CLOTHING_144
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_CLOTHING_320,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_CLOTHING_320
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_NEW_144,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_NEW_144
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_NEW_320,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_NEW_320
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_SHOES_144,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_SHOES_144
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.CATEGORY_SHOES_320,
+    localImgPath: MEDIA_PATHS.LOCAL_CATEGORY_SHOES_320
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.TEASER_SMALL,
+    localImgPath: MEDIA_PATHS.LOCAL_TEASER_SMALL
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.TEASER_MEDIUM_376,
+    localImgPath: MEDIA_PATHS.LOCAL_TEASER_MEDIUM_376
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.TEASER_MEDIUM_472,
+    localImgPath: MEDIA_PATHS.LOCAL_TEASER_MEDIUM_472
+  },
+  {
+    imgTemplatePath: MEDIA_PATHS.TEASER_LARGE,
+    localImgPath: MEDIA_PATHS.LOCAL_TEASER_LARGE
   }
 ]

@@ -52,6 +52,8 @@
     "no-console": "off",
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
-    "no-lonely-if": "off"
+    "no-lonely-if": "off",
+    "no-multi-assign": "off",
+    "consistent-return": "off"
   }
 }
