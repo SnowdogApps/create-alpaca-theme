@@ -46,14 +46,10 @@ export function validateComposer() {
   })
 }
 
-export function isMagentoInstance() {
+export function validateMagentoInstance() {
   const path = './bin/magento'
 
-  if (fs.existsSync(path)) {
-    return true
-  }
-
-  return false
+  return fs.existsSync(path)
 }
 
 export function validateYarn() {
@@ -62,13 +58,21 @@ export function validateYarn() {
   })
 }
 
-export function validateEnvPhp() {
-  const path = './app/etc/env.php'
+export function validateConfigFiles() {
+  const envPhpPath = './app/etc/env.php'
+  const configPhpPath = './app/etc/config.php'
 
-  if (fs.existsSync(path)) {
-    return true
+  if (!fs.existsSync(envPhpPath)) {
+    console.log(colors.red('\nCould not find env.php file in app/design/etc directory.'))
+
+    process.exit(1)
   }
 
-  console.log(colors.red('\nCould not find env.php file in app/design/etc directory.'))
-  process.exit(1)
+  if (!fs.existsSync(configPhpPath)) {
+    console.log(colors.red('\nCould not find config.php file in app/design/etc directory.'))
+
+    process.exit(1)
+  }
+
+  return true
 }

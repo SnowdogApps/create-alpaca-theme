@@ -27,9 +27,9 @@ import {
 } from './frontools-actions.js'
 import {
   validateName,
-  validateEnvPhp,
+  validateConfigFiles,
   validateComposer,
-  isMagentoInstance,
+  validateMagentoInstance,
   validateRegistrationName
 } from './validators.js'
 import {
@@ -81,7 +81,7 @@ const promptQuestions = [
 let dbErrors = []
 
 function init() {
-  if (!isMagentoInstance()) {
+  if (!validateMagentoInstance()) {
     notMagentoInstanceMessage()
 
     process.exit(1)
@@ -94,8 +94,8 @@ function init() {
     try {
       console.time(colors.blue('Finished in')) // Start time counter
       spinner.start()
-      bar.start(100, 0, { info: infoColor('Validating env.php...') })
-      validateEnvPhp()
+      bar.start(100, 0, { info: infoColor('Validating Magento config files...') })
+      validateConfigFiles()
 
       bar.update(1, { info: infoColor('Validating composer...') })
       await validateComposer()
