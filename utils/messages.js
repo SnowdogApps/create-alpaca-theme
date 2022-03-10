@@ -12,3 +12,11 @@ export const CLISuccesMessage = (themeName) => {
     colors.yellow('\n\n2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n')
   )
 }
+
+export const databaseErrorMessage = () => {
+  return log(
+    colors.red('During installation there was an issue running some database queries.'),
+    colors.red('\nIt will not affect the basic functioning of Alpaca but might cause some problems with certain features.'),
+    colors.red('\nSee details below:')
+  )
+}

@@ -8,7 +8,10 @@ import {
   exemplaryComponentDirectories
 } from './directioriesList.js'
 import runQueries from './database-actions.js'
-import { CLISuccesMessage } from '../utils/messages.js'
+import {
+  CLISuccesMessage,
+  databaseErrorMessage
+} from '../utils/messages.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
@@ -53,7 +56,7 @@ const bar = new cliProgress.SingleBar({
 const promptQuestions = [
   {
     type: 'input',
-    message: `Enter your theme full name (${colors.yellow('e.g. Child Theme')}):`,
+    message: `Enter theme full name (${colors.yellow('e.g. Child Theme')}):`,
     name: 'fullName',
     validate: validateName
   },
@@ -65,12 +68,12 @@ const promptQuestions = [
   },
   {
     type: 'confirm',
-    message: `Extend exemplary Alpaca Component? (${colors.yellow('recommended')})`,
+    message: `Extend exemplary Alpaca Component? (${colors.yellow('Recommended')})`,
     name: 'exemplaryComponent'
   },
   {
     type: 'confirm',
-    message: `Update database with essential Alpaca tables? (${colors.yellow('recommended')})`,
+    message: `Update database with essential Alpaca tables? (${colors.yellow('Recommended')})`,
     name: 'database'
   }
 ]
@@ -85,11 +88,11 @@ const init = () => {
       try {
         console.time(colors.blue('Finished in')) // Start time counter
         spinner.start()
-        bar.start(100, 0, { info: infoColor('Validating composer...') })
-        await validateComposer()
-
-        bar.update(1, { info: infoColor('Validating env.php...') })
+        bar.start(100, 0, { info: infoColor('Validating env.php...') })
         validateEnvPhp()
+
+        bar.update(1, { info: infoColor('Validating composer...') })
+        await validateComposer()
 
         bar.update(2, { info: infoColor('Downloading Alpaca Packages...') })
         await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
@@ -154,9 +157,7 @@ const init = () => {
         CLISuccesMessage(answers.fullName)
 
         if (dbErrors.length !== 0) {
-          log(colors.red('During installation there was an issue running some database queries.'))
-          log(colors.red('It will not affect the basic functioning of Alpaca but might cause some problems with certain features.'))
-          log(colors.red('See details below:'))
+          databaseErrorMessage()
           dbErrors.forEach((err) => {
             log(colors.magenta(err))
           })
@@ -174,6 +175,7 @@ const init = () => {
       colors.red(NOT_MAGENTO_MSG_TOP),
       `\n${colors.yellow(NOT_MAGENTO_MSG_BOTTOM)}`
     )
+    process.exit(1)
   }
 }
 

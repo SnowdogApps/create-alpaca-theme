@@ -54,5 +54,4 @@ _Use 'yarn dev' in Snowdog_Components directory_
 
 * _Gitlab links need to be changed to Github_
 * _Testing locally section will be deleted_
-* _Enable Alpaca Packages download & disable theme-fronetned-alpaca test branch_
 * _Move this repo to OpenSource_
