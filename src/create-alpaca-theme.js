@@ -20,6 +20,7 @@ import {
 import { installFrontools, compileFiles } from './frontools-actions.js'
 import {
   validateName,
+  validateEnvPhp,
   validateComposer,
   isMagentoInstance,
   validateRegistrationName
@@ -87,8 +88,8 @@ const init = () => {
         bar.start(100, 0, { info: infoColor('Validating composer...') })
         await validateComposer()
 
-        bar.update(1, { info: infoColor('Downloading Alpaca Packages...') })
-        /* ENABLE AFTER FEATURE-PERFORMANCE REALEASE */
+        bar.update(1, { info: infoColor('Validating env.php...') })
+        validateEnvPhp()
         // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
 
         /* TEMP - DELETE AFTER FEATURE-PERFORMANCE REALEASE */

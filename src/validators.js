@@ -1,4 +1,5 @@
 import fs from 'fs'
+import colors from 'colors'
 import promiseExec from '../utils/promiseExec.js'
 import {
   NAME_MINIMUM_LENGTH,
@@ -59,4 +60,15 @@ export function validateYarn() {
   return promiseExec('yarn -v', (msg) => {
     return `There was an issue validating yarn: ${msg}`
   })
+}
+
+export function validateEnvPhp() {
+  const path = './app/etc/env.php'
+
+  if (fs.existsSync(path)) {
+    return true
+  }
+
+  console.log(colors.red('\nCould not find env.php file in app/design/etc directory.'))
+  process.exit(1)
 }
