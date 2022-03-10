@@ -42,7 +42,7 @@ npm install -g
 ```
 * From any magento project root directory run
 ```
-npx alpaca-theme
+npx create-alpaca-theme
 ```
 
 1. Check if you can choose your child theme in admin panel</br>
