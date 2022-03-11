@@ -13,11 +13,11 @@ const localNodeVersion = process.versions.node
 const semver = localNodeVersion.split('.')
 const major = semver[0]
 
-if (major < 14) {
+if (major < 16) {
   console.error(
     'You are running node',
     localNodeVersion,
-    '\nnpx alpaca-theme requires Node 14 or higher.',
+    '\ncreate-alpaca-theme requires Node 16 or higher.',
     '\nIn order to continue update your Node version.'
   )
   process.exit(1)
