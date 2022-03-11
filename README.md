@@ -17,8 +17,6 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
 ## Requirements
   * Valid Magento instance.
   * Node >= 16.
-  <br>
-
 ## What it does?
 - Installs following packages:
   - [snowdog/frontools](https://github.com/SnowdogApps/magento2-frontools)
@@ -53,10 +51,11 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
     - blackbird/contentmanager
     - vladimirpopov/webforms</br></br>
 - Creates necessary files structure in child theme - adding SCSS, JS, and elemental config files.
+- Configures frontools.
 - Extends exemplary component (If selected during installation).
 - Updates database with essential Alpaca Tables (If selected during installation).
-- Adds placeholder images on homepage.
-- Upgrades Magento instance and compile styles, JS file and SVG via Frontools.
+- Adds placeholder images.
+- Upgrades Magento instance, compile styles, JS files and SVG via Frontools.
 
 ****
 2021 **[SNOW.DOG](https://www.snow.dog)**
