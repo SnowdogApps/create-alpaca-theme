@@ -1,22 +1,22 @@
 # Create Alpaca Theme
 
 Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
-
-- [Working with Alpaca Theme]() - Learn how to utilize Alpaca Theme.
-- [Alpaca Theme step by step setup]() - How to set up Alpaca from scratch, without **create-alpaca-theme**.
-- [Current Alpaca Release](https://github.com/SnowdogApps/magento2-alpaca-theme) - Visit Alpaca's Github page.
-
 ## Quick Overview
 - Run from Magento project root directory:
   ```sh
   npx create-alpaca-theme
   ```
-- Choose installation options.
+- Select installation options.
 - Go to `Admin Panel -> Content -> Design -> Configuration` and choose your theme.
-- Run **yarn dev** in **Snowdog_Components** directory to see components in Fractal environment.
+- Run `yarn dev` in **Snowdog_Components** directory to see components in Fractal environment.
 ## Requirements
   * Valid Magento instance.
   * Node >= 16.
+
+## User guide
+- [Working with Alpaca Theme]() - Learn how to utilize Alpaca Theme.
+- [Alpaca Theme step by step setup]() - How to set up Alpaca from scratch, without **create-alpaca-theme**.
+- [Current Alpaca Release](https://github.com/SnowdogApps/magento2-alpaca-theme) - Visit Alpaca's Github page.
 ## What it does?
 - Installs following packages:
   - [snowdog/frontools](https://github.com/SnowdogApps/magento2-frontools)
@@ -35,27 +35,22 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
     - [snowdog/module-shipping-latency](https://github.com/SnowdogApps/magento2-shipping-latency)
     - [snowdog/module-wishlist-unlocker](https://github.com/SnowdogApps/magento2-wishlist-unlocker)
     - [webshopapps/module-matrixrate](https://github.com/webshopapps/module-matrixrate)</br></br>
-
-  List of additional, non-opensource, <u>**not included**</u> in `create-alpaca-theme` modules that Alpaca Theme works with, to cover additional features:
-    - amasty/adminactionslog
-    - amasty/module-gdpr
-    - amasty/module-gift-card
-    - amasty/module-google-rich-snippets
-    - amasty/module-product-feed
-    - amasty/module-shipping-rules
-    - amasty/module-special-promo
-    - amasty/module-store-locator
-    - amasty/payrestriction
-    - amasty/shiprestriction
-    - apptrian/facebook-pixel
-    - blackbird/contentmanager
-    - vladimirpopov/webforms</br></br>
-- Creates necessary files structure in child theme - adding SCSS, JS, and elemental config files.
+- Creates necessary files structure in child theme including SCSS, JS, and elemental config files.
 - Configures frontools.
 - Extends exemplary component (If selected during installation).
 - Updates database with essential Alpaca Tables (If selected during installation).
 - Adds placeholder images.
-- Upgrades Magento instance, compile styles, JS files and SVG via Frontools.
+- Upgrades Magento instance, compile styles, JS files and SVG.
 
+## Useful Links
+  * [Alpaca Theme details](https://github.com/SnowdogApps/magento2-alpaca-theme)
+  * [Snowdog Frontools](https://github.com/SnowdogApps/magento2-frontools)
+  * [Valet Plus](https://github.com/weprovide/valet-plus/wiki/Database)
+  * [Fractal guide](https://fractal.build/guide/)
+  * [Alpaca Packages](https://github.com/SnowdogApps/magento2-alpaca-packages)
+  * [Alpaca Components guide](https://github.com/SnowdogApps/magento2-alpaca-theme/blob/master/Snowdog_Components/README.md)
+  * [Alpaca Components preview](https://magento2-alpaca-theme-git-master-snowdog1.vercel.app/)
+  * [Theme inheritance magento docs](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-inherit.html)
+  * [Layout instructions magento docs](https://devdocs.magento.com/guides/v2.4/frontend-dev-guide/layouts/xml-instructions.html)
 ****
-2021 **[SNOW.DOG](https://www.snow.dog)**
+2022 **[Snowdog](https://www.snow.dog)**
