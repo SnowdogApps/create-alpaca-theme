@@ -62,10 +62,14 @@ export async function addTemplateFile(file, themeName = null) {
 
     if (prependedImport) {
       const data = fs.readFileSync(`${filePath}${name}`)
+      const dataArr = data.toString().split('\n')
+      const lineIdx = dataArr.findIndex((str) => str.includes('variables'))
+
+      dataArr.splice(lineIdx + 2, 0, prependedImport.replace(re, themeName))
+      const text = dataArr.join('\n')
       const fd = fs.openSync(`${filePath}${name}`, 'w+')
-      const buffer = Buffer.from(prependedImport.replace(re, themeName))
-      fs.writeSync(fd, buffer, 0, buffer.length, 0)
-      fs.writeSync(fd, data, 0, data.length, buffer.length)
+
+      fs.writeSync(fd, text, 0, text.length, 0)
       fs.close(fd)
     }
   } catch (error) {

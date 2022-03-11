@@ -54,9 +54,9 @@ export const LOCAL_ENV_PATHS = {
 // ATOM VARIABALES PATHS
 export const VARIABLES_IMPORT_PATHS = {
   COMMENT: '// Child theme variables\n',
-  MAIN: '@import "../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n',
-  DOCS: '@import "../../components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n',
-  CHECKOUT: '@import "../../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n\n'
+  MAIN: '@import "../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n',
+  DOCS: '@import "../../components/Atoms/variables/YOUR_THEME_NAME-variables";\n',
+  CHECKOUT: '@import "../../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n'
 }
 
 // PROGRESS BAR
