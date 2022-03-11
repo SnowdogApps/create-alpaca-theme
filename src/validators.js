@@ -9,7 +9,7 @@ import {
   BANNED_NAMES_MSG,
   BANNED_NAMES_LIST,
   NAME_NOT_LOWERCASE
-} from '../utils/constants.js'
+} from '../constants/constants.js'
 
 function getNameValidator(customRule) {
   return (name) => {

@@ -10,7 +10,7 @@ import {
   mediaDirList,
   directoriesList,
   exemplaryComponentDirectories
-} from './directioriesList.js'
+} from '../constants/directioriesList.js'
 import {
   CLISuccesMessage,
   databaseErrorMessage,
@@ -20,7 +20,7 @@ import {
   templateFiles,
   templateMedia,
   exemplaryComponent
-} from './filesList.js'
+} from '../constants/filesList.js'
 import {
   installFrontools,
   compileFiles
@@ -42,7 +42,7 @@ import {
   LOADING_BAR,
   PACKAGE_PATH,
   CHECK_MARK_CHARACTER
-} from '../utils/constants.js'
+} from '../constants/constants.js'
 
 const { log } = console
 const spinner = new Spinner()

@@ -9,9 +9,8 @@ import {
   TEMPLATE_PATHS,
   LOCAL_ENV_PATHS,
   VARIABLES_IMPORT_PATHS,
-  COMPONENT_EXTEND_COMMENT,
   MEDIA_PATHS
-} from '../utils/constants.js'
+} from './constants.js'
 
 /*
   TEMPLATE FILES FORMAT - ARRAY OF OBJECTS CONTAINING:
@@ -298,7 +297,7 @@ export const exemplaryComponent = [
     phraseToReplace: '../Molecules/button/button',
     useSampleTemplate: false,
     addThemeNameToFileName: false,
-    prependedImport: COMPONENT_EXTEND_COMMENT,
+    prependedImport: null,
     replaceWith: '../Molecules/button/button-extend'
   },
   {

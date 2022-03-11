@@ -56,7 +56,7 @@ export const VARIABLES_IMPORT_PATHS = {
   COMMENT: '// Child theme variables\n',
   MAIN: '@import "../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n',
   DOCS: '@import "../../components/Atoms/variables/YOUR_THEME_NAME-variables";\n',
-  CHECKOUT: '@import "../../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n'
+  CHECKOUT: '@import "../../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";'
 }
 
 // PROGRESS BAR
@@ -122,6 +122,3 @@ export const MEDIA_PATHS = {
   LOCAL_TEASER_MEDIUM_472: 'pub/media/cms/home/teasers/teaser-medium-girl_472-432.jpg',
   LOCAL_TEASER_LARGE: 'pub/media/cms/home/teasers/teaser-large-girl_1328-1200.jpg'
 }
-
-// OTHER
-export const COMPONENT_EXTEND_COMMENT = '// WHEN EXTENDING COMPONENT, CHANGE IMPORT PATH (ADD -extend) - SEE BUTTON AS A EXAMPLE\n\n'

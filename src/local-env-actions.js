@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as fsPromises from 'fs/promises'
 import { readFile } from 'fs/promises'
-import { BASE_PATH } from '../utils/constants.js'
+import { BASE_PATH } from '../constants/constants.js'
 
 export function createDirectory(path) {
   return new Promise((resolve, reject) => {
