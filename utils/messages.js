@@ -11,8 +11,8 @@ export const CLISuccesMessage = (themeName) => {
     (`(${colors.yellow(themeName)}).`),
     colors.blue(`\n✨ Use ${colors.yellow('yarn dev')} in Snowdog_Components dir to run components in Fractal.`),
     colors.blue('\n🔎 Read'),
-    colors.yellow('Working with Alpaca Theme'),
-    colors.blue('section in README learn how to use Alpaca Theme.'),
+    colors.yellow('Alpaca Docs'),
+    colors.blue('to learn how to use Alpaca Theme.'),
     colors.yellow('\n\n2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n')
   )
 }
