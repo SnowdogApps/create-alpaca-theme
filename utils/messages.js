@@ -5,10 +5,14 @@ const { log } = console
 export const CLISuccesMessage = (themeName) => {
   return log(
     colors.yellow('\nInstallation completed successfully!'),
-    colors.blue('\n\nGo to Admin Panel -> Content -> Design -> Configuration and choose your theme'),
+    colors.blue('\n\n👉 Go to'),
+    colors.yellow('Admin Panel -> Content -> Design -> Configuration'),
+    colors.blue('and choose your theme'),
     (`(${colors.yellow(themeName)}).`),
-    colors.blue(`\nUse ${colors.yellow('\'yarn dev\'')} in Snowdog_Components dir to run components in Fractal`),
-    colors.blue('\nRead Alpaca Docs to learn how to work with Alpaca Theme.'),
+    colors.blue(`\n✨ Use ${colors.yellow('yarn dev')} in Snowdog_Components dir to run components in Fractal.`),
+    colors.blue('\n🔎 Read'),
+    colors.yellow('Working with Alpaca Theme'),
+    colors.blue('section in README learn how to use Alpaca Theme.'),
     colors.yellow('\n\n2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n')
   )
 }

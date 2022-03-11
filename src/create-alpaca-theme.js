@@ -155,7 +155,7 @@ function init() {
       bar.update(87, { info: infoColor('Compiling files...') })
       await compileFiles()
 
-      bar.update(100, { info: colors.blue('Enjoy Alpaca :)') })
+      bar.update(100, { info: colors.blue('Enjoy Alpaca 🦙') })
       process.stdout.write(`\r${CHECK_MARK_CHARACTER}`)
       spinner.stop()
       bar.stop()
