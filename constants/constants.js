@@ -42,6 +42,7 @@ export const TEMPLATE_PATHS = {
   EXEMPLARY_COMPONENT: '../templates/components/extend.scss.sample',
   EMPTY: '../templates/components/empty.scss.sample',
   COMPONENTS_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical.scss',
+  COMPONENTS_CRITICAL_CHECKOUT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical-checkout.scss',
   COMPONENTS_NON_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_non-critical.scss'
 }
 

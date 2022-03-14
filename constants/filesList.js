@@ -301,6 +301,17 @@ export const exemplaryComponent = [
     replaceWith: '../Molecules/button/button-extend'
   },
   {
+    name: '_critical-checkout.scss',
+    templateFilePath: TEMPLATE_PATHS.COMPONENTS_CRITICAL_CHECKOUT,
+    childFileDestination: '/Snowdog_Components/components/styles/',
+    replacePhrase: true,
+    phraseToReplace: '../Molecules/button/button',
+    useSampleTemplate: false,
+    addThemeNameToFileName: false,
+    prependedImport: null,
+    replaceWith: '../Molecules/button/button-extend'
+  },
+  {
     name: '_non-critical.scss',
     templateFilePath: TEMPLATE_PATHS.COMPONENTS_NON_CRITICAL,
     childFileDestination: '/Snowdog_Components/components/styles/',
