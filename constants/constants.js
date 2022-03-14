@@ -16,42 +16,42 @@ export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 
 // TEMPLATE FILES PATHS
 export const TEMPLATE_PATHS = {
-  BROWSER_SYNC: '../templates/frontools/browser-sync.json.sample',
-  REGISTRATION: '../templates/theme/registration.php.sample',
-  THEME_XML: '../templates/theme/theme.xml.sample',
-  THEMES_JSON: '../templates/frontools/themes.json.sample',
-  EDITOR_CONFIG: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.editorconfig',
-  ESLINT_IGNORE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintignore',
-  ESLINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintrc.json',
-  NODE_VERSIONS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.node-version',
-  SASS_LINT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.sass-lint.yml',
-  STYLE_LINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.stylelintrc',
-  GULPFILE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/gulpfile.mjs',
-  MODULES_MJS: '../templates/components/modules.mjs.sample',
-  PACKAGE_JSON: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/package.json',
-  DOCS_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/checkout.scss',
-  DOCS_STYLES_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/styles.scss',
-  MAGENTO_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Magento_Checkout/styles/checkout.scss',
-  THEME_VARIABLES: '../templates/components/variables.scss.sample',
-  THEME_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/styles.scss',
-  CRITICAL_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/critical.scss',
-  README: '../templates/theme/README.md.sample',
-  CHANGELOG: '../templates/theme/CHANGELOG.md.sample',
-  GITIGNORE: 'vendor/snowdog/theme-frontend-alpaca/.gitignore',
-  BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc',
-  EXEMPLARY_COMPONENT: '../templates/components/extend.scss.sample',
-  EXEMPLARY_VARIABLES: '../templates/components/example-component-variables.scss.sample',
-  EXEMPLARY_STYLES: '../templates/components/example-component.scss.sample',
-  COMPONENTS_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical.scss',
-  COMPONENTS_CRITICAL_CHECKOUT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical-checkout.scss',
-  COMPONENTS_NON_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_non-critical.scss'
+  // BROWSER_SYNC: '../templates/frontools/browser-sync.json.sample',
+  // REGISTRATION: '../templates/theme/registration.php.sample',
+  // THEME_XML: '../templates/theme/theme.xml.sample',
+  // THEMES_JSON: '../templates/frontools/themes.json.sample',
+  // EDITOR_CONFIG: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.editorconfig',
+  // ESLINT_IGNORE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintignore',
+  // ESLINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintrc.json',
+  // NODE_VERSIONS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.node-version',
+  // SASS_LINT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.sass-lint.yml',
+  // STYLE_LINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.stylelintrc',
+  // GULPFILE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/gulpfile.mjs',
+  // MODULES_MJS: '../templates/components/modules.mjs.sample',
+  // PACKAGE_JSON: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/package.json',
+  // DOCS_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/checkout.scss',
+  // DOCS_STYLES_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/styles.scss',
+  // MAGENTO_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Magento_Checkout/styles/checkout.scss',
+  // THEME_VARIABLES: '../templates/components/variables.scss.sample',
+  // THEME_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/styles.scss',
+  // CRITICAL_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/critical.scss',
+  // README: '../templates/theme/README.md.sample',
+  // CHANGELOG: '../templates/theme/CHANGELOG.md.sample',
+  // GITIGNORE: 'vendor/snowdog/theme-frontend-alpaca/.gitignore',
+  // BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc',
+  // EXEMPLARY_COMPONENT: '../templates/components/extend.scss.sample',
+  // EXEMPLARY_VARIABLES: '../templates/components/example-component-variables.scss.sample',
+  // EXEMPLARY_STYLES: '../templates/components/example-component.scss.sample',
+  // COMPONENTS_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical.scss',
+  // COMPONENTS_CRITICAL_CHECKOUT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical-checkout.scss',
+  // COMPONENTS_NON_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_non-critical.scss'
 }
 
 // LOCAL ENVIRONMENT PATHS
-export const LOCAL_ENV_PATHS = {
-  BROWSER_SYNC: 'dev/tools/frontools/config/browser-sync.json',
-  THEMES_JSON: 'dev/tools/frontools/config/themes.json'
-}
+// export const LOCAL_ENV_PATHS = {
+//   BROWSER_SYNC: 'dev/tools/frontools/config/browser-sync.json',
+//   THEMES_JSON: 'dev/tools/frontools/config/themes.json'
+// }
 
 // ATOM VARIABALES PATHS
 export const VARIABLES_IMPORT_PATHS = {
