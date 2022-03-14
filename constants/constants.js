@@ -32,7 +32,7 @@ export const TEMPLATE_PATHS = {
   DOCS_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/checkout.scss',
   DOCS_STYLES_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/styles.scss',
   MAGENTO_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Magento_Checkout/styles/checkout.scss',
-  THEME_VARIABLES: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/Atoms/variables/_variables.scss',
+  THEME_VARIABLES: '../templates/components/variables.scss.sample',
   THEME_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/styles.scss',
   CRITICAL_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/critical.scss',
   README: '../templates/theme/README.md.sample',
@@ -40,7 +40,8 @@ export const TEMPLATE_PATHS = {
   GITIGNORE: 'vendor/snowdog/theme-frontend-alpaca/.gitignore',
   BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc',
   EXEMPLARY_COMPONENT: '../templates/components/extend.scss.sample',
-  EMPTY: '../templates/components/empty.scss.sample',
+  EXEMPLARY_VARIABLES: '../templates/components/example-component-variables.scss.sample',
+  EXEMPLARY_STYLES: '../templates/components/example-component.scss.sample',
   COMPONENTS_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical.scss',
   COMPONENTS_CRITICAL_CHECKOUT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical-checkout.scss',
   COMPONENTS_NON_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_non-critical.scss'

@@ -252,7 +252,7 @@ export const templateFiles = [
     childFileDestination: '/Snowdog_Components/components/Atoms/variables/',
     replacePhrase: false,
     phraseToReplace: '',
-    useSampleTemplate: false,
+    useSampleTemplate: true,
     addThemeNameToFileName: true,
     prependedImport: null
   }
@@ -271,7 +271,7 @@ export const exemplaryComponent = [
   },
   {
     name: 'button-variables.scss',
-    templateFilePath: TEMPLATE_PATHS.EMPTY,
+    templateFilePath: TEMPLATE_PATHS.EXEMPLARY_VARIABLES,
     childFileDestination: '/Snowdog_Components/components/Molecules/button/',
     replacePhrase: false,
     phraseToReplace: '',
@@ -281,7 +281,7 @@ export const exemplaryComponent = [
   },
   {
     name: 'button.scss',
-    templateFilePath: TEMPLATE_PATHS.EMPTY,
+    templateFilePath: TEMPLATE_PATHS.EXEMPLARY_STYLES,
     childFileDestination: '/Snowdog_Components/components/Molecules/button/',
     replacePhrase: false,
     phraseToReplace: '',

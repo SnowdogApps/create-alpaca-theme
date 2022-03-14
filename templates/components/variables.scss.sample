@@ -1,0 +1,8 @@
+/*
+  Edit components variables here. Primary color changed as a example.
+  You can alter any variable, by giving it new value and removing !default.
+  To see Alpaca Theme variables go to:
+  vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/Atoms/variables/_variables.scss
+*/
+
+$color-primary: $purple;

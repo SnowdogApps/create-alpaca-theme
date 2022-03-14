@@ -46,8 +46,6 @@ export async function addTemplateFile(file, themeName = null) {
 
     if (replacePhrase) {
       updatedTemplate = template.toString().replace(re, replaceWith || themeName)
-    } else if (name === 'variables.scss') {
-      updatedTemplate = template.toString().replace(/^/gm, '//')
     } else {
       updatedTemplate = template
     }
