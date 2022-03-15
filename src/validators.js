@@ -59,20 +59,15 @@ export function validateYarn() {
 }
 
 export function validateConfigFiles() {
-  const envPhpPath = './app/etc/env.php'
-  const configPhpPath = './app/etc/config.php'
+  const configFiles = ['./app/etc/env.php', './app/etc/config.php']
 
-  if (!fs.existsSync(envPhpPath)) {
-    console.log(colors.red('\nCould not find env.php file in app/design/etc directory.'))
+  configFiles.forEach((file) => {
+    if (!fs.existsSync(file)) {
+      console.log(colors.red(`\nCould not find ${file}.`))
 
-    process.exit(1)
-  }
-
-  if (!fs.existsSync(configPhpPath)) {
-    console.log(colors.red('\nCould not find config.php file in app/design/etc directory.'))
-
-    process.exit(1)
-  }
+      process.exit(1)
+    }
+  })
 
   return true
 }
