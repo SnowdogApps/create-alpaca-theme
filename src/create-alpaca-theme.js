@@ -36,9 +36,11 @@ import {
   createDirectory,
   // addTemplateFile,
   copyImage,
-  setupConfigFiles,
+  setupComponentsConfigFiles,
+  setupThemeConfigFiles,
+  setupFrontoolsConfigFiles,
   addBaseStyles,
-  addExemplaryFiles
+  addExemplaryStyles
 } from './local-env-actions.js'
 import {
   BASE_PATH,
@@ -122,8 +124,16 @@ function init() {
       //   bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
       //   addTemplateFile(file, answers.name, answers.fullName)
       // })
+      bar.update(36, { info: infoColor('Setting up component config files...') })
+      await setupComponentsConfigFiles(answers.name)
 
-      await setupConfigFiles(answers.name, answers.fullName)
+      bar.update(37, { info: infoColor('Setting up theme config files...') })
+      await setupThemeConfigFiles(answers.name, answers.fullName)
+
+      bar.update(38, { info: infoColor('Setting up frontools config files...') })
+      await setupFrontoolsConfigFiles(answers.name)
+
+      bar.update(39, { info: infoColor('Setting up base styles structure...') })
       await addBaseStyles(answers.name)
 
       if (answers.exemplaryComponent) {
@@ -131,7 +141,8 @@ function init() {
           await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
         }))
 
-        await addExemplaryFiles(answers.name)
+        bar.update(40, { info: infoColor('Adding exemplary styles...') })
+        await addExemplaryStyles(answers.name)
         // exemplaryComponent.forEach((file) => {
         //   bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
         //   addTemplateFile(file, answers.name, answers.fullName)
