@@ -123,14 +123,19 @@ export async function setupComponentsConfigFiles(themeName) {
       phraseToReplaceWith: themeName
     }
   ]
-
-  await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DIR, themeName, '.lock|.md', SNOWDOG_COMPONENTS)
-  await addFilesFromTemplate(ENV_PATH.TEMPLATES_COMPONENTS_CONFIG_DIR, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
-  await editFiles(componentFilesToUpdate, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
+  try {
+    await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DIR, themeName, '.lock|.md', SNOWDOG_COMPONENTS)
+    await addFilesFromTemplate(ENV_PATH.TEMPLATES_COMPONENTS_CONFIG_DIR, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
+    await editFiles(componentFilesToUpdate, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
+  } catch (error) {
+    console.log(`\n${error}`)
+  }
 }
 
 // Base theme level files setup
 export async function setupThemeConfigFiles(themeName, fullThemeName) {
+  const lineToAddParentTag = 2
+  const parentTag = '    <parent>Snowdog/alpaca</parent>'
   const themeFilesToUpdate = [
     {
       name: 'theme.xml',
@@ -152,6 +157,12 @@ export async function setupThemeConfigFiles(themeName, fullThemeName) {
   await addFilesFromDir(ALPACA_THEME_DIR, themeName, '.lock|.md|now|LICENSE|composer')
   await addFilesFromTemplate('../templates/theme', `${BASE_PATH}${themeName}`)
   await editFiles(themeFilesToUpdate, `${BASE_PATH}${themeName}`)
+  await prependImport(
+    `${BASE_PATH}${themeName}/theme.xml`,
+    parentTag,
+    themeName,
+    lineToAddParentTag
+  )
 }
 
 // themes.json and browsersync setup
@@ -175,12 +186,12 @@ export async function setupFrontoolsConfigFiles(themeName) {
 
 export async function addBaseStyles(themeName) {
   const docsPath = `${BASE_PATH}${themeName}${ENV_PATH.COMPONENT_DOCS_STYLES_DIR}`
-  const docsFilesNames = await listFiles(docsPath)
+
   const docsText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.DOCS
   const chechoutPath = `${BASE_PATH}${themeName}/Magento_Checkout/styles/checkout.scss`
   const checkoutText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.CHECKOUT
   const themeLevelStylesPath = `${BASE_PATH}${themeName}/styles`
-  const themeLevelStyles = await listFiles(themeLevelStylesPath)
+
   const themeLevelStylesText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.MAIN
 
   // Component variables
@@ -195,9 +206,12 @@ export async function addBaseStyles(themeName) {
 
   // Components docs styles
   await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DOCS_STYLES_DIR, themeName, '_', ENV_PATH.COMPONENT_DOCS_STYLES_DIR)
-  await Promise.all(docsFilesNames.map(async (fileName) => {
-    await prependImport(`${docsPath}/${fileName}`, docsText, themeName, null, 'variables', 'YOUR_THEME_NAME')
-  }))
+
+  const docsFilesNames = await listFiles(docsPath)
+
+  docsFilesNames.forEach((fileName) => {
+    prependImport(`${docsPath}/${fileName}`, docsText, themeName, null, 'variables', 'YOUR_THEME_NAME')
+  })
 
   // Magento checkout styles
   await addFilesFromDir(ENV_PATH.ALPACA_MAGENTO_CHECKOUT_STYLES_DIR, themeName, '_', '/Magento_Checkout/styles')
@@ -205,8 +219,11 @@ export async function addBaseStyles(themeName) {
 
   // Theme level styles
   await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, 'email|gallery', '/styles')
-  await Promise.all(themeLevelStyles.map(async (fileName) => {
-    await prependImport(
+
+  const themeLevelStyles = await listFiles(themeLevelStylesPath)
+
+  themeLevelStyles.forEach((fileName) => {
+    prependImport(
       `${themeLevelStylesPath}/${fileName}`,
       themeLevelStylesText,
       themeName,
@@ -214,7 +231,7 @@ export async function addBaseStyles(themeName) {
       'variables',
       'YOUR_THEME_NAME'
     )
-  }))
+  })
 }
 
 // Exemplary styles
