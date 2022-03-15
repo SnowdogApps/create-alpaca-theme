@@ -21,7 +21,7 @@ export const TEMPLATES_IMAGES_DIR = '../templates/images'
 // LOCAL ENV ACTIONS PATHS
 export const ENV_PATH = {
   SNOWDOG_COMPONENTS_STYLES_DIR: `${SNOWDOG_COMPONENTS}/components/styles`,
-  SNOWDOG_COMPONENTS_MOLECULES_DIR: `${SNOWDOG_COMPONENTS}}/components/Molecules`,
+  SNOWDOG_COMPONENTS_MOLECULES_DIR: `${SNOWDOG_COMPONENTS}/components/Molecules`,
   COMPONENT_DOCS_STYLES_DIR: `${SNOWDOG_COMPONENTS}/docs/styles`,
   COMPONENT_VARIABLES_DIR: `${SNOWDOG_COMPONENTS}/components/Atoms/variables`,
   COMPONENT_VARIABLES_FILE: `${SNOWDOG_COMPONENTS}/components/Atoms/variables/variables.scss`,
