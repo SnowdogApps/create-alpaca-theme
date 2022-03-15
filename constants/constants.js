@@ -17,6 +17,8 @@ export const SNOWDOG_COMPONENTS = '/Snowdog_Components'
 export const ALPACA_THEME_DIR = 'vendor/snowdog/theme-frontend-alpaca'
 export const TEMPLATES_DIR = '../templates'
 export const TEMPLATES_IMAGES_DIR = '../templates/images'
+export const CMS_BANNERS_DIR = 'pub/media/cms/home/banners'
+export const CMS_TEASERS_DIR = 'pub/media/cms/home/teasers'
 
 // LOCAL ENV ACTIONS PATHS
 export const ENV_PATH = {
@@ -87,20 +89,20 @@ const PLACEHOLDER_1328_1200 = `${TEMPLATES_IMAGES_DIR}/placeholder_1328-1200.jpg
 
 // CMS BLOCKS IMAGES NAMES
 const CMS_BLOCKS = {
-  LOCAL_BANNER_MED_MEN: 'pub/media/cms/home/banners/banner-medium-men-now-656_264.jpg',
-  LOCAL_BANNER_MED_WOMEN: 'pub/media/cms/home/banners/banner-medium-women-now-656_264.jpg',
-  LOCAL_CATEGORY_ACCERSORES_144: 'pub/media/cms/home/banners/category-accessories-144_200.jpg',
-  LOCAL_CATEGORY_ACCERSORES_320: 'pub/media/cms/home/banners/category-accessories-320_432.jpg',
-  LOCAL_CATEGORY_CLOTHING_144: 'pub/media/cms/home/banners/category-clothing-144_200.jpg',
-  LOCAL_CATEGORY_CLOTHING_320: 'pub/media/cms/home/banners/category-clothing-320_432.jpg',
-  LOCAL_CATEGORY_NEW_144: 'pub/media/cms/home/banners/category-new-in-144_200.jpg',
-  LOCAL_CATEGORY_NEW_320: 'pub/media/cms/home/banners/category-new-in-320_432.jpg',
-  LOCAL_CATEGORY_SHOES_144: 'pub/media/cms/home/banners/category-shoes-144_200.jpg',
-  LOCAL_CATEGORY_SHOES_320: 'pub/media/cms/home/banners/category-shoes-320_432.jpg',
-  LOCAL_TEASER_SMALL: 'pub/media/cms/home/teasers/teaser-small-girl_304-304.jpg',
-  LOCAL_TEASER_MEDIUM_376: 'pub/media/cms/home/teasers/teaser-medium-girl_376-432.jpg',
-  LOCAL_TEASER_MEDIUM_472: 'pub/media/cms/home/teasers/teaser-medium-girl_472-432.jpg',
-  LOCAL_TEASER_LARGE: 'pub/media/cms/home/teasers/teaser-large-girl_1328-1200.jpg'
+  LOCAL_BANNER_MED_MEN: `${CMS_BANNERS_DIR}/banner-medium-men-now-656_264.jpg`,
+  LOCAL_BANNER_MED_WOMEN: `${CMS_BANNERS_DIR}/banner-medium-women-now-656_264.jpg`,
+  LOCAL_CATEGORY_ACCERSORES_144: `${CMS_BANNERS_DIR}/category-accessories-144_200.jpg`,
+  LOCAL_CATEGORY_ACCERSORES_320: `${CMS_BANNERS_DIR}/category-accessories-320_432.jpg`,
+  LOCAL_CATEGORY_CLOTHING_144: `${CMS_BANNERS_DIR}/category-clothing-144_200.jpg`,
+  LOCAL_CATEGORY_CLOTHING_320: `${CMS_BANNERS_DIR}/category-clothing-320_432.jpg`,
+  LOCAL_CATEGORY_NEW_144: `${CMS_BANNERS_DIR}/category-new-in-144_200.jpg`,
+  LOCAL_CATEGORY_NEW_320: `${CMS_BANNERS_DIR}/category-new-in-320_432.jpg`,
+  LOCAL_CATEGORY_SHOES_144: `${CMS_BANNERS_DIR}/category-shoes-144_200.jpg`,
+  LOCAL_CATEGORY_SHOES_320: `${CMS_BANNERS_DIR}/category-shoes-320_432.jpg`,
+  LOCAL_TEASER_SMALL: `${CMS_TEASERS_DIR}/teaser-small-girl_304-304.jpg`,
+  LOCAL_TEASER_MEDIUM_376: `${CMS_TEASERS_DIR}/teaser-medium-girl_376-432.jpg`,
+  LOCAL_TEASER_MEDIUM_472: `${CMS_TEASERS_DIR}/teaser-medium-girl_472-432.jpg`,
+  LOCAL_TEASER_LARGE: `${CMS_TEASERS_DIR}/teaser-large-girl_1328-1200.jpg`
 }
 
 export const MEDIA_PATHS = [
