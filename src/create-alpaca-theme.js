@@ -166,7 +166,7 @@ function init() {
       spinner.stop()
       bar.stop()
       console.timeEnd(colors.blue('Finished in')) // Stop time counter
-      CLISuccesMessage(answers.fullName)
+      CLISuccesMessage(answers.fullName, answers.exemplaryComponent)
 
       if (dbErrors.length !== 0) {
         databaseErrorMessage()
