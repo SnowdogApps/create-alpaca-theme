@@ -13,45 +13,29 @@ export const PACKAGE_PATH = {
 // BASE PATHS
 export const BASE_PATH = 'app/design/frontend/Snowdog/'
 export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
+export const SNOWDOG_COMPONENTS = '/Snowdog_Components'
+export const ALPACA_THEME_DIR = 'vendor/snowdog/theme-frontend-alpaca'
+export const TEMPLATES_DIR = '../templates'
+export const TEMPLATES_IMAGES_DIR = '../templates/images'
 
-// TEMPLATE FILES PATHS
-export const TEMPLATE_PATHS = {
-  // BROWSER_SYNC: '../templates/frontools/browser-sync.json.sample',
-  // REGISTRATION: '../templates/theme/registration.php.sample',
-  // THEME_XML: '../templates/theme/theme.xml.sample',
-  // THEMES_JSON: '../templates/frontools/themes.json.sample',
-  // EDITOR_CONFIG: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.editorconfig',
-  // ESLINT_IGNORE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintignore',
-  // ESLINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.eslintrc.json',
-  // NODE_VERSIONS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.node-version',
-  // SASS_LINT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.sass-lint.yml',
-  // STYLE_LINT_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.stylelintrc',
-  // GULPFILE: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/gulpfile.mjs',
-  // MODULES_MJS: '../templates/components/modules.mjs.sample',
-  // PACKAGE_JSON: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/package.json',
-  // DOCS_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/checkout.scss',
-  // DOCS_STYLES_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/docs/styles/styles.scss',
-  // MAGENTO_CHECKOUT_SCSS: 'vendor/snowdog/theme-frontend-alpaca/Magento_Checkout/styles/checkout.scss',
-  // THEME_VARIABLES: '../templates/components/variables.scss.sample',
-  // THEME_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/styles.scss',
-  // CRITICAL_STYLES: 'vendor/snowdog/theme-frontend-alpaca/styles/critical.scss',
-  // README: '../templates/theme/README.md.sample',
-  // CHANGELOG: '../templates/theme/CHANGELOG.md.sample',
-  // GITIGNORE: 'vendor/snowdog/theme-frontend-alpaca/.gitignore',
-  // BROWSER_LIST_RC: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/.browserslistrc',
-  // EXEMPLARY_COMPONENT: '../templates/components/extend.scss.sample',
-  // EXEMPLARY_VARIABLES: '../templates/components/example-component-variables.scss.sample',
-  // EXEMPLARY_STYLES: '../templates/components/example-component.scss.sample',
-  // COMPONENTS_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical.scss',
-  // COMPONENTS_CRITICAL_CHECKOUT: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_critical-checkout.scss',
-  // COMPONENTS_NON_CRITICAL: 'vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/styles/_non-critical.scss'
+// LOCAL ENV ACTIONS PATHS
+export const ENV_PATH = {
+  SNOWDOG_COMPONENTS_STYLES_DIR: `${SNOWDOG_COMPONENTS}/components/styles`,
+  SNOWDOG_COMPONENTS_MOLECULES_DIR: `${SNOWDOG_COMPONENTS}}/components/Molecules`,
+  COMPONENT_DOCS_STYLES_DIR: `${SNOWDOG_COMPONENTS}/docs/styles`,
+  COMPONENT_VARIABLES_DIR: `${SNOWDOG_COMPONENTS}/components/Atoms/variables`,
+  COMPONENT_VARIABLES_FILE: `${SNOWDOG_COMPONENTS}/components/Atoms/variables/variables.scss`,
+  ALPACA_STYLES_DIR: `${ALPACA_THEME_DIR}/styles`,
+  ALPACA_COMPONENTS_DIR: `${ALPACA_THEME_DIR}${SNOWDOG_COMPONENTS}`,
+  ALPACA_COMPONENTS_STYLES_DIR: `${ALPACA_THEME_DIR}${SNOWDOG_COMPONENTS}/components/styles`,
+  ALPACA_COMPONENTS_DOCS_STYLES_DIR: `${ALPACA_THEME_DIR}${SNOWDOG_COMPONENTS}/docs/styles`,
+  ALPACA_MAGENTO_CHECKOUT_STYLES_DIR: `${ALPACA_THEME_DIR}/Magento_Checkout/styles`,
+  TEMPLATES_COMPONENTS_CONFIG_DIR: `${TEMPLATES_DIR}/components/config`,
+  TEMPLATES_COMPONENTS_BASE_DIR: `${TEMPLATES_DIR}/components/base`,
+  TEMPLATES_COMPONENTS_EXEMPLARY_DIR: `${TEMPLATES_DIR}/components/exemplary`,
+  TEMPLATES_FRONTOOLS_DIR: `${TEMPLATES_DIR}/frontools`,
+  DEV_FRONTOOLS_CONFIG_DIR: 'dev/tools/frontools/config'
 }
-
-// LOCAL ENVIRONMENT PATHS
-// export const LOCAL_ENV_PATHS = {
-//   BROWSER_SYNC: 'dev/tools/frontools/config/browser-sync.json',
-//   THEMES_JSON: 'dev/tools/frontools/config/themes.json'
-// }
 
 // ATOM VARIABALES PATHS
 export const VARIABLES_IMPORT_PATHS = {
@@ -92,23 +76,17 @@ export const BANNED_NAMES_LIST = [
   'theme-blank-sass'
 ]
 
-// IMAGES PATHS
-// LOCAL IMAGES NAMES MUST MATCH NAMES IN MAGENTO CMS BLOCKS
-export const MEDIA_PATHS = {
-  BANNER_MED_MEN: '../templates/images/placeholder-656_254.jpg',
-  BANNER_MED_WOMEN: '../templates/images/placeholder-656_254.jpg',
-  CATEGORY_ACCERSORES_144: '../templates/images/placeholder-144_200.jpg',
-  CATEGORY_ACCERSORES_320: '../templates/images/placeholder-320_432.jpg',
-  CATEGORY_CLOTHING_144: '../templates/images/placeholder-144_200.jpg',
-  CATEGORY_CLOTHING_320: '../templates/images/placeholder-320_432.jpg',
-  CATEGORY_NEW_144: '../templates/images/placeholder-144_200.jpg',
-  CATEGORY_NEW_320: '../templates/images/placeholder-320_432.jpg',
-  CATEGORY_SHOES_144: '../templates/images/placeholder-144_200.jpg',
-  CATEGORY_SHOES_320: '../templates/images/placeholder-320_432.jpg',
-  TEASER_SMALL: '../templates/images/placeholder-304_304.jpg',
-  TEASER_MEDIUM_376: '../templates/images/placeholder-376_432.jpg',
-  TEASER_MEDIUM_472: '../templates/images/placeholder-472_432.jpg',
-  TEASER_LARGE: '../templates/images/placeholder_1328-1200.jpg',
+// PLACEHOLDER MEDIA PATHS
+const PLACEHOLDER_654_254 = `${TEMPLATES_IMAGES_DIR}/placeholder-656_254.jpg`
+const PLACEHOLDER_144_200 = `${TEMPLATES_IMAGES_DIR}/placeholder-144_200.jpg`
+const PLACEHOLDER_320_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-144_200.jpg`
+const PLACEHOLDER_304_304 = `${TEMPLATES_IMAGES_DIR}/placeholder-304_304.jpg`
+const PLACEHOLDER_376_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-376_432.jpg`
+const PLACEHOLDER_472_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-472_432.jpg`
+const PLACEHOLDER_1328_1200 = `${TEMPLATES_IMAGES_DIR}/placeholder_1328-1200.jpg`
+
+// CMS BLOCKS IMAGES NAMES
+const CMS_BLOCKS = {
   LOCAL_BANNER_MED_MEN: 'pub/media/cms/home/banners/banner-medium-men-now-656_264.jpg',
   LOCAL_BANNER_MED_WOMEN: 'pub/media/cms/home/banners/banner-medium-women-now-656_264.jpg',
   LOCAL_CATEGORY_ACCERSORES_144: 'pub/media/cms/home/banners/category-accessories-144_200.jpg',
@@ -124,3 +102,20 @@ export const MEDIA_PATHS = {
   LOCAL_TEASER_MEDIUM_472: 'pub/media/cms/home/teasers/teaser-medium-girl_472-432.jpg',
   LOCAL_TEASER_LARGE: 'pub/media/cms/home/teasers/teaser-large-girl_1328-1200.jpg'
 }
+
+export const MEDIA_PATHS = [
+  { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: CMS_BLOCKS.LOCAL_BANNER_MED_MEN },
+  { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: CMS_BLOCKS.LOCAL_BANNER_MED_WOMEN },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_ACCERSORES_144 },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_ACCERSORES_320 },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_CLOTHING_144 },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_CLOTHING_320 },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_NEW_144 },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_NEW_320 },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_SHOES_144 },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_SHOES_320 },
+  { imgTemplatePath: PLACEHOLDER_304_304, localImgPath: CMS_BLOCKS.LOCAL_TEASER_SMALL },
+  { imgTemplatePath: PLACEHOLDER_376_432, localImgPath: CMS_BLOCKS.LOCAL_TEASER_MEDIUM_376 },
+  { imgTemplatePath: PLACEHOLDER_472_432, localImgPath: CMS_BLOCKS.LOCAL_TEASER_MEDIUM_472 },
+  { imgTemplatePath: PLACEHOLDER_1328_1200, localImgPath: CMS_BLOCKS.LOCAL_TEASER_LARGE }
+]
