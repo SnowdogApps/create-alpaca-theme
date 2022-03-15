@@ -7,6 +7,9 @@ import {
 } from 'fs/promises'
 import {
   VARIABLES_IMPORT_PATHS,
+  ENV_PATH,
+  SNOWDOG_COMPONENTS,
+  ALPACA_THEME_DIR,
   BASE_PATH
 } from '../constants/constants.js'
 
@@ -106,15 +109,7 @@ export async function copyImage(imagePaths) {
   }
 }
 
-const ALPACA_THEME_DIR = 'vendor/snowdog/theme-frontend-alpaca'
-const ALPACA_STYLES_DIR = `${ALPACA_THEME_DIR}/styles`
-const ALPACA_COMPONENTS_DIR = `${ALPACA_THEME_DIR}/Snowdog_Components`
-const ALPACA_COMPONENTS_STYLES_DIR = `${ALPACA_COMPONENTS_DIR}/components/styles`
-const ALPACA_COMPONENTS_DOCS_STYLES_DIR = `${ALPACA_COMPONENTS_DIR}/docs/styles`
-const MAGENTO_CHECKOUT_STYLES_DIR = `${ALPACA_THEME_DIR}/Magento_Checkout/styles`
-
-const TEMPLATES_DIR = '../templates'
-
+// Snowdog_Components config files setup
 export async function setupComponentsConfigFiles(themeName) {
   const componentFilesToUpdate = [
     {
@@ -129,11 +124,12 @@ export async function setupComponentsConfigFiles(themeName) {
     }
   ]
 
-  await addFilesFromDir(ALPACA_COMPONENTS_DIR, themeName, '.lock|.md', '/Snowdog_Components')
-  await addFilesFromTemplate('../templates/components/config', `${BASE_PATH}${themeName}/Snowdog_Components`)
-  await editFiles(componentFilesToUpdate, `${BASE_PATH}${themeName}/Snowdog_Components`)
+  await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DIR, themeName, '.lock|.md', SNOWDOG_COMPONENTS)
+  await addFilesFromTemplate(ENV_PATH.TEMPLATES_COMPONENTS_CONFIG_DIR, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
+  await editFiles(componentFilesToUpdate, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
 }
 
+// Base theme level files setup
 export async function setupThemeConfigFiles(themeName, fullThemeName) {
   const themeFilesToUpdate = [
     {
@@ -158,6 +154,7 @@ export async function setupThemeConfigFiles(themeName, fullThemeName) {
   await editFiles(themeFilesToUpdate, `${BASE_PATH}${themeName}`)
 }
 
+// themes.json and browsersync setup
 export async function setupFrontoolsConfigFiles(themeName) {
   const frontoolsFilesToUpdate = [
     {
@@ -172,44 +169,55 @@ export async function setupFrontoolsConfigFiles(themeName) {
     }
   ]
 
-  await addFilesFromTemplate('../templates/frontools', 'dev/tools/frontools/config')
-  await editFiles(frontoolsFilesToUpdate, 'dev/tools/frontools/config')
+  await addFilesFromTemplate(ENV_PATH.TEMPLATES_FRONTOOLS_DIR, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
+  await editFiles(frontoolsFilesToUpdate, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
 }
 
 export async function addBaseStyles(themeName) {
-  const docsPath = `${BASE_PATH}${themeName}/Snowdog_Components/docs/styles`
+  const docsPath = `${BASE_PATH}${themeName}${ENV_PATH.COMPONENT_DOCS_STYLES_DIR}`
   const docsFilesNames = await listFiles(docsPath)
   const docsText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.DOCS
-
   const chechoutPath = `${BASE_PATH}${themeName}/Magento_Checkout/styles/checkout.scss`
   const checkoutText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.CHECKOUT
-
   const themeLevelStylesPath = `${BASE_PATH}${themeName}/styles`
   const themeLevelStyles = await listFiles(themeLevelStylesPath)
   const themeLevelStylesText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.MAIN
 
+  // Component variables
+  await addFilesFromTemplate(
+    ENV_PATH.TEMPLATES_COMPONENTS_BASE_DIR,
+    `${BASE_PATH}${themeName}${ENV_PATH.COMPONENT_VARIABLES_DIR}`
+  )
+  await rename(
+    `${BASE_PATH}${themeName}${ENV_PATH.COMPONENT_VARIABLES_FILE}`,
+    `${BASE_PATH}${themeName}${ENV_PATH.COMPONENT_VARIABLES_DIR}/_${themeName}-variables.scss`
+  )
+
   // Components docs styles
-  await addFilesFromDir(ALPACA_COMPONENTS_DOCS_STYLES_DIR, themeName, '_', '/Snowdog_Components/docs/styles')
+  await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DOCS_STYLES_DIR, themeName, '_', ENV_PATH.COMPONENT_DOCS_STYLES_DIR)
   await Promise.all(docsFilesNames.map(async (fileName) => {
     await prependImport(`${docsPath}/${fileName}`, docsText, themeName, null, 'variables', 'YOUR_THEME_NAME')
   }))
 
   // Magento checkout styles
-  await addFilesFromDir(MAGENTO_CHECKOUT_STYLES_DIR, themeName, '_', '/Magento_Checkout/styles')
+  await addFilesFromDir(ENV_PATH.ALPACA_MAGENTO_CHECKOUT_STYLES_DIR, themeName, '_', '/Magento_Checkout/styles')
   await prependImport(chechoutPath, checkoutText, themeName, null, 'variables', 'YOUR_THEME_NAME')
 
   // Theme level styles
-  await addFilesFromDir(ALPACA_STYLES_DIR, themeName, 'email|gallery', '/styles')
+  await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, 'email|gallery', '/styles')
   await Promise.all(themeLevelStyles.map(async (fileName) => {
-    await prependImport(`${themeLevelStylesPath}/${fileName}`, themeLevelStylesText, themeName, null, 'variables', 'YOUR_THEME_NAME')
+    await prependImport(
+      `${themeLevelStylesPath}/${fileName}`,
+      themeLevelStylesText,
+      themeName,
+      null,
+      'variables',
+      'YOUR_THEME_NAME'
+    )
   }))
-
-  // Component variables
-  await addFilesFromTemplate('../templates/components/base', `${BASE_PATH}${themeName}/Snowdog_Components/components/Atoms/variables`)
-  await rename(`${BASE_PATH}${themeName}/Snowdog_Components/components/Atoms/variables/variables.scss`, `${BASE_PATH}${themeName}/Snowdog_Components/components/Atoms/variables/_${themeName}-variables.scss`)
 }
 
-// Exemplary styles to extend button
+// Exemplary styles
 export async function addExemplaryStyles(themeName) {
   const exemplaryFilesToUpdate = [
     {
@@ -232,11 +240,27 @@ export async function addExemplaryStyles(themeName) {
     }
   ]
 
-  await addFilesFromTemplate('../templates/components/exemplary', `${BASE_PATH}${themeName}/Snowdog_Components/components/Molecules/button`)
-  await editFiles(exemplaryFilesToUpdate, `${BASE_PATH}${themeName}/Snowdog_Components/components/Molecules/button`)
-  await rename(`${BASE_PATH}${themeName}/Snowdog_Components/components/Molecules/button/button.scss`, `${BASE_PATH}${themeName}/Snowdog_Components/components/Molecules/button/_${themeName}-button.scss`)
-  await rename(`${BASE_PATH}${themeName}/Snowdog_Components/components/Molecules/button/button-variables.scss`, `${BASE_PATH}${themeName}/Snowdog_Components/components/Molecules/button/_${themeName}-button-variables.scss`)
+  // Button styles
+  await addFilesFromTemplate(
+    ENV_PATH.TEMPLATES_COMPONENTS_EXEMPLARY_DIR,
+    `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`
+  )
+  await editFiles(exemplaryFilesToUpdate, `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`)
+  await rename(
+    `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button.scss`,
+    `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button.scss`
+  )
+  await rename(
+    `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button-variables.scss`,
+    `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button-variables.scss`
+  )
 
-  await addFilesFromDir(ALPACA_COMPONENTS_STYLES_DIR, themeName, 'mixins|-extends|_checkout', '/Snowdog_Components/components/styles')
-  await editFiles(criticalStylesToUpdate, `${BASE_PATH}${themeName}/Snowdog_Components/components/styles`)
+  // Critical and Non-critical imports
+  await addFilesFromDir(
+    ENV_PATH.ALPACA_COMPONENTS_STYLES_DIR,
+    themeName,
+    'mixins|-extends|_checkout',
+    ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR
+  )
+  await editFiles(criticalStylesToUpdate, `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR}`)
 }
