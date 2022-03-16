@@ -32,6 +32,7 @@ async function createFile(path, payload) {
   })
 }
 
+// List all files form directory, excluding folders
 async function listFiles(directory) {
   const dirents = await readdir(directory, { withFileTypes: true })
 
@@ -68,12 +69,13 @@ async function addFilesFromTemplate(templateDir, targetDir) {
   }))
 }
 
-async function editFiles(filesToUpdate, dir) {
+async function replacePhraseInAll(filesToUpdate, dir) {
   await Promise.all(filesToUpdate.map(async (file) => {
     await replacePhrase(`${dir}/${file.name}`, file.phraseToReplace, file.phraseToReplaceWith)
   }))
 }
 
+// Prepend text to a file, e.g. variables import
 async function prependImport(
   filePath,
   textToPrepend,
@@ -126,7 +128,7 @@ export async function setupComponentsConfigFiles(themeName) {
   try {
     await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DIR, themeName, '.lock|.md', SNOWDOG_COMPONENTS)
     await addFilesFromTemplate(ENV_PATH.TEMPLATES_COMPONENTS_CONFIG_DIR, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
-    await editFiles(componentFilesToUpdate, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
+    await replacePhraseInAll(componentFilesToUpdate, `${BASE_PATH}${themeName}${SNOWDOG_COMPONENTS}`)
   } catch (error) {
     console.log(`\n${error}`)
   }
@@ -156,7 +158,7 @@ export async function setupThemeConfigFiles(themeName, fullThemeName) {
 
   await addFilesFromDir(ALPACA_THEME_DIR, themeName, '.lock|.md|now|LICENSE|composer')
   await addFilesFromTemplate('../templates/theme', `${BASE_PATH}${themeName}`)
-  await editFiles(themeFilesToUpdate, `${BASE_PATH}${themeName}`)
+  await replacePhraseInAll(themeFilesToUpdate, `${BASE_PATH}${themeName}`)
   await prependImport(
     `${BASE_PATH}${themeName}/theme.xml`,
     parentTag,
@@ -181,7 +183,7 @@ export async function setupFrontoolsConfigFiles(themeName) {
   ]
 
   await addFilesFromTemplate(ENV_PATH.TEMPLATES_FRONTOOLS_DIR, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
-  await editFiles(frontoolsFilesToUpdate, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
+  await replacePhraseInAll(frontoolsFilesToUpdate, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
 }
 
 export async function addBaseStyles(themeName) {
@@ -262,7 +264,7 @@ export async function addExemplaryStyles(themeName) {
     ENV_PATH.TEMPLATES_COMPONENTS_EXEMPLARY_DIR,
     `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`
   )
-  await editFiles(exemplaryFilesToUpdate, `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`)
+  await replacePhraseInAll(exemplaryFilesToUpdate, `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`)
   await rename(
     `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button.scss`,
     `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button.scss`
@@ -279,5 +281,5 @@ export async function addExemplaryStyles(themeName) {
     'mixins|-extends|_checkout',
     ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR
   )
-  await editFiles(criticalStylesToUpdate, `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR}`)
+  await replacePhraseInAll(criticalStylesToUpdate, `${BASE_PATH}${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR}`)
 }
