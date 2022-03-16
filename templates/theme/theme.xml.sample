@@ -1,4 +1,0 @@
-<theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
-   <title>YOUR_THEME_NAME</title>
-   <parent>Snowdog/alpaca</parent>
-</theme>

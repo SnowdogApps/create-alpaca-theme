@@ -17,11 +17,6 @@ import {
   notMagentoInstanceMessage
 } from '../utils/messages.js'
 import {
-  templateFiles,
-  templateMedia,
-  exemplaryComponent
-} from '../constants/filesList.js'
-import {
   installFrontools,
   compileFiles
 } from './frontools-actions.js'
@@ -34,14 +29,19 @@ import {
 } from './validators.js'
 import {
   createDirectory,
-  addTemplateFile,
-  copyImage
+  copyImage,
+  setupComponentsConfigFiles,
+  setupThemeConfigFiles,
+  setupFrontoolsConfigFiles,
+  addBaseStyles,
+  addExemplaryStyles
 } from './local-env-actions.js'
 import {
   BASE_PATH,
   LOADING_BAR,
   PACKAGE_PATH,
-  CHECK_MARK_CHARACTER
+  CHECK_MARK_CHARACTER,
+  MEDIA_PATHS
 } from '../constants/constants.js'
 
 const { log } = console
@@ -115,23 +115,29 @@ function init() {
         await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
       }))
 
-      templateFiles.forEach((file) => {
-        bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
-        addTemplateFile(file, answers.name, answers.fullName)
-      })
+      bar.update(36, { info: infoColor('Setting up component config files...') })
+      await setupComponentsConfigFiles(answers.name)
+
+      bar.update(37, { info: infoColor('Setting up theme config files...') })
+      await setupThemeConfigFiles(answers.name, answers.fullName)
+
+      bar.update(38, { info: infoColor('Setting up frontools config files...') })
+      await setupFrontoolsConfigFiles(answers.name)
+
+      bar.update(39, { info: infoColor('Setting up base styles structure...') })
+      await addBaseStyles(answers.name)
 
       if (answers.exemplaryComponent) {
+        bar.update(40, { info: infoColor('Creating exemplary component directories...') })
         await Promise.all(exemplaryComponentDirectories.map(async (dir) => {
           await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
         }))
 
-        exemplaryComponent.forEach((file) => {
-          bar.increment(0.5, { info: infoColor(`Creating ${file.name} file...`) })
-          addTemplateFile(file, answers.name, answers.fullName)
-        })
+        bar.update(41, { info: infoColor('Adding exemplary styles...') })
+        await addExemplaryStyles(answers.name)
       }
 
-      bar.update(40, { info: infoColor('Installing Snowdog Components...') })
+      bar.update(42, { info: infoColor('Installing Snowdog Components...') })
       await installComponents(answers.name)
 
       if (answers.database) {
@@ -144,7 +150,7 @@ function init() {
         }))
 
         bar.update(57, { info: infoColor('Copying media...') })
-        templateMedia.forEach((img) => {
+        MEDIA_PATHS.forEach((img) => {
           copyImage(img)
         })
       }
@@ -160,7 +166,7 @@ function init() {
       spinner.stop()
       bar.stop()
       console.timeEnd(colors.blue('Finished in')) // Stop time counter
-      CLISuccesMessage(answers.fullName)
+      CLISuccesMessage(answers.fullName, answers.exemplaryComponent, answers.name)
 
       if (dbErrors.length !== 0) {
         databaseErrorMessage()

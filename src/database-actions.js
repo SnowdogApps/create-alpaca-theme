@@ -2,6 +2,7 @@ import mysql from 'mysql'
 import { readFile } from 'fs/promises'
 import colors from 'colors'
 
+// GETTING SINGULAR VALUE FROM PHP ARRAY
 function getValue(table, name) {
   return table.join('')
     .split(',')

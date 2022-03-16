@@ -2,17 +2,19 @@ import colors from 'colors'
 
 const { log } = console
 
-export const CLISuccesMessage = (themeName) => {
+export const CLISuccesMessage = (fullThemeName, exemplaryComponent, themeName) => {
   return log(
     colors.yellow('\nInstallation completed successfully!'),
     colors.blue('\n\n👉 Go to'),
     colors.yellow('Admin Panel -> Content -> Design -> Configuration'),
     colors.blue('and choose your theme'),
-    (`(${colors.yellow(themeName)}).`),
+    (`(${colors.yellow(fullThemeName)}).`),
     colors.blue(`\n✨ Use ${colors.yellow('yarn dev')} in Snowdog_Components dir to run components in Fractal.`),
     colors.blue('\n🔎 Read'),
     colors.yellow('Alpaca Docs'),
     colors.blue('to learn how to use Alpaca Theme.'),
+    exemplaryComponent ? colors.cyan(`\n\nVariable ${colors.magenta('$color-primary')} and ${colors.magenta('$button-text-color')} have been change as example.`) : '',
+    exemplaryComponent ? colors.cyan(`\nGo to ${colors.magenta(`_${themeName}-variables`)} and ${colors.magenta(`_${themeName}-button-variables`)} to edit them.`) : '',
     colors.yellow('\n\n2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n')
   )
 }
