@@ -14,13 +14,14 @@ export const PACKAGE_PATH = {
 export const BASE_PATH = 'app/design/frontend/Snowdog/'
 export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 export const SNOWDOG_COMPONENTS = '/Snowdog_Components'
+export const MAGENTO_CHECKOUT_STYLES = '/Magento_Checkout/styles'
 export const ALPACA_THEME_DIR = 'vendor/snowdog/theme-frontend-alpaca'
 export const TEMPLATES_DIR = '../templates'
 export const TEMPLATES_IMAGES_DIR = '../templates/images'
 export const CMS_BANNERS_DIR = 'pub/media/cms/home/banners'
 export const CMS_TEASERS_DIR = 'pub/media/cms/home/teasers'
 
-// LOCAL ENV ACTIONS PATHS
+// LOCAL-ENV-ACTIONS PATHS
 export const ENV_PATH = {
   SNOWDOG_COMPONENTS_STYLES_DIR: `${SNOWDOG_COMPONENTS}/components/styles`,
   SNOWDOG_COMPONENTS_MOLECULES_DIR: `${SNOWDOG_COMPONENTS}/components/Molecules`,
@@ -39,7 +40,7 @@ export const ENV_PATH = {
   DEV_FRONTOOLS_CONFIG_DIR: 'dev/tools/frontools/config'
 }
 
-// ATOM VARIABALES PATHS
+// ATOM VARIABALES PATHS TO PREPEND TO FILE
 export const VARIABLES_IMPORT_PATHS = {
   COMMENT: '// Child theme variables\n',
   MAIN: '@import "../Snowdog_Components/components/Atoms/variables/YOUR_THEME_NAME-variables";\n',
@@ -78,7 +79,7 @@ export const BANNED_NAMES_LIST = [
   'theme-blank-sass'
 ]
 
-// PLACEHOLDER MEDIA PATHS
+// PLACEHOLDER IMAGES PATHS
 const PLACEHOLDER_654_254 = `${TEMPLATES_IMAGES_DIR}/placeholder-656_254.jpg`
 const PLACEHOLDER_144_200 = `${TEMPLATES_IMAGES_DIR}/placeholder-144_200.jpg`
 const PLACEHOLDER_320_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-320_432.jpg`
@@ -87,7 +88,7 @@ const PLACEHOLDER_376_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-376_432.jpg`
 const PLACEHOLDER_472_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-472_432.jpg`
 const PLACEHOLDER_1328_1200 = `${TEMPLATES_IMAGES_DIR}/placeholder_1328-1200.jpg`
 
-// CMS BLOCKS IMAGES NAMES
+// ALPACA CMS BLOCKS IMAGES NAMES
 const CMS_BLOCKS = {
   LOCAL_BANNER_MED_MEN: `${CMS_BANNERS_DIR}/banner-medium-men-now-656_264.jpg`,
   LOCAL_BANNER_MED_WOMEN: `${CMS_BANNERS_DIR}/banner-medium-women-now-656_264.jpg`,
@@ -105,6 +106,7 @@ const CMS_BLOCKS = {
   LOCAL_TEASER_LARGE: `${CMS_TEASERS_DIR}/teaser-large-girl_1328-1200.jpg`
 }
 
+// SPECIFY WHICH PLACHOLDER TO USE FOR CMS BLOCK
 export const MEDIA_PATHS = [
   { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: CMS_BLOCKS.LOCAL_BANNER_MED_MEN },
   { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: CMS_BLOCKS.LOCAL_BANNER_MED_WOMEN },
