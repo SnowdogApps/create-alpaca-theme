@@ -101,7 +101,7 @@ function init() {
       await validateComposer()
 
       bar.update(2, { info: infoColor('Downloading Alpaca Packages...') })
-      // await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
+      await composerRequire(PACKAGE_PATH.ALPACA_PACKAGES)
       await composerRequire(PACKAGE_PATH.THEME_FRONTEND_ALPACA)
 
       bar.update(16, { info: infoColor('Downloading Frontools...') })
@@ -166,7 +166,7 @@ function init() {
       spinner.stop()
       bar.stop()
       console.timeEnd(colors.blue('Finished in')) // Stop time counter
-      CLISuccesMessage(answers.fullName, answers.exemplaryComponent)
+      CLISuccesMessage(answers.fullName, answers.exemplaryComponent, answers.name)
 
       if (dbErrors.length !== 0) {
         databaseErrorMessage()
