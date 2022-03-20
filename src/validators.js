@@ -42,7 +42,7 @@ export const validateRegistrationName = getNameValidator((name) => {
 
 export function validateComposer() {
   return promiseExec('composer -v', (msg) => {
-    return `There was an while validating composer: ${msg}`
+    return `There was an issue while validating composer: ${msg}`
   })
 }
 
@@ -59,7 +59,10 @@ export function validateYarn() {
 }
 
 export function validateConfigFiles() {
-  const configFiles = ['./app/etc/env.php', './app/etc/config.php']
+  const configFiles = [
+    './app/etc/env.php',
+    './app/etc/config.php'
+  ]
 
   configFiles.forEach((file) => {
     if (!fs.existsSync(file)) {

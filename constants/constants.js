@@ -3,7 +3,7 @@ import colors from 'colors'
 // GLOBAL CONSTANTS
 export const CHECK_MARK_CHARACTER = '\u2713'
 
-// COMPOSER PACLAGES NAMES
+// COMPOSER PACKAGES NAMES
 export const PACKAGE_PATH = {
   ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
   THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26.0"', // CLI WORKS ONLY WITH ^2.26.0

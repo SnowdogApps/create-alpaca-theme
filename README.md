@@ -10,7 +10,7 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
 - Go to `Admin Panel -> Content -> Design -> Configuration` and choose your theme.
 - Run `yarn dev` in **Snowdog_Components** directory to see components in Fractal environment.
 ## Requirements
-  * Valid Magento instance.
+  * Working and valid Magento 2.4 instance.
   * Node >= 16.
 
 ## User guide
