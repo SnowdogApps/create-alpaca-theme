@@ -6,23 +6,17 @@ const INSTALLING_ERROR_MSG = 'There was an error installing Frontools:'
 const COMPILING_ERROR_MSG = 'There was an error compiling files with Frontools:'
 
 export function installFrontools() {
-  if (validateYarn()) {
-    return promiseExec(`cd ${FRONTOOLS_PATH} && yarn install && yarn setup`, (msg) => {
-      return `${INSTALLING_ERROR_MSG} ${msg}`
-    })
-  }
-  return promiseExec(`cd ${FRONTOOLS_PATH} && npm install && npm run setup`, (msg) => {
+  const packageManager = validateYarn() ? 'yarn' : 'npm'
+
+  return promiseExec(`cd ${FRONTOOLS_PATH} && ${packageManager} install && ${packageManager} setup`, (msg) => {
     return `${INSTALLING_ERROR_MSG} ${msg}`
   })
 }
 
 export function compileFiles() {
-  if (validateYarn()) {
-    return promiseExec(`cd ${FRONTOOLS_PATH} && yarn styles && yarn svg && yarn babel`, (msg) => {
-      return `${COMPILING_ERROR_MSG} ${msg}`
-    })
-  }
-  return promiseExec(`cd ${FRONTOOLS_PATH} && npm run styles && npm run svg && npm run babel`, (msg) => {
+  const packageManager = validateYarn() ? 'yarn' : 'npm'
+
+  return promiseExec(`cd ${FRONTOOLS_PATH} && ${packageManager} styles && ${packageManager} svg && ${packageManager} babel`, (msg) => {
     return `${COMPILING_ERROR_MSG} ${msg}`
   })
 }
