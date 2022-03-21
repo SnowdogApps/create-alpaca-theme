@@ -1,12 +1,12 @@
 {
   "name": "create-alpaca-theme",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.0",
   "description": "Create Magento 2 child theme based on Snowdog Alpaca Theme",
   "type": "module",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://lab.snowdog.pro/patrykbura/alpaca-theme-npm"
+    "url": "https://github.com/SnowdogApps/create-alpaca-theme"
   },
   "scripts": {
     "lint": "eslint ./src ./utils index.js --ext .js"
@@ -21,6 +21,9 @@
   ],
   "author": "Patryk Bura",
   "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "cli-progress": "3.9.1",
     "colors": "1.4.0",
