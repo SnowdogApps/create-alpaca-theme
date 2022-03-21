@@ -4,7 +4,7 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
 ## Quick Overview
 - Run from Magento project root directory:
   ```sh
-  npx create-alpaca-theme
+  npx @snowdog/create-alpaca-theme
   ```
 - Select installation options.
 - Go to `Admin Panel -> Content -> Design -> Configuration` and choose your theme.
@@ -52,5 +52,14 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
   * [Alpaca Components preview](https://magento2-alpaca-theme-git-master-snowdog1.vercel.app/)
   * [Theme inheritance magento docs](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/themes/theme-inherit.html)
   * [Layout instructions magento docs](https://devdocs.magento.com/guides/v2.4/frontend-dev-guide/layouts/xml-instructions.html)
+
+## Test package locally
+  * clone repository
+  * install package globally: `npm install -g`
+  * link command running `npm link`
+  * run `npx create-alpaca-theme`
+
+If you have problems with global npm persmission, check npm docs: [Resolving eaccess permissions error when installing package globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)<br/>
+
 ****
 2022 **[Snowdog](https://www.snow.dog)**
