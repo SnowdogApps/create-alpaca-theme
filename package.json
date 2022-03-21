@@ -1,5 +1,5 @@
 {
-  "name": "create-alpaca-theme",
+  "name": "@snowdog/create-alpaca-theme",
   "version": "1.0.0-rc.0",
   "description": "Create Magento 2 child theme based on Snowdog Alpaca Theme",
   "type": "module",
