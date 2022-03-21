@@ -1,0 +1,9 @@
+{
+  "proxy": "YOUR_THEME_NAME.test",
+  "rewriteRules": [
+    {
+      "match": ".YOUR_THEME_NAME.test",
+      "replace": ""
+    }
+  ]
+}
