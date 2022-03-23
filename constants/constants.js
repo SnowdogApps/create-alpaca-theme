@@ -5,8 +5,8 @@ export const CHECK_MARK_CHARACTER = '\u2713'
 
 // COMPOSER PACKAGES NAMES
 export const PACKAGE_PATH = {
-  ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
-  THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26"', // CLI WORKS ONLY WITH ^2.26.0
+  ALPACA_PACKAGES: 'snowdog/module-alpaca-packages --no-interaction',
+  THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26" --no-interaction', // CLI WORKS ONLY WITH ^2.26.0
   FRONTOOLS: 'snowdog/frontools'
 }
 
