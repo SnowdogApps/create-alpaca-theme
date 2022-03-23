@@ -8,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/SnowdogApps/create-alpaca-theme"
   },
+  "bugs": {
+    "url": "https://github.com/SnowdogApps/create-alpaca-theme/issues"
+  },
+  "homepage": "https://github.com/SnowdogApps/create-alpaca-theme#readme",
   "scripts": {
     "lint": "eslint ./src ./utils index.js --ext .js"
   },
@@ -19,7 +23,7 @@
     "snowdog",
     "theme"
   ],
-  "author": "Patryk Bura",
+  "author": "Patryk Bura <patryk.bura@snow.dog>",
   "license": "MIT",
   "engines": {
     "node": ">=16"
