@@ -57,13 +57,13 @@ const bar = new cliProgress.SingleBar({
 const promptQuestions = [
   {
     type: 'input',
-    message: `Enter theme full name (${colors.yellow('e.g. Child Theme')}):`,
+    message: `Enter theme full name (${colors.yellow('e.g. Alpaca Child')}):`,
     name: 'fullName',
     validate: validateName
   },
   {
     type: 'input',
-    message: `Enter theme registration name (${colors.yellow('one phrase, e.g. child-theme')}):`,
+    message: `Enter theme registration name (${colors.yellow('one phrase, e.g. alpaca-child')}):`,
     name: 'name',
     validate: validateRegistrationName
   },
