@@ -41,7 +41,7 @@ After installation is completed:
    - Custom variables file in `Snowdog_Components/components/Atoms/variables/` directory
    - Example of how to change Sass variable value
    - Example of how to extend component styles (If selected during installation)
-- Adds frontools(https://github.com/SnowdogApps/magento2-frontools) configuration files in `dev/tools/frontools/config` directory.
+- Adds [frontools](https://github.com/SnowdogApps/magento2-frontools) configuration files in `dev/tools/frontools/config` directory.
 - Updates database with essential Alpaca Tables (If selected during installation).
 - Adds placeholder images.
 - Upgrades Magento instance, compiles styles, JS files and SVGs.
