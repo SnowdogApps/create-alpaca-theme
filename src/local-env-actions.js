@@ -112,12 +112,12 @@ export async function copyImage(imagePaths) {
 }
 
 // Snowdog_Components config files setup
-export async function setupComponentsConfigFiles(themeName) {
+export async function setupComponentsConfigFiles(themeName, fullThemeName) {
   const componentFilesToUpdate = [
     {
       name: 'gulpfile.mjs',
       phraseToReplace: 'Alpaca',
-      phraseToReplaceWith: themeName
+      phraseToReplaceWith: fullThemeName
     },
     {
       name: 'package.json',
