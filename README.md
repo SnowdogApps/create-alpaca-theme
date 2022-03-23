@@ -1,22 +1,22 @@
 # Create Alpaca Theme
 
-Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
+Quickly create Magento 2 Child Theme based on [Snowdog Alpaca Theme](https://github.com/SnowdogApps/magento2-alpaca-theme).
+
+## Requirements
+  * Working and valid Magento 2.4 instance.
+  * Node >= 16.
+
 ## Quick Overview
 - Run from Magento project root directory:
   ```sh
   npx @snowdog/create-alpaca-theme
   ```
 - Select installation options.
-- Go to `Admin Panel -> Content -> Design -> Configuration` and choose your theme.
-- Run `yarn dev` in **Snowdog_Components** directory to see components in Fractal environment.
-## Requirements
-  * Working and valid Magento 2.4 instance.
-  * Node >= 16.
 
-## User guide
-- [Working with Alpaca Theme]() - Learn how to utilize Alpaca Theme.
-- [Alpaca Theme step by step setup]() - How to set up Alpaca from scratch, without **create-alpaca-theme**.
-- [Current Alpaca Release](https://github.com/SnowdogApps/magento2-alpaca-theme) - Visit Alpaca's Github page.
+After installation is completed:
+- Go to `Admin Panel -> Content -> Design -> Configuration` and choose your theme.
+- Run `yarn dev` in `app/design/frontend/Snowdog/CHILD_THEME_NAME/Snowdog_Components` directory to see components in Fractal environment.
+
 ## What it does?
 - Installs following packages:
   - [snowdog/frontools](https://github.com/SnowdogApps/magento2-frontools)
@@ -35,15 +35,23 @@ Quickly create Magento 2 Child Theme based on Snowdog Alpaca Theme.
     - [snowdog/module-shipping-latency](https://github.com/SnowdogApps/magento2-shipping-latency)
     - [snowdog/module-wishlist-unlocker](https://github.com/SnowdogApps/magento2-wishlist-unlocker)
     - [webshopapps/module-matrixrate](https://github.com/webshopapps/module-matrixrate)</br></br>
-- Creates necessary files structure in child theme including SCSS, JS, and elemental config files.
-- Configures frontools.
-- Extends exemplary component (If selected during installation).
+- Creates Alpaca Child Theme in `app/design/frontend/Snowdog/CHILD_THEME_NAME` including everything you need to start working with Alpaca:
+   - Essential configuration files
+   - Styles inheritance setup
+   - Custom variables file in `Snowdog_Components/components/Atoms/variables/` directory
+   - Example of how to change Sass variable value
+   - Example of how to extend component styles (If selected during installation)
+- Adds [frontools](https://github.com/SnowdogApps/magento2-frontools) configuration files in `dev/tools/frontools/config` directory.
 - Updates database with essential Alpaca Tables (If selected during installation).
 - Adds placeholder images.
-- Upgrades Magento instance, compile styles, JS files and SVG.
+- Upgrades Magento instance, compiles styles, JS files and SVGs.
+
+## User guide
+- [Working with Alpaca Theme]() - Learn how to utilize Alpaca Theme.
+- [Alpaca Theme step by step setup]() - How to set up Alpaca from scratch, without **create-alpaca-theme**.
 
 ## Useful Links
-  * [Alpaca Theme details](https://github.com/SnowdogApps/magento2-alpaca-theme)
+  * [Alpaca Theme](https://github.com/SnowdogApps/magento2-alpaca-theme)
   * [Snowdog Frontools](https://github.com/SnowdogApps/magento2-frontools)
   * [Valet Plus](https://github.com/weprovide/valet-plus/wiki/Database)
   * [Fractal guide](https://fractal.build/guide/)
