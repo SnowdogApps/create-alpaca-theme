@@ -141,15 +141,12 @@ function init() {
       await installComponents(answers.name)
 
       if (answers.database) {
-        bar.update(55, { info: infoColor('Running database queries...') })
-        dbErrors = await runQueries()
-
-        bar.update(56, { info: infoColor('Creating media directories...') })
+        bar.update(55, { info: infoColor('Creating media directories...') })
         await Promise.all(mediaDirList.map(async (dir) => {
           await createDirectory(dir)
         }))
 
-        bar.update(57, { info: infoColor('Copying media...') })
+        bar.update(56, { info: infoColor('Copying media...') })
         MEDIA_PATHS.forEach((img) => {
           copyImage(img)
         })
@@ -157,6 +154,11 @@ function init() {
 
       bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
       await magentoUpgrade()
+
+      if (answers.database) {
+        bar.update(85, { info: infoColor('Running database queries...') })
+        dbErrors = await runQueries()
+      }
 
       bar.update(87, { info: infoColor('Compiling files...') })
       await compileFiles()
