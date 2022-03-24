@@ -38,6 +38,7 @@ export const ENV_PATH = {
   TEMPLATES_COMPONENTS_BASE_DIR: `${TEMPLATES_DIR}/components/base`,
   TEMPLATES_COMPONENTS_EXEMPLARY_DIR: `${TEMPLATES_DIR}/components/exemplary`,
   TEMPLATES_FRONTOOLS_DIR: `${TEMPLATES_DIR}/frontools`,
+  TEMPLATES_THEME_DIR: `${TEMPLATES_DIR}/theme`,
   DEV_FRONTOOLS_CONFIG_DIR: 'dev/tools/frontools/config'
 }
 

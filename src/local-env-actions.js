@@ -1,10 +1,5 @@
-import * as fs from 'fs'
-import {
-  readFile,
-  writeFile,
-  readdir,
-  rename
-} from 'fs/promises'
+import { rename } from 'fs/promises'
+import { listFiles } from './utils/fileSystem.js'
 import {
   VARIABLES_IMPORT_PATHS,
   ENV_PATH,
@@ -12,104 +7,12 @@ import {
   ALPACA_THEME_DIR,
   BASE_PATH
 } from './constants/constants.js'
-
-export function createDirectory(path) {
-  return new Promise((resolve, reject) => {
-    fs.mkdir(path, { recursive: true }, (err) => {
-      if (err) {
-        reject(err)
-      }
-      resolve()
-    })
-  })
-}
-
-async function createFile(path, payload) {
-  return writeFile(path, payload, (err) => {
-    if (err) {
-      throw err
-    }
-  })
-}
-
-// List all files form directory, excluding folders
-async function listFiles(directory) {
-  const dirents = await readdir(directory, { withFileTypes: true })
-
-  return dirents
-    .filter((dirent) => dirent.isFile())
-    .map((dirent) => dirent.name)
-}
-
-async function replacePhrase(filePath, phraseToReplace, phraseToReplaceWith) {
-  const re = new RegExp(phraseToReplace, 'gim')
-  const file = await readFile(filePath)
-  const fileUpdated = file.toString().replace(re, phraseToReplaceWith)
-
-  await createFile(filePath, fileUpdated)
-}
-
-async function addFilesFromDir(dir, themeName, ignoredFiles, dirInChildTheme = '') {
-  const configFiles = await listFiles(dir)
-  const re = new RegExp(ignoredFiles)
-  const configFilesFiltered = configFiles.filter((str) => !re.test(str))
-
-  await Promise.all(configFilesFiltered.map(async (fileName) => {
-    const file = await readFile(`${dir}/${fileName}`)
-    await createFile(`${BASE_PATH}${themeName}${dirInChildTheme}/${fileName}`, file)
-  }))
-}
-
-async function addFilesFromTemplate(templateDir, targetDir) {
-  const fileList = await listFiles(new URL(templateDir, import.meta.url))
-
-  await Promise.all(fileList.map(async (fileName) => {
-    const file = await readFile(new URL(`${templateDir}/${fileName}`, import.meta.url))
-    await createFile(`${targetDir}/${fileName}`, file)
-  }))
-}
-
-async function replacePhraseInAll(filesToUpdate, dir) {
-  await Promise.all(filesToUpdate.map(async (file) => {
-    await replacePhrase(`${dir}/${file.name}`, file.phraseToReplace, file.phraseToReplaceWith)
-  }))
-}
-
-// Prepend text to a file, e.g. variables import
-async function prependImport(
-  filePath,
-  textToPrepend,
-  themeName,
-  lineToPrepend = null,
-  prependAfterWord = null,
-  phraseToReplace = null
-) {
-  const data = fs.readFileSync(filePath)
-  const dataArr = data.toString().split('\n')
-  const lineIdx = lineToPrepend || dataArr.findIndex((str) => str.includes(prependAfterWord)) + 2
-  const re = phraseToReplace ? new RegExp(phraseToReplace, 'gim') : null
-
-  dataArr.splice(lineIdx, 0, phraseToReplace ? textToPrepend.replace(re, themeName) : textToPrepend)
-  const text = dataArr.join('\n')
-  const fd = fs.openSync(filePath, 'w+')
-
-  fs.writeSync(fd, text, 0, text.length, 0)
-  fs.close(fd)
-}
-
-export async function copyImage(imagePaths) {
-  const {
-    imgTemplatePath,
-    localImgPath
-  } = imagePaths
-  const img = await readFile(new URL(imgTemplatePath, import.meta.url))
-
-  try {
-    await createFile(localImgPath, img)
-  } catch (error) {
-    console.error(`\n${error}`)
-  }
-}
+import {
+  addFilesFromDir,
+  addFilesFromTemplate,
+  replacePhraseInAll,
+  prependImport
+} from './local-env-helper.js'
 
 // Snowdog_Components config files setup
 export async function setupComponentsConfigFiles(themeName, fullThemeName) {
@@ -157,7 +60,7 @@ export async function setupThemeConfigFiles(themeName, fullThemeName) {
   ]
 
   await addFilesFromDir(ALPACA_THEME_DIR, themeName, '.lock|.md|now|LICENSE|composer')
-  await addFilesFromTemplate('../templates/theme', `${BASE_PATH}${themeName}`)
+  await addFilesFromTemplate(ENV_PATH.TEMPLATES_THEME_DIR, `${BASE_PATH}${themeName}`)
   await replacePhraseInAll(themeFilesToUpdate, `${BASE_PATH}${themeName}`)
   await prependImport(
     `${BASE_PATH}${themeName}/theme.xml`,

@@ -6,6 +6,8 @@ import runQueries from './database-actions.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
+import { createDirectory } from './utils/fileSystem.js'
+import { copyImage } from './local-env-helper.js'
 import {
   mediaDirList,
   directoriesList,
@@ -28,8 +30,6 @@ import {
   validateRegistrationName
 } from './validators.js'
 import {
-  createDirectory,
-  copyImage,
   setupComponentsConfigFiles,
   setupThemeConfigFiles,
   setupFrontoolsConfigFiles,
