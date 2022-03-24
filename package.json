@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/SnowdogApps/create-alpaca-theme#readme",
   "scripts": {
-    "lint": "eslint ./src ./utils index.js --ext .js"
+    "lint": "eslint ./src ./src/utils/* ./src/helpers/* index.js --ext .js"
   },
   "keywords": [
     "alpaca",
