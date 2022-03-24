@@ -116,7 +116,7 @@ function init() {
       }))
 
       bar.update(36, { info: infoColor('Setting up component config files...') })
-      await setupComponentsConfigFiles(answers.name)
+      await setupComponentsConfigFiles(answers.name, answers.fullName)
 
       bar.update(37, { info: infoColor('Setting up theme config files...') })
       await setupThemeConfigFiles(answers.name, answers.fullName)
