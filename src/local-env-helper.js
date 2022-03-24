@@ -30,7 +30,9 @@ export async function addFilesFromTemplate(templateDir, targetDir) {
 
   await Promise.all(fileList.map(async (fileName) => {
     const file = await readFile(new URL(`${templateDir}/${fileName}`, import.meta.url))
-    await createFile(`${targetDir}/${fileName}`, file)
+    const updatedFileName = fileName.replace(/.sample/g, '')
+
+    await createFile(`${targetDir}/${updatedFileName}`, file)
   }))
 }
 
