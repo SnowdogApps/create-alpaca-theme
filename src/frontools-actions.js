@@ -1,6 +1,6 @@
-import promiseExec from '../utils/promiseExec.js'
+import promiseExec from './utils/promiseExec.js'
 import { validateYarn } from './validators.js'
-import { FRONTOOLS_PATH } from '../constants/constants.js'
+import { FRONTOOLS_PATH } from './constants/constants.js'
 
 const INSTALLING_ERROR_MSG = 'There was an error installing Frontools:'
 const COMPILING_ERROR_MSG = 'There was an error compiling files with Frontools:'

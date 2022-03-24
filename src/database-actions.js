@@ -2,6 +2,8 @@ import mysql from 'mysql'
 import { readFile } from 'fs/promises'
 import colors from 'colors'
 
+const dbQueriesPath = './database/queries.sql'
+
 // GETTING SINGULAR VALUE FROM PHP ARRAY
 function getValue(table, name) {
   return table.join('')
@@ -67,7 +69,7 @@ async function execute(connection, dataSql) {
 }
 
 export default async function runQueries() {
-  const dataSql = await readFile(new URL('../templates/database/queries.sql', import.meta.url))
+  const dataSql = await readFile(new URL(dbQueriesPath, import.meta.url))
   const connection = mysql.createConnection(await getDatabaseDetails())
   const errors = await execute(connection, dataSql)
 

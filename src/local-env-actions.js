@@ -11,7 +11,7 @@ import {
   SNOWDOG_COMPONENTS,
   ALPACA_THEME_DIR,
   BASE_PATH
-} from '../constants/constants.js'
+} from './constants/constants.js'
 
 export function createDirectory(path) {
   return new Promise((resolve, reject) => {

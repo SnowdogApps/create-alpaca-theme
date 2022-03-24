@@ -1,6 +1,6 @@
 import fs from 'fs'
 import colors from 'colors'
-import promiseExec from '../utils/promiseExec.js'
+import promiseExec from './utils/promiseExec.js'
 import {
   NAME_MINIMUM_LENGTH,
   NAME_TO_SHORT_MSG,
@@ -9,7 +9,7 @@ import {
   BANNED_NAMES_MSG,
   BANNED_NAMES_LIST,
   NAME_NOT_LOWERCASE
-} from '../constants/constants.js'
+} from './constants/constants.js'
 
 function getNameValidator(customRule) {
   return (name) => {

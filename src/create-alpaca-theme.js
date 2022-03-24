@@ -1,7 +1,7 @@
 import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
-import Spinner from '../utils/spinner.js'
+import Spinner from './utils/spinner.js'
 import runQueries from './database-actions.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
@@ -10,12 +10,12 @@ import {
   mediaDirList,
   directoriesList,
   exemplaryComponentDirectories
-} from '../constants/directioriesList.js'
+} from './constants/directioriesList.js'
 import {
   CLISuccesMessage,
   databaseErrorMessage,
   notMagentoInstanceMessage
-} from '../utils/messages.js'
+} from './utils/messages.js'
 import {
   installFrontools,
   compileFiles
@@ -42,7 +42,7 @@ import {
   PACKAGE_PATH,
   CHECK_MARK_CHARACTER,
   MEDIA_PATHS
-} from '../constants/constants.js'
+} from './constants/constants.js'
 
 const { log } = console
 const spinner = new Spinner()

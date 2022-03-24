@@ -17,7 +17,8 @@ export const SNOWDOG_COMPONENTS = '/Snowdog_Components'
 export const MAGENTO_CHECKOUT_STYLES = '/Magento_Checkout/styles'
 export const ALPACA_THEME_DIR = 'vendor/snowdog/theme-frontend-alpaca'
 export const TEMPLATES_DIR = '../templates'
-export const TEMPLATES_IMAGES_DIR = '../templates/images'
+export const ASSETS_DIR = '../assets'
+export const ASSETS_IMAGES_DIR = '../assets/images'
 export const CMS_BANNERS_DIR = 'pub/media/cms/home/banners'
 export const CMS_TEASERS_DIR = 'pub/media/cms/home/teasers'
 
@@ -80,13 +81,13 @@ export const BANNED_NAMES_LIST = [
 ]
 
 // PLACEHOLDER IMAGES PATHS
-const PLACEHOLDER_654_254 = `${TEMPLATES_IMAGES_DIR}/placeholder-656_254.jpg`
-const PLACEHOLDER_144_200 = `${TEMPLATES_IMAGES_DIR}/placeholder-144_200.jpg`
-const PLACEHOLDER_320_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-320_432.jpg`
-const PLACEHOLDER_304_304 = `${TEMPLATES_IMAGES_DIR}/placeholder-304_304.jpg`
-const PLACEHOLDER_376_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-376_432.jpg`
-const PLACEHOLDER_472_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-472_432.jpg`
-const PLACEHOLDER_1328_1200 = `${TEMPLATES_IMAGES_DIR}/placeholder_1328-1200.jpg`
+const PLACEHOLDER_654_254 = `${ASSETS_IMAGES_DIR}/placeholder-656_254.jpg`
+const PLACEHOLDER_144_200 = `${ASSETS_IMAGES_DIR}/placeholder-144_200.jpg`
+const PLACEHOLDER_320_432 = `${ASSETS_IMAGES_DIR}/placeholder-320_432.jpg`
+const PLACEHOLDER_304_304 = `${ASSETS_IMAGES_DIR}/placeholder-304_304.jpg`
+const PLACEHOLDER_376_432 = `${ASSETS_IMAGES_DIR}/placeholder-376_432.jpg`
+const PLACEHOLDER_472_432 = `${ASSETS_IMAGES_DIR}/placeholder-472_432.jpg`
+const PLACEHOLDER_1328_1200 = `${ASSETS_IMAGES_DIR}/placeholder_1328-1200.jpg`
 
 // ALPACA CMS BLOCKS IMAGES NAMES
 const CMS_BLOCKS = {
