@@ -63,6 +63,7 @@ After installation is completed:
 
 ## Test package locally
   * clone repository
+  * change name of package in `package.json` to `create-alpaca-theme`
   * install package globally: `npm install -g`
   * link command running `npm link`
   * run `npx create-alpaca-theme`
