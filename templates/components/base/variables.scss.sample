@@ -1,0 +1,10 @@
+// Edit components variables here. Primary color changed as a example.
+// You can alter any variable, by giving it new value and removing !default.
+// To see Alpaca Theme variables go to:
+// vendor/snowdog/theme-frontend-alpaca/Snowdog_Components/components/Atoms/variables/_variables.scss
+
+// Colors
+$black-pearl  : #1d1f21;
+
+// Semantic color scheme
+$color-primary: $black-pearl;

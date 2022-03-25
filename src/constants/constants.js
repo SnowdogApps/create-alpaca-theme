@@ -5,8 +5,8 @@ export const CHECK_MARK_CHARACTER = '\u2713'
 
 // COMPOSER PACKAGES NAMES
 export const PACKAGE_PATH = {
-  ALPACA_PACKAGES: 'snowdog/module-alpaca-packages',
-  THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26"', // CLI WORKS ONLY WITH ^2.26.0
+  ALPACA_PACKAGES: 'snowdog/module-alpaca-packages --no-interaction',
+  THEME_FRONTEND_ALPACA: 'snowdog/theme-frontend-alpaca "^2.26" --no-interaction', // CLI WORKS ONLY WITH ^2.26.0
   FRONTOOLS: 'snowdog/frontools'
 }
 
@@ -17,7 +17,8 @@ export const SNOWDOG_COMPONENTS = '/Snowdog_Components'
 export const MAGENTO_CHECKOUT_STYLES = '/Magento_Checkout/styles'
 export const ALPACA_THEME_DIR = 'vendor/snowdog/theme-frontend-alpaca'
 export const TEMPLATES_DIR = '../templates'
-export const TEMPLATES_IMAGES_DIR = '../templates/images'
+export const ASSETS_DIR = '../assets'
+export const ASSETS_IMAGES_DIR = `${ASSETS_DIR}/images`
 export const CMS_BANNERS_DIR = 'pub/media/cms/home/banners'
 export const CMS_TEASERS_DIR = 'pub/media/cms/home/teasers'
 
@@ -37,6 +38,7 @@ export const ENV_PATH = {
   TEMPLATES_COMPONENTS_BASE_DIR: `${TEMPLATES_DIR}/components/base`,
   TEMPLATES_COMPONENTS_EXEMPLARY_DIR: `${TEMPLATES_DIR}/components/exemplary`,
   TEMPLATES_FRONTOOLS_DIR: `${TEMPLATES_DIR}/frontools`,
+  TEMPLATES_THEME_DIR: `${TEMPLATES_DIR}/theme`,
   DEV_FRONTOOLS_CONFIG_DIR: 'dev/tools/frontools/config'
 }
 
@@ -80,46 +82,28 @@ export const BANNED_NAMES_LIST = [
 ]
 
 // PLACEHOLDER IMAGES PATHS
-const PLACEHOLDER_654_254 = `${TEMPLATES_IMAGES_DIR}/placeholder-656_254.jpg`
-const PLACEHOLDER_144_200 = `${TEMPLATES_IMAGES_DIR}/placeholder-144_200.jpg`
-const PLACEHOLDER_320_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-320_432.jpg`
-const PLACEHOLDER_304_304 = `${TEMPLATES_IMAGES_DIR}/placeholder-304_304.jpg`
-const PLACEHOLDER_376_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-376_432.jpg`
-const PLACEHOLDER_472_432 = `${TEMPLATES_IMAGES_DIR}/placeholder-472_432.jpg`
-const PLACEHOLDER_1328_1200 = `${TEMPLATES_IMAGES_DIR}/placeholder_1328-1200.jpg`
-
-// ALPACA CMS BLOCKS IMAGES NAMES
-const CMS_BLOCKS = {
-  LOCAL_BANNER_MED_MEN: `${CMS_BANNERS_DIR}/banner-medium-men-now-656_264.jpg`,
-  LOCAL_BANNER_MED_WOMEN: `${CMS_BANNERS_DIR}/banner-medium-women-now-656_264.jpg`,
-  LOCAL_CATEGORY_ACCERSORES_144: `${CMS_BANNERS_DIR}/category-accessories-144_200.jpg`,
-  LOCAL_CATEGORY_ACCERSORES_320: `${CMS_BANNERS_DIR}/category-accessories-320_432.jpg`,
-  LOCAL_CATEGORY_CLOTHING_144: `${CMS_BANNERS_DIR}/category-clothing-144_200.jpg`,
-  LOCAL_CATEGORY_CLOTHING_320: `${CMS_BANNERS_DIR}/category-clothing-320_432.jpg`,
-  LOCAL_CATEGORY_NEW_144: `${CMS_BANNERS_DIR}/category-new-in-144_200.jpg`,
-  LOCAL_CATEGORY_NEW_320: `${CMS_BANNERS_DIR}/category-new-in-320_432.jpg`,
-  LOCAL_CATEGORY_SHOES_144: `${CMS_BANNERS_DIR}/category-shoes-144_200.jpg`,
-  LOCAL_CATEGORY_SHOES_320: `${CMS_BANNERS_DIR}/category-shoes-320_432.jpg`,
-  LOCAL_TEASER_SMALL: `${CMS_TEASERS_DIR}/teaser-small-girl_304-304.jpg`,
-  LOCAL_TEASER_MEDIUM_376: `${CMS_TEASERS_DIR}/teaser-medium-girl_376-432.jpg`,
-  LOCAL_TEASER_MEDIUM_472: `${CMS_TEASERS_DIR}/teaser-medium-girl_472-432.jpg`,
-  LOCAL_TEASER_LARGE: `${CMS_TEASERS_DIR}/teaser-large-girl_1328-1200.jpg`
-}
+const PLACEHOLDER_654_254 = `${ASSETS_IMAGES_DIR}/placeholder-656_254.jpg`
+const PLACEHOLDER_144_200 = `${ASSETS_IMAGES_DIR}/placeholder-144_200.jpg`
+const PLACEHOLDER_320_432 = `${ASSETS_IMAGES_DIR}/placeholder-320_432.jpg`
+const PLACEHOLDER_304_304 = `${ASSETS_IMAGES_DIR}/placeholder-304_304.jpg`
+const PLACEHOLDER_376_432 = `${ASSETS_IMAGES_DIR}/placeholder-376_432.jpg`
+const PLACEHOLDER_472_432 = `${ASSETS_IMAGES_DIR}/placeholder-472_432.jpg`
+const PLACEHOLDER_1328_1200 = `${ASSETS_IMAGES_DIR}/placeholder_1328-1200.jpg`
 
 // SPECIFY WHICH PLACHOLDER TO USE FOR CMS BLOCK
 export const MEDIA_PATHS = [
-  { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: CMS_BLOCKS.LOCAL_BANNER_MED_MEN },
-  { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: CMS_BLOCKS.LOCAL_BANNER_MED_WOMEN },
-  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_ACCERSORES_144 },
-  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_ACCERSORES_320 },
-  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_CLOTHING_144 },
-  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_CLOTHING_320 },
-  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_NEW_144 },
-  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_NEW_320 },
-  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_SHOES_144 },
-  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: CMS_BLOCKS.LOCAL_CATEGORY_SHOES_320 },
-  { imgTemplatePath: PLACEHOLDER_304_304, localImgPath: CMS_BLOCKS.LOCAL_TEASER_SMALL },
-  { imgTemplatePath: PLACEHOLDER_376_432, localImgPath: CMS_BLOCKS.LOCAL_TEASER_MEDIUM_376 },
-  { imgTemplatePath: PLACEHOLDER_472_432, localImgPath: CMS_BLOCKS.LOCAL_TEASER_MEDIUM_472 },
-  { imgTemplatePath: PLACEHOLDER_1328_1200, localImgPath: CMS_BLOCKS.LOCAL_TEASER_LARGE }
+  { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: `${CMS_BANNERS_DIR}/banner-medium-men-now-656_264.jpg` },
+  { imgTemplatePath: PLACEHOLDER_654_254, localImgPath: `${CMS_BANNERS_DIR}/banner-medium-women-now-656_264.jpg` },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: `${CMS_BANNERS_DIR}/category-accessories-144_200.jpg` },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: `${CMS_BANNERS_DIR}/category-accessories-320_432.jpg` },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: `${CMS_BANNERS_DIR}/category-clothing-144_200.jpg` },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: `${CMS_BANNERS_DIR}/category-clothing-320_432.jpg` },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: `${CMS_BANNERS_DIR}/category-new-in-144_200.jpg` },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: `${CMS_BANNERS_DIR}/category-new-in-320_432.jpg` },
+  { imgTemplatePath: PLACEHOLDER_144_200, localImgPath: `${CMS_BANNERS_DIR}/category-shoes-144_200.jpg` },
+  { imgTemplatePath: PLACEHOLDER_320_432, localImgPath: `${CMS_BANNERS_DIR}/category-shoes-320_432.jpg` },
+  { imgTemplatePath: PLACEHOLDER_304_304, localImgPath: `${CMS_TEASERS_DIR}/teaser-small-girl_304-304.jpg` },
+  { imgTemplatePath: PLACEHOLDER_376_432, localImgPath: `${CMS_TEASERS_DIR}/teaser-medium-girl_376-432.jpg` },
+  { imgTemplatePath: PLACEHOLDER_472_432, localImgPath: `${CMS_TEASERS_DIR}/teaser-medium-girl_472-432.jpg` },
+  { imgTemplatePath: PLACEHOLDER_1328_1200, localImgPath: `${CMS_TEASERS_DIR}/teaser-large-girl_1328-1200.jpg` }
 ]

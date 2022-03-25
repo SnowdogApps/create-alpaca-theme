@@ -1,4 +1,4 @@
-import promiseExec from '../utils/promiseExec.js'
+import promiseExec from './utils/promiseExec.js'
 
 export function magentoUpgrade() {
   return promiseExec('bin/magento setup:upgrade', (msg) => {

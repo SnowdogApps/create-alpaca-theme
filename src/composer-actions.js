@@ -1,5 +1,5 @@
 import colors from 'colors'
-import promiseExec from '../utils/promiseExec.js'
+import promiseExec from './utils/promiseExec.js'
 
 export function composerRequire(composerPackage) {
   return promiseExec(`composer require ${composerPackage}`, (msg) => {

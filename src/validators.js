@@ -1,6 +1,6 @@
 import fs from 'fs'
 import colors from 'colors'
-import promiseExec from '../utils/promiseExec.js'
+import promiseExec from './utils/promiseExec.js'
 import {
   NAME_MINIMUM_LENGTH,
   NAME_TO_SHORT_MSG,
@@ -9,7 +9,7 @@ import {
   BANNED_NAMES_MSG,
   BANNED_NAMES_LIST,
   NAME_NOT_LOWERCASE
-} from '../constants/constants.js'
+} from './constants/constants.js'
 
 function getNameValidator(customRule) {
   return (name) => {
@@ -52,10 +52,14 @@ export function validateMagentoInstance() {
   return fs.existsSync(path)
 }
 
-export function validateYarn() {
-  return promiseExec('yarn -v', (msg) => {
+export async function validateYarn() {
+  const semver = await promiseExec('yarn -v', (msg) => {
     return `There was an issue validating yarn: ${msg}`
   })
+  const semVerRegExp = /^((([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$/
+  const version = semver.split('').filter((x) => x !== '\n').join('')
+
+  return semVerRegExp.test(version)
 }
 
 export function validateConfigFiles() {
