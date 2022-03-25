@@ -3,6 +3,7 @@ import { readFile } from 'fs/promises'
 import colors from 'colors'
 
 const dbQueriesPath = './database/queries.sql'
+const envPhpPath = './app/etc/env.php'
 
 // GETTING SINGULAR VALUE FROM PHP ARRAY
 function getValue(table, name) {
@@ -16,7 +17,7 @@ function getValue(table, name) {
 
 // EXTRACTING DATABASE CREDENTIALS FROM ETC/ENV FILE IN PHP FORMAT
 async function getDatabaseDetails() {
-  const file = await readFile(('./app/etc/env.php'))
+  const file = await readFile((envPhpPath))
   const dbTable = file.toString().split('[').filter((x) => x.includes('host'))
   const host = getValue(dbTable, 'host')
   const database = getValue(dbTable, 'dbname')
