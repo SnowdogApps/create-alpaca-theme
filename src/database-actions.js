@@ -2,6 +2,9 @@ import mysql from 'mysql'
 import { readFile } from 'fs/promises'
 import colors from 'colors'
 
+const dbQueriesPath = './database/queries.sql'
+const envPhpPath = './app/etc/env.php'
+
 // GETTING SINGULAR VALUE FROM PHP ARRAY
 function getValue(table, name) {
   return table.join('')
@@ -14,7 +17,7 @@ function getValue(table, name) {
 
 // EXTRACTING DATABASE CREDENTIALS FROM ETC/ENV FILE IN PHP FORMAT
 async function getDatabaseDetails() {
-  const file = await readFile(('./app/etc/env.php'))
+  const file = await readFile((envPhpPath))
   const dbTable = file.toString().split('[').filter((x) => x.includes('host'))
   const host = getValue(dbTable, 'host')
   const database = getValue(dbTable, 'dbname')
@@ -67,7 +70,7 @@ async function execute(connection, dataSql) {
 }
 
 export default async function runQueries() {
-  const dataSql = await readFile(new URL('../templates/database/queries.sql', import.meta.url))
+  const dataSql = await readFile(new URL(dbQueriesPath, import.meta.url))
   const connection = mysql.createConnection(await getDatabaseDetails())
   const errors = await execute(connection, dataSql)
 

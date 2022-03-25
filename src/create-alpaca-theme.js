@@ -1,21 +1,23 @@
 import colors from 'colors'
 import Inquirer from 'inquirer'
 import cliProgress from 'cli-progress'
-import Spinner from '../utils/spinner.js'
+import Spinner from './utils/spinner.js'
 import runQueries from './database-actions.js'
 import { magentoUpgrade } from './magento-actions.js'
 import { composerRequire } from './composer-actions.js'
 import { installComponents } from './components-actions.js'
+import { createDirectory } from './utils/fileSystem.js'
+import { copyImage } from './local-env-helper.js'
 import {
   mediaDirList,
   directoriesList,
   exemplaryComponentDirectories
-} from '../constants/directioriesList.js'
+} from './constants/directioriesList.js'
 import {
   CLISuccesMessage,
   databaseErrorMessage,
   notMagentoInstanceMessage
-} from '../utils/messages.js'
+} from './utils/messages.js'
 import {
   installFrontools,
   compileFiles
@@ -28,8 +30,6 @@ import {
   validateRegistrationName
 } from './validators.js'
 import {
-  createDirectory,
-  copyImage,
   setupComponentsConfigFiles,
   setupThemeConfigFiles,
   setupFrontoolsConfigFiles,
@@ -42,7 +42,7 @@ import {
   PACKAGE_PATH,
   CHECK_MARK_CHARACTER,
   MEDIA_PATHS
-} from '../constants/constants.js'
+} from './constants/constants.js'
 
 const { log } = console
 const spinner = new Spinner()
@@ -57,13 +57,13 @@ const bar = new cliProgress.SingleBar({
 const promptQuestions = [
   {
     type: 'input',
-    message: `Enter theme full name (${colors.yellow('e.g. Child Theme')}):`,
+    message: `Enter theme full name (${colors.yellow('e.g. Alpaca Child')}):`,
     name: 'fullName',
     validate: validateName
   },
   {
     type: 'input',
-    message: `Enter theme registration name (${colors.yellow('one phrase, e.g. child-theme')}):`,
+    message: `Enter theme registration name (${colors.yellow('one phrase, e.g. alpaca-child')}):`,
     name: 'name',
     validate: validateRegistrationName
   },
@@ -116,7 +116,7 @@ function init() {
       }))
 
       bar.update(36, { info: infoColor('Setting up component config files...') })
-      await setupComponentsConfigFiles(answers.name)
+      await setupComponentsConfigFiles(answers.name, answers.fullName)
 
       bar.update(37, { info: infoColor('Setting up theme config files...') })
       await setupThemeConfigFiles(answers.name, answers.fullName)
@@ -141,15 +141,12 @@ function init() {
       await installComponents(answers.name)
 
       if (answers.database) {
-        bar.update(55, { info: infoColor('Running database queries...') })
-        dbErrors = await runQueries()
-
-        bar.update(56, { info: infoColor('Creating media directories...') })
+        bar.update(55, { info: infoColor('Creating media directories...') })
         await Promise.all(mediaDirList.map(async (dir) => {
           await createDirectory(dir)
         }))
 
-        bar.update(57, { info: infoColor('Copying media...') })
+        bar.update(56, { info: infoColor('Copying media...') })
         MEDIA_PATHS.forEach((img) => {
           copyImage(img)
         })
@@ -157,6 +154,11 @@ function init() {
 
       bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
       await magentoUpgrade()
+
+      if (answers.database) {
+        bar.update(85, { info: infoColor('Running database queries...') })
+        dbErrors = await runQueries()
+      }
 
       bar.update(87, { info: infoColor('Compiling files...') })
       await compileFiles()

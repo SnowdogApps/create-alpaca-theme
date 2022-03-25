@@ -60,16 +60,56 @@ VALUES
     (526, 0),
     (527, 0),
     (528, 0);
+CREATE TABLE IF NOT EXISTS `snowmenu_menu` (
+  `menu_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
+  `title` varchar(255) NOT NULL COMMENT 'Demo Title',
+  `identifier` varchar(255) NOT NULL COMMENT 'Menu identifier',
+  `css_class` varchar(255) DEFAULT 'menu' COMMENT 'CSS Class',
+  `creation_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation Time',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modification Time',
+  `is_active` smallint(6) NOT NULL DEFAULT '1' COMMENT 'Is Active',
+  PRIMARY KEY (`menu_id`)
+);
 INSERT IGNORE INTO `snowmenu_menu` (`menu_id`, `title`, `identifier`, `css_class`, `creation_time`, `update_time`, `is_active`)
 VALUES
     (1, 'Main menu', 'main-desktop', 'mega-menu', '2019-10-03 13:24:47', '2019-10-03 20:50:28', 1),
     (2, 'Mobile menu', 'main-mobile', 'dropdown-list', '2019-10-03 20:49:39', '2019-10-03 20:49:39', 1),
     (3, 'Footer links', 'main-footer', 'dropdown-list', '2019-10-03 21:28:13', '2019-10-03 21:28:13', 1);
+CREATE TABLE IF NOT EXISTS `snowmenu_store` (
+  `menu_id` int(10) unsigned NOT NULL COMMENT 'Menu ID',
+  `store_id` smallint(5) unsigned NOT NULL COMMENT 'Store ID',
+  PRIMARY KEY (`menu_id`,`store_id`),
+  KEY `SNOWMENU_STORE_STORE_ID_STORE_STORE_ID` (`store_id`),
+  CONSTRAINT `SNOWMENU_STORE_MENU_ID_SNOWMENU_MENU_MENU_ID` FOREIGN KEY (`menu_id`) REFERENCES `snowmenu_menu` (`menu_id`) ON DELETE CASCADE,
+  CONSTRAINT `SNOWMENU_STORE_STORE_ID_STORE_STORE_ID` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE
+);
 INSERT IGNORE INTO `snowmenu_store` (`menu_id`, `store_id`)
 VALUES
     (1, 1),
     (2, 1),
     (3, 1);
+CREATE TABLE IF NOT EXISTS `snowmenu_node` (
+  `node_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Node ID',
+  `menu_id` int(10) unsigned NOT NULL COMMENT 'Menu ID',
+  `type` varchar(255) NOT NULL COMMENT 'Node Type',
+  `content` text COMMENT 'Node contents',
+  `classes` varchar(255) DEFAULT NULL COMMENT 'CSS class name',
+  `parent_id` int(10) unsigned DEFAULT NULL COMMENT 'Parent Node ID',
+  `position` int(10) unsigned NOT NULL COMMENT 'Node position',
+  `level` int(10) unsigned NOT NULL COMMENT 'Node level',
+  `title` text NOT NULL,
+  `target` tinyint(1) DEFAULT '0',
+  `image` text COMMENT 'Image',
+  `image_alt_text` text COMMENT 'Image Alt Text',
+  `node_template` varchar(255) DEFAULT NULL COMMENT 'Node Template',
+  `submenu_template` varchar(255) DEFAULT NULL COMMENT 'Submenu Template',
+  `creation_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation Time',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modification Time',
+  `is_active` smallint(6) NOT NULL DEFAULT '1' COMMENT 'Is Active',
+  PRIMARY KEY (`node_id`),
+  KEY `SNOWMENU_NODE_MENU_ID_SNOWMENU_MENU_MENU_ID` (`menu_id`),
+  CONSTRAINT `SNOWMENU_NODE_MENU_ID_SNOWMENU_MENU_MENU_ID` FOREIGN KEY (`menu_id`) REFERENCES `snowmenu_menu` (`menu_id`) ON DELETE CASCADE
+);
 INSERT IGNORE INTO `snowmenu_node` (`node_id`, `menu_id`, `type`, `content`, `classes`, `parent_id`, `position`, `level`, `title`, `target`, `image`, `image_alt_text`, `node_template`, `submenu_template`, `creation_time`, `update_time`, `is_active`)
 VALUES
     (345, 2, 'category', '38', NULL, NULL, 0, 0, 'What\'s new', 0, NULL, NULL, NULL, NULL, '2019-10-03 21:10:26', '2019-10-03 21:10:26', 1),

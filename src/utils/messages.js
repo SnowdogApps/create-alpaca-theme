@@ -5,16 +5,19 @@ const { log } = console
 export const CLISuccesMessage = (fullThemeName, exemplaryComponent, themeName) => {
   return log(
     colors.yellow('\nInstallation completed successfully!'),
-    colors.blue('\n\n👉 Go to'),
-    colors.yellow('Admin Panel -> Content -> Design -> Configuration'),
+    colors.blue(`\n\n✅ Theme created in ${colors.green(`app/design/frontend/Snowdog/${themeName}`)}`),
+    colors.blue('\n👉 Go to'),
+    colors.green('Admin Panel -> Content -> Design -> Configuration'),
     colors.blue('and choose your theme'),
-    (`(${colors.yellow(fullThemeName)}).`),
-    colors.blue(`\n✨ Use ${colors.yellow('yarn dev')} in Snowdog_Components dir to run components in Fractal.`),
+    (`(${colors.green(fullThemeName)})`),
+    colors.blue(`\n✨ Use ${colors.green('yarn dev')} in`),
+    colors.green(`app/design/frontend/Snowdog/${themeName}/Snowdog_Components`),
+    colors.blue('to run components in Fractal'),
     colors.blue('\n🔎 Read'),
-    colors.yellow('Alpaca Docs'),
-    colors.blue('to learn how to use Alpaca Theme.'),
-    exemplaryComponent ? colors.cyan(`\n\nVariable ${colors.magenta('$color-primary')} and ${colors.magenta('$button-text-color')} have been change as example.`) : '',
-    exemplaryComponent ? colors.cyan(`\nGo to ${colors.magenta(`_${themeName}-variables`)} and ${colors.magenta(`_${themeName}-button-variables`)} to edit them.`) : '',
+    colors.green('Alpaca Docs'),
+    colors.blue('to learn how to use Alpaca Theme'),
+    exemplaryComponent ? colors.blue(`\n\nVariables ${colors.green('$color-primary')} and ${colors.green('$button-text-color')} have been changed as an example`) : '',
+    exemplaryComponent ? colors.blue(`\nSee ${colors.green(`_${themeName}-variables.scss`)} and ${colors.green(`_${themeName}-button-variables.scss`)} to edit them`) : '',
     colors.yellow('\n\n2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n')
   )
 }
