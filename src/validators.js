@@ -52,10 +52,14 @@ export function validateMagentoInstance() {
   return fs.existsSync(path)
 }
 
-export function validateYarn() {
-  return promiseExec('yarn -v', (msg) => {
+export async function validateYarn() {
+  const semver = await promiseExec('yarn -v', (msg) => {
     return `There was an issue validating yarn: ${msg}`
   })
+  const semVerRegExp = /^((([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)$/
+  const version = semver.split('').filter((x) => x !== '\n').join('')
+
+  return semVerRegExp.test(version)
 }
 
 export function validateConfigFiles() {
