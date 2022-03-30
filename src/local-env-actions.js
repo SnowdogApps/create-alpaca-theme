@@ -124,7 +124,7 @@ export async function addBaseStyles(themeName) {
   await prependImport(chechoutPath, checkoutText, themeName, null, 'variables', 'YOUR_THEME_NAME')
 
   // CREATING THEME LEVEL STYLES
-  await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, 'email', '/styles')
+  await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, '_', '/styles')
 
   const themeLevelStyles = await listFiles(themeLevelStylesPath)
 
