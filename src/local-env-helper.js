@@ -15,11 +15,14 @@ export async function replacePhrase(filePath, phraseToReplace, phraseToReplaceWi
 }
 
 export async function addFilesFromDir(dir, themeName, ignoredFiles, dirInChildTheme = '') {
-  const configFiles = await listFiles(dir)
-  const re = new RegExp(ignoredFiles)
-  const configFilesFiltered = configFiles.filter((str) => !re.test(str))
+  let configFiles = await listFiles(dir)
 
-  await Promise.all(configFilesFiltered.map(async (fileName) => {
+  if (ignoredFiles) {
+    const re = new RegExp(ignoredFiles)
+    configFiles = configFiles.filter((str) => !re.test(str))
+  }
+
+  await Promise.all(configFiles.map(async (fileName) => {
     const file = await readFile(`${dir}/${fileName}`)
     await createFile(`${BASE_PATH}${themeName}${dirInChildTheme}/${fileName}`, file)
   }))
