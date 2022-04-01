@@ -100,10 +100,10 @@ function init() {
 
   Inquirer.prompt(promptQuestions).then(async (answers) => {
     try {
-      // console.time(colors.blue('Finished in')) // Start time counter
-      // spinner.start()
-      // bar.start(100, 0, { info: infoColor('Validating Magento config files...') })
-      // validateConfigFiles()
+      console.time(colors.blue('Finished in')) // Start time counter
+      spinner.start()
+      bar.start(100, 0, { info: infoColor('Validating Magento config files...') })
+      validateConfigFiles()
 
       // bar.update(1, { info: infoColor('Validating composer...') })
       // await validateComposer()
@@ -118,35 +118,35 @@ function init() {
       // bar.update(31, { info: infoColor('Installing Frontools...') })
       // await installFrontools()
 
-      // bar.update(35, { info: infoColor('Creating directories...') })
-      // await Promise.all(directoriesList.map(async (dir) => {
-      //   await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
-      // }))
+      bar.update(35, { info: infoColor('Creating directories...') })
+      await Promise.all(directoriesList.map(async (dir) => {
+        await createDirectory(`${BASE_PATH}${answers.vendor}/${answers.name}${dir}`)
+      }))
 
-      // bar.update(36, { info: infoColor('Setting up component config files...') })
-      // await setupComponentsConfigFiles(answers.name, answers.fullName)
+      bar.update(36, { info: infoColor('Setting up component config files...') })
+      await setupComponentsConfigFiles(answers.name, answers.fullName, answers.vendor)
 
-      // bar.update(37, { info: infoColor('Setting up theme config files...') })
-      // await setupThemeConfigFiles(answers.name, answers.fullName)
+      bar.update(37, { info: infoColor('Setting up theme config files...') })
+      await setupThemeConfigFiles(answers.name, answers.fullName, answers.vendor)
 
-      // bar.update(38, { info: infoColor('Setting up frontools config files...') })
-      // await setupFrontoolsConfigFiles(answers.name)
+      bar.update(38, { info: infoColor('Setting up frontools config files...') })
+      await setupFrontoolsConfigFiles(answers.name, answers.vendor)
 
-      // bar.update(39, { info: infoColor('Setting up base styles structure...') })
-      // await addBaseStyles(answers.name)
+      bar.update(39, { info: infoColor('Setting up base styles structure...') })
+      await addBaseStyles(answers.name, answers.vendor)
 
-      // if (answers.exemplaryComponent) {
-      //   bar.update(40, { info: infoColor('Creating exemplary component directories...') })
-      //   await Promise.all(exemplaryComponentDirectories.map(async (dir) => {
-      //     await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
-      //   }))
+      if (answers.exemplaryComponent) {
+        bar.update(40, { info: infoColor('Creating exemplary component directories...') })
+        await Promise.all(exemplaryComponentDirectories.map(async (dir) => {
+          await createDirectory(`${BASE_PATH}${answers.vendor}/${answers.name}${dir}`)
+        }))
 
-      //   bar.update(41, { info: infoColor('Adding exemplary styles...') })
-      //   await addExemplaryStyles(answers.name)
-      // }
+        bar.update(41, { info: infoColor('Adding exemplary styles...') })
+        await addExemplaryStyles(answers.name, answers.vendor)
+      }
 
       // bar.update(42, { info: infoColor('Installing Snowdog Components...') })
-      // await installComponents(answers.name)
+      // await installComponents(answers.name, answers.vendor)
 
       // if (answers.database) {
       //   bar.update(55, { info: infoColor('Creating media directories...') })
@@ -171,12 +171,12 @@ function init() {
       // bar.update(87, { info: infoColor('Compiling files...') })
       // await compileFiles()
 
-      // bar.update(100, { info: colors.blue('Enjoy Alpaca 🦙') })
-      // process.stdout.write(`\r${CHECK_MARK_CHARACTER}`)
-      // spinner.stop()
-      // bar.stop()
-      // console.timeEnd(colors.blue('Finished in')) // Stop time counter
-      // CLISuccesMessage(answers.fullName, answers.exemplaryComponent, answers.name)
+      bar.update(100, { info: colors.blue('Enjoy Alpaca 🦙') })
+      process.stdout.write(`\r${CHECK_MARK_CHARACTER}`)
+      spinner.stop()
+      bar.stop()
+      console.timeEnd(colors.blue('Finished in')) // Stop time counter
+      CLISuccesMessage(answers.fullName, answers.exemplaryComponent, answers.name)
 
       if (dbErrors.length !== 0) {
         databaseErrorMessage()

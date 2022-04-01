@@ -15,7 +15,7 @@ Quickly create Magento 2 Child Theme based on [Snowdog Alpaca Theme](https://git
 
 After installation is completed:
 - Go to `Admin Panel -> Content -> Design -> Configuration` and choose your theme.
-- Run `yarn dev` in `app/design/frontend/Snowdog/CHILD_THEME_NAME/Snowdog_Components` directory to see components in Fractal environment.
+- Run `yarn dev` in `app/design/frontend/VENDOR_NAME/CHILD_THEME_NAME/Snowdog_Components` directory to see components in Fractal environment.
 
 ## What it does?
 - Installs following packages:
@@ -35,7 +35,7 @@ After installation is completed:
     - [snowdog/module-shipping-latency](https://github.com/SnowdogApps/magento2-shipping-latency)
     - [snowdog/module-wishlist-unlocker](https://github.com/SnowdogApps/magento2-wishlist-unlocker)
     - [webshopapps/module-matrixrate](https://github.com/webshopapps/module-matrixrate)</br></br>
-- Creates Alpaca Child Theme in `app/design/frontend/Snowdog/CHILD_THEME_NAME` including everything you need to start working with Alpaca:
+- Creates Alpaca Child Theme in `app/design/frontend/VENDOR_NAME/CHILD_THEME_NAME` including everything you need to start working with Alpaca:
    - Essential configuration files
    - Styles inheritance setup
    - Custom variables file in `Snowdog_Components/components/Atoms/variables/` directory

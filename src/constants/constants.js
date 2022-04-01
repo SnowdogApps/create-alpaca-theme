@@ -11,7 +11,7 @@ export const PACKAGE_PATH = {
 }
 
 // BASE PATHS
-export const BASE_PATH = 'app/design/frontend/Snowdog/'
+export const BASE_PATH = 'app/design/frontend/'
 export const FRONTOOLS_PATH = 'vendor/snowdog/frontools'
 export const SNOWDOG_COMPONENTS = '/Snowdog_Components'
 export const MAGENTO_CHECKOUT_STYLES = '/Magento_Checkout/styles'

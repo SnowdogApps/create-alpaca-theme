@@ -14,14 +14,14 @@ export async function replacePhrase(filePath, phraseToReplace, phraseToReplaceWi
   await createFile(filePath, fileUpdated)
 }
 
-export async function addFilesFromDir(dir, themeName, ignoredFiles, dirInChildTheme = '') {
+export async function addFilesFromDir(dir, themeName, ignoredFiles, vendor, dirInChildTheme = '') {
   const configFiles = await listFiles(dir)
   const re = new RegExp(ignoredFiles)
   const configFilesFiltered = configFiles.filter((str) => !re.test(str))
 
   await Promise.all(configFilesFiltered.map(async (fileName) => {
     const file = await readFile(`${dir}/${fileName}`)
-    await createFile(`${BASE_PATH}${themeName}${dirInChildTheme}/${fileName}`, file)
+    await createFile(`${BASE_PATH}${vendor}/${themeName}${dirInChildTheme}/${fileName}`, file)
   }))
 }
 
