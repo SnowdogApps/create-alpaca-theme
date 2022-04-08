@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Add custom vendor name functionality (#2)
 
 ## [Released]
 ## [1.0.0-rc.2] - 25.03.2022
