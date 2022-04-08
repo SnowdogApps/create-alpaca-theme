@@ -65,6 +65,7 @@ export async function setupThemeConfigFiles(themeName, fullThemeName, vendor) {
   await addFilesFromDir(ALPACA_THEME_DIR, themeName, ignoredFiles, vendor)
   await addFilesFromTemplate(ENV_PATH.TEMPLATES_THEME_DIR, `${BASE_THEME_PATH}${vendor}/${themeName}`)
   await replacePhraseInAll(themeFilesToUpdate, `${BASE_THEME_PATH}${vendor}/${themeName}`)
+  await replacePhrase(`${BASE_THEME_PATH}${vendor}/${themeName}/registration.php`, 'Snowdog', vendor)
   await prependImport(
     `${BASE_THEME_PATH}${vendor}/${themeName}/theme.xml`,
     parentTag,
@@ -90,7 +91,7 @@ export async function setupFrontoolsConfigFiles(themeName, vendor) {
 
   await addFilesFromTemplate(ENV_PATH.TEMPLATES_FRONTOOLS_DIR, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
   await replacePhraseInAll(frontoolsFilesToUpdate, ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR)
-  await replacePhrase('dev/tools/frontools/config/themes.json', 'YOUR_VENDOR', vendor)
+  await replacePhrase(`${ENV_PATH.DEV_FRONTOOLS_CONFIG_DIR}/themes.json`, 'YOUR_VENDOR', vendor)
 }
 
 // ADDING ALPACA BASE STYLES
