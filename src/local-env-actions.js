@@ -5,7 +5,7 @@ import {
   ENV_PATH,
   SNOWDOG_COMPONENTS,
   ALPACA_THEME_DIR,
-  BASE_PATH,
+  BASE_THEME_PATH,
   MAGENTO_CHECKOUT_STYLES
 } from './constants/constants.js'
 import {
@@ -32,8 +32,8 @@ export async function setupComponentsConfigFiles(themeName, fullThemeName, vendo
   ]
   try {
     await addFilesFromDir(ENV_PATH.ALPACA_COMPONENTS_DIR, themeName, '.lock|.md', vendor, SNOWDOG_COMPONENTS)
-    await addFilesFromTemplate(ENV_PATH.TEMPLATES_COMPONENTS_CONFIG_DIR, `${BASE_PATH}${vendor}/${themeName}${SNOWDOG_COMPONENTS}`)
-    await replacePhraseInAll(componentFilesToUpdate, `${BASE_PATH}${vendor}/${themeName}${SNOWDOG_COMPONENTS}`)
+    await addFilesFromTemplate(ENV_PATH.TEMPLATES_COMPONENTS_CONFIG_DIR, `${BASE_THEME_PATH}${vendor}/${themeName}${SNOWDOG_COMPONENTS}`)
+    await replacePhraseInAll(componentFilesToUpdate, `${BASE_THEME_PATH}${vendor}/${themeName}${SNOWDOG_COMPONENTS}`)
   } catch (error) {
     console.log(`\n${error}`)
   }
@@ -63,10 +63,10 @@ export async function setupThemeConfigFiles(themeName, fullThemeName, vendor) {
   ]
 
   await addFilesFromDir(ALPACA_THEME_DIR, themeName, ignoredFiles, vendor)
-  await addFilesFromTemplate(ENV_PATH.TEMPLATES_THEME_DIR, `${BASE_PATH}${vendor}/${themeName}`)
-  await replacePhraseInAll(themeFilesToUpdate, `${BASE_PATH}${vendor}/${themeName}`)
+  await addFilesFromTemplate(ENV_PATH.TEMPLATES_THEME_DIR, `${BASE_THEME_PATH}${vendor}/${themeName}`)
+  await replacePhraseInAll(themeFilesToUpdate, `${BASE_THEME_PATH}${vendor}/${themeName}`)
   await prependImport(
-    `${BASE_PATH}${vendor}/${themeName}/theme.xml`,
+    `${BASE_THEME_PATH}${vendor}/${themeName}/theme.xml`,
     parentTag,
     themeName,
     lineToAddParentTag
@@ -95,21 +95,21 @@ export async function setupFrontoolsConfigFiles(themeName, vendor) {
 
 // ADDING ALPACA BASE STYLES
 export async function addBaseStyles(themeName, vendor) {
-  const docsPath = `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_DOCS_STYLES_DIR}`
+  const docsPath = `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_DOCS_STYLES_DIR}`
   const docsText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.DOCS
-  const chechoutPath = `${BASE_PATH}${vendor}/${themeName}${MAGENTO_CHECKOUT_STYLES}/checkout.scss`
+  const chechoutPath = `${BASE_THEME_PATH}${vendor}/${themeName}${MAGENTO_CHECKOUT_STYLES}/checkout.scss`
   const checkoutText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.CHECKOUT
-  const themeLevelStylesPath = `${BASE_PATH}${vendor}/${themeName}/styles`
+  const themeLevelStylesPath = `${BASE_THEME_PATH}${vendor}/${themeName}/styles`
   const themeLevelStylesText = VARIABLES_IMPORT_PATHS.COMMENT + VARIABLES_IMPORT_PATHS.MAIN
 
   // CREATING CHILD THEME VARIABLES
   await addFilesFromTemplate(
     ENV_PATH.TEMPLATES_COMPONENTS_BASE_DIR,
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_VARIABLES_DIR}`
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_VARIABLES_DIR}`
   )
   await rename(
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_VARIABLES_FILE}`,
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_VARIABLES_DIR}/_${themeName}-variables.scss`
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_VARIABLES_FILE}`,
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.COMPONENT_VARIABLES_DIR}/_${themeName}-variables.scss`
   )
 
   // IMPORTING ALPACA COMPONENTS DOCS STYLES
@@ -168,16 +168,16 @@ export async function addExemplaryStyles(themeName, vendor) {
   // ADDING BUTTON STYLES
   await addFilesFromTemplate(
     ENV_PATH.TEMPLATES_COMPONENTS_EXEMPLARY_DIR,
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`
   )
-  await replacePhraseInAll(exemplaryFilesToUpdate, `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`)
+  await replacePhraseInAll(exemplaryFilesToUpdate, `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button`)
   await rename(
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button.scss`,
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button.scss`
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button.scss`,
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button.scss`
   )
   await rename(
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button-variables.scss`,
-    `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button-variables.scss`
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/button-variables.scss`,
+    `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_MOLECULES_DIR}/button/_${themeName}-button-variables.scss`
   )
 
   // IMPORTING CRITICAL AND NON CRITICAL STYLES
@@ -188,5 +188,5 @@ export async function addExemplaryStyles(themeName, vendor) {
     vendor,
     ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR
   )
-  await replacePhraseInAll(criticalStylesToUpdate, `${BASE_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR}`)
+  await replacePhraseInAll(criticalStylesToUpdate, `${BASE_THEME_PATH}${vendor}/${themeName}${ENV_PATH.SNOWDOG_COMPONENTS_STYLES_DIR}`)
 }

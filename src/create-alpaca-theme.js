@@ -38,7 +38,7 @@ import {
   addExemplaryStyles
 } from './local-env-actions.js'
 import {
-  BASE_PATH,
+  BASE_THEME_PATH,
   LOADING_BAR,
   PACKAGE_PATH,
   CHECK_MARK_CHARACTER,
@@ -107,7 +107,7 @@ function init() {
       database
     } = answers
     const timerMsg = 'Finished in'
-    const vendorPath = `${BASE_PATH}${vendor}/`
+    const vendorPath = `${BASE_THEME_PATH}${vendor}/`
 
     try {
       console.time(colors.blue(timerMsg))
