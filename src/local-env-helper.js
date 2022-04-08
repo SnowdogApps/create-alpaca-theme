@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { readFile } from 'fs/promises'
-import { BASE_PATH } from './constants/constants.js'
+import { BASE_THEME_PATH } from './constants/constants.js'
 import {
   createFile,
   listFiles
@@ -14,7 +14,7 @@ export async function replacePhrase(filePath, phraseToReplace, phraseToReplaceWi
   await createFile(filePath, fileUpdated)
 }
 
-export async function addFilesFromDir(dir, themeName, ignoredFiles, dirInChildTheme = '') {
+export async function addFilesFromDir(dir, themeName, ignoredFiles, vendor, dirInChildTheme = '') {
   let configFiles = await listFiles(dir)
 
   if (ignoredFiles) {
@@ -24,7 +24,7 @@ export async function addFilesFromDir(dir, themeName, ignoredFiles, dirInChildTh
 
   await Promise.all(configFiles.map(async (fileName) => {
     const file = await readFile(`${dir}/${fileName}`)
-    await createFile(`${BASE_PATH}${themeName}${dirInChildTheme}/${fileName}`, file)
+    await createFile(`${BASE_THEME_PATH}${vendor}/${themeName}${dirInChildTheme}/${fileName}`, file)
   }))
 }
 

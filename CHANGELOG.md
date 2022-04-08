@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Add custom vendor name functionality (#2)
 - Add mising styles imports, rework addFilesFromDir method (#10)
 
 ## [Released]

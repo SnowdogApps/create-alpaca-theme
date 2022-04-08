@@ -2,16 +2,16 @@ import colors from 'colors'
 
 const { log } = console
 
-export const CLISuccesMessage = (fullThemeName, exemplaryComponent, themeName) => {
+export const CLISuccesMessage = (fullThemeName, exemplaryComponent, themeName, vendor) => {
   return log(
     colors.yellow('\nInstallation completed successfully!'),
-    colors.blue(`\n\n✅ Theme created in ${colors.green(`app/design/frontend/Snowdog/${themeName}`)}`),
+    colors.blue(`\n\n✅ Theme created in ${colors.green(`app/design/frontend/${vendor}/${themeName}`)}`),
     colors.blue('\n👉 Go to'),
     colors.green('Admin Panel -> Content -> Design -> Configuration'),
     colors.blue('and choose your theme'),
     (`(${colors.green(fullThemeName)})`),
     colors.blue(`\n✨ Use ${colors.green('yarn dev')} in`),
-    colors.green(`app/design/frontend/Snowdog/${themeName}/Snowdog_Components`),
+    colors.green(`app/design/frontend/${vendor}/${themeName}/Snowdog_Components`),
     colors.blue('to run components in Fractal'),
     colors.blue('\n🔎 Read'),
     colors.green('Alpaca Docs'),

@@ -26,6 +26,7 @@ import {
   validateName,
   validateConfigFiles,
   validateComposer,
+  validateVendorName,
   validateMagentoInstance,
   validateRegistrationName
 } from './validators.js'
@@ -37,7 +38,7 @@ import {
   addExemplaryStyles
 } from './local-env-actions.js'
 import {
-  BASE_PATH,
+  BASE_THEME_PATH,
   LOADING_BAR,
   PACKAGE_PATH,
   CHECK_MARK_CHARACTER,
@@ -68,6 +69,13 @@ const promptQuestions = [
     validate: validateRegistrationName
   },
   {
+    type: 'input',
+    message: `Enter vendor name, or leave it as default (${colors.yellow('Snowdog')}):`,
+    name: 'vendor',
+    default: 'Snowdog',
+    validate: validateVendorName
+  },
+  {
     type: 'confirm',
     message: `Extend exemplary Alpaca Component? (${colors.yellow('Recommended')})`,
     name: 'exemplaryComponent'
@@ -91,8 +99,18 @@ function init() {
   log(colors.blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
 
   Inquirer.prompt(promptQuestions).then(async (answers) => {
+    const {
+      fullName,
+      name,
+      vendor,
+      exemplaryComponent,
+      database
+    } = answers
+    const timerMsg = 'Finished in'
+    const vendorPath = `${BASE_THEME_PATH}${vendor}/`
+
     try {
-      console.time(colors.blue('Finished in')) // Start time counter
+      console.time(colors.blue(timerMsg))
       spinner.start()
       bar.start(100, 0, { info: infoColor('Validating Magento config files...') })
       validateConfigFiles()
@@ -112,35 +130,35 @@ function init() {
 
       bar.update(35, { info: infoColor('Creating directories...') })
       await Promise.all(directoriesList.map(async (dir) => {
-        await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
+        await createDirectory(`${vendorPath}${name}${dir}`)
       }))
 
       bar.update(36, { info: infoColor('Setting up component config files...') })
-      await setupComponentsConfigFiles(answers.name, answers.fullName)
+      await setupComponentsConfigFiles(name, fullName, vendor)
 
       bar.update(37, { info: infoColor('Setting up theme config files...') })
-      await setupThemeConfigFiles(answers.name, answers.fullName)
+      await setupThemeConfigFiles(name, fullName, vendor)
 
       bar.update(38, { info: infoColor('Setting up frontools config files...') })
-      await setupFrontoolsConfigFiles(answers.name)
+      await setupFrontoolsConfigFiles(name, vendor)
 
       bar.update(39, { info: infoColor('Setting up base styles structure...') })
-      await addBaseStyles(answers.name)
+      await addBaseStyles(name, vendor)
 
-      if (answers.exemplaryComponent) {
+      if (exemplaryComponent) {
         bar.update(40, { info: infoColor('Creating exemplary component directories...') })
         await Promise.all(exemplaryComponentDirectories.map(async (dir) => {
-          await createDirectory(`${BASE_PATH}${answers.name}${dir}`)
+          await createDirectory(`${vendorPath}${name}${dir}`)
         }))
 
         bar.update(41, { info: infoColor('Adding exemplary styles...') })
-        await addExemplaryStyles(answers.name)
+        await addExemplaryStyles(name, vendor)
       }
 
       bar.update(42, { info: infoColor('Installing Snowdog Components...') })
-      await installComponents(answers.name)
+      await installComponents(name, vendor)
 
-      if (answers.database) {
+      if (database) {
         bar.update(55, { info: infoColor('Creating media directories...') })
         await Promise.all(mediaDirList.map(async (dir) => {
           await createDirectory(dir)
@@ -155,7 +173,7 @@ function init() {
       bar.update(60, { info: infoColor('Upgrading Magneto instance...') })
       await magentoUpgrade()
 
-      if (answers.database) {
+      if (database) {
         bar.update(85, { info: infoColor('Running database queries...') })
         dbErrors = await runQueries()
       }
@@ -167,8 +185,8 @@ function init() {
       process.stdout.write(`\r${CHECK_MARK_CHARACTER}`)
       spinner.stop()
       bar.stop()
-      console.timeEnd(colors.blue('Finished in')) // Stop time counter
-      CLISuccesMessage(answers.fullName, answers.exemplaryComponent, answers.name)
+      console.timeEnd(colors.blue(timerMsg))
+      CLISuccesMessage(fullName, exemplaryComponent, name, vendor)
 
       if (dbErrors.length !== 0) {
         databaseErrorMessage()
