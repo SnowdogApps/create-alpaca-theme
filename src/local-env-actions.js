@@ -120,11 +120,11 @@ export async function addBaseStyles(themeName) {
   })
 
   // IMPORTING MAGENTO CHECKOUT STYLES
-  await addFilesFromDir(ENV_PATH.ALPACA_MAGENTO_CHECKOUT_STYLES_DIR, themeName, '_', MAGENTO_CHECKOUT_STYLES)
+  await addFilesFromDir(ENV_PATH.ALPACA_MAGENTO_CHECKOUT_STYLES_DIR, themeName, null, MAGENTO_CHECKOUT_STYLES)
   await prependImport(chechoutPath, checkoutText, themeName, null, 'variables', 'YOUR_THEME_NAME')
 
   // CREATING THEME LEVEL STYLES
-  await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, 'email|gallery', '/styles')
+  await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, null, '/styles')
 
   const themeLevelStyles = await listFiles(themeLevelStylesPath)
 
