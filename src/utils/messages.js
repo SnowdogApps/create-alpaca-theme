@@ -13,9 +13,9 @@ export const CLISuccesMessage = (fullThemeName, exemplaryComponent, themeName, v
     colors.blue(`\n✨ Use ${colors.green('yarn dev')} in`),
     colors.green(`app/design/frontend/${vendor}/${themeName}/Snowdog_Components`),
     colors.blue('to run components in Fractal'),
-    colors.blue('\n🔎 Read'),
+    colors.blue('\n🔎 Visit'),
     colors.green('Alpaca Docs'),
-    colors.blue('to learn how to use Alpaca Theme'),
+    colors.blue('at https://magento2-alpaca-docs.vercel.app/'),
     exemplaryComponent ? colors.blue(`\n\nVariables ${colors.green('$color-primary')} and ${colors.green('$button-text-color')} have been changed as an example`) : '',
     exemplaryComponent ? colors.blue(`\nSee ${colors.green(`_${themeName}-variables.scss`)} and ${colors.green(`_${themeName}-button-variables.scss`)} to edit them`) : '',
     colors.yellow('\n\n2022 Snowdog || https://snow.dog || https://github.com/SnowdogApps \n')
