@@ -56,8 +56,10 @@ export async function prependImport(
 ) {
   const data = fs.readFileSync(filePath)
   const dataArr = data.toString().split('\n')
-  const lineIdx = lineToPrepend || dataArr.findIndex((str) => str.includes(prependAfterWord)) + 2
   const re = phraseToReplace ? new RegExp(phraseToReplace, 'gim') : null
+  const lineIdx = lineToPrepend || lineToPrepend === 0
+    ? lineToPrepend
+    : dataArr.findIndex((str) => str.includes(prependAfterWord)) + 2
 
   dataArr.splice(lineIdx, 0, phraseToReplace ? textToPrepend.replace(re, themeName) : textToPrepend)
   const text = dataArr.join('\n')

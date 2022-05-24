@@ -119,12 +119,12 @@ export async function addBaseStyles(themeName, vendor) {
   const docsFilesNames = await listFiles(docsPath)
 
   docsFilesNames.forEach((fileName) => {
-    prependImport(`${docsPath}/${fileName}`, docsText, themeName, null, 'variables', 'YOUR_THEME_NAME')
+    prependImport(`${docsPath}/${fileName}`, docsText, themeName, 0, null, 'YOUR_THEME_NAME')
   })
 
   // IMPORTING MAGENTO CHECKOUT STYLES
   await addFilesFromDir(ENV_PATH.ALPACA_MAGENTO_CHECKOUT_STYLES_DIR, themeName, null, vendor, MAGENTO_CHECKOUT_STYLES)
-  await prependImport(chechoutPath, checkoutText, themeName, null, 'variables', 'YOUR_THEME_NAME')
+  await prependImport(chechoutPath, checkoutText, themeName, 0, null, 'YOUR_THEME_NAME')
 
   // CREATING THEME LEVEL STYLES
   await addFilesFromDir(ENV_PATH.ALPACA_STYLES_DIR, themeName, null, vendor, '/styles')
@@ -136,8 +136,8 @@ export async function addBaseStyles(themeName, vendor) {
       `${themeLevelStylesPath}/${fileName}`,
       themeLevelStylesText,
       themeName,
+      0,
       null,
-      'variables',
       'YOUR_THEME_NAME'
     )
   })
