@@ -57,7 +57,7 @@ export async function prependImport(
   const data = fs.readFileSync(filePath)
   const dataArr = data.toString().split('\n')
   const re = phraseToReplace ? new RegExp(phraseToReplace, 'gim') : null
-  const lineIdx = lineToPrepend || lineToPrepend === 0
+  const lineIdx = typeof lineToPrepend === 'number'
     ? lineToPrepend
     : dataArr.findIndex((str) => str.includes(prependAfterWord)) + 2
 
