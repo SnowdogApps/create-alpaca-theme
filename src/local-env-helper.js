@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { readFile } from 'fs/promises'
-import { BASE_PATH } from './constants/constants.js'
+import { BASE_THEME_PATH } from './constants/constants.js'
 import {
   createFile,
   listFiles
@@ -14,14 +14,17 @@ export async function replacePhrase(filePath, phraseToReplace, phraseToReplaceWi
   await createFile(filePath, fileUpdated)
 }
 
-export async function addFilesFromDir(dir, themeName, ignoredFiles, dirInChildTheme = '') {
-  const configFiles = await listFiles(dir)
-  const re = new RegExp(ignoredFiles)
-  const configFilesFiltered = configFiles.filter((str) => !re.test(str))
+export async function addFilesFromDir(dir, themeName, ignoredFiles, vendor, dirInChildTheme = '') {
+  let configFiles = await listFiles(dir)
 
-  await Promise.all(configFilesFiltered.map(async (fileName) => {
+  if (ignoredFiles) {
+    const re = new RegExp(ignoredFiles)
+    configFiles = configFiles.filter((str) => !re.test(str))
+  }
+
+  await Promise.all(configFiles.map(async (fileName) => {
     const file = await readFile(`${dir}/${fileName}`)
-    await createFile(`${BASE_PATH}${themeName}${dirInChildTheme}/${fileName}`, file)
+    await createFile(`${BASE_THEME_PATH}${vendor}/${themeName}${dirInChildTheme}/${fileName}`, file)
   }))
 }
 
@@ -53,8 +56,10 @@ export async function prependImport(
 ) {
   const data = fs.readFileSync(filePath)
   const dataArr = data.toString().split('\n')
-  const lineIdx = lineToPrepend || dataArr.findIndex((str) => str.includes(prependAfterWord)) + 2
   const re = phraseToReplace ? new RegExp(phraseToReplace, 'gim') : null
+  const lineIdx = typeof lineToPrepend === 'number'
+    ? lineToPrepend
+    : dataArr.findIndex((str) => str.includes(prependAfterWord)) + 2
 
   dataArr.splice(lineIdx, 0, phraseToReplace ? textToPrepend.replace(re, themeName) : textToPrepend)
   const text = dataArr.join('\n')

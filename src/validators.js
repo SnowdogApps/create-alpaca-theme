@@ -19,15 +19,18 @@ function getNameValidator(customRule) {
     if (name.length < NAME_MINIMUM_LENGTH) {
       return NAME_TO_SHORT_MSG
     }
-    if (BANNED_NAMES_LIST.includes(name)) {
-      return BANNED_NAMES_MSG
-    }
 
     return customRule ? customRule(name) : true
   }
 }
 
-export const validateName = getNameValidator()
+export const validateName = getNameValidator((name) => {
+  if (BANNED_NAMES_LIST.includes(name)) {
+    return BANNED_NAMES_MSG
+  }
+
+  return true
+})
 
 export const validateRegistrationName = getNameValidator((name) => {
   if (name.split(' ').length > 1) {
@@ -35,6 +38,17 @@ export const validateRegistrationName = getNameValidator((name) => {
   }
   if (name !== name.toLowerCase()) {
     return NAME_NOT_LOWERCASE
+  }
+  if (BANNED_NAMES_LIST.includes(name)) {
+    return BANNED_NAMES_MSG
+  }
+
+  return true
+})
+
+export const validateVendorName = getNameValidator((name) => {
+  if (name.split(' ').length > 1) {
+    return REGISTRATION_NAME_NOT_SINGULAR
   }
 
   return true
