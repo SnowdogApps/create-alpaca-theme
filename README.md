@@ -54,7 +54,6 @@ After installation is completed:
   * [Snowdog Frontools](https://github.com/SnowdogApps/magento2-frontools)
   * [Fractal guide](https://fractal.build/guide/)
   * [Alpaca Packages](https://github.com/SnowdogApps/magento2-alpaca-packages)
-  * [Alpaca Components guide](https://github.com/SnowdogApps/magento2-alpaca-theme/blob/master/Snowdog_Components/README.md)
   * [Alpaca Components preview](https://magento2-alpaca-theme-git-master-snowdog1.vercel.app/)
 
 ## Testing and local development
