@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Fix getting dbtable from Magento's env.php
 
 ## [Released]
 ## [1.0.0] - 26.05.2022
