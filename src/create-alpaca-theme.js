@@ -96,7 +96,7 @@ function init() {
   }
 
   console.clear()
-  log(colors.blue('Snowdog Alpaca Theme CLI v1.0.0\n'))
+  log(colors.blue('Snowdog Alpaca Theme CLI v1.0.1\n'))
 
   Inquirer.prompt(promptQuestions).then(async (answers) => {
     const {
