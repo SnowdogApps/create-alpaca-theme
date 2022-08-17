@@ -3,6 +3,8 @@
 ## [Unreleased]
 
 ## [Released]
+## [1.0.1] - 17.08.2022
+- Fix getting dbtable from Magento's env.php
 ## [1.0.0] - 26.05.2022
 - Add custom vendor name functionality (#2)
 - Add mising styles imports, rework addFilesFromDir method (#10)

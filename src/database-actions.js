@@ -18,7 +18,7 @@ function getValue(table, name) {
 // EXTRACTING DATABASE CREDENTIALS FROM ETC/ENV FILE IN PHP FORMAT
 async function getDatabaseDetails() {
   const file = await readFile((envPhpPath))
-  const dbTable = file.toString().split('[').filter((x) => x.includes('host'))
+  const dbTable = file.toString().split('[').filter((x) => x.includes('dbname'))
   const host = getValue(dbTable, 'host')
   const database = getValue(dbTable, 'dbname')
   const user = getValue(dbTable, 'username')
